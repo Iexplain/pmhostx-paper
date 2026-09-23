@@ -1,0 +1,48 @@
+name: 发布文献地图
+
+# 只发布 litmap.html 到 Pages。仓库本身是公开的，但站点只从这个工作流
+# 上传的那一个文件生成——所以 pages 上只有文献地图，不含 data/ 与 weekly/。
+on:
+  push:
+    branches: [main]
+    paths:
+      - litmap.html
+      - .github/workflows/pages.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 不要并发部署，后一次等前一次跑完
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # enablement: true —— 仓库还没开 Pages 时由它代开，省掉手动去设置里点
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: 组装站点
+        run: |
+          mkdir -p _site
+          cp litmap.html _site/index.html
+          touch _site/.nojekyll
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
