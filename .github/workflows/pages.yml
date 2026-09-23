@@ -29,20 +29,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # 本仓库实测情况：Pages 早就是开着的，但 Source 是 "Deploy from a branch"
-      # （legacy 构建）。那个模式下 GitHub 用内置的 "pages build and deployment"
-      # 工作流把 main 分支根目录整个发布出去——站点根没有 index.html 所以 / 是 404，
-      # 但 /litmap.html 能通，而且 data/ 与 weekly/ 也一起挂在站点上。
+      # Source 已于 2026-09-23 手动切为 **GitHub Actions**
+      # （Settings → Pages → Build and deployment → Source）。
       #
-      # 必须手动切一次 Source 到 **GitHub Actions**：
-      #     Settings → Pages → Build and deployment → Source
-      # 两种模式的差别：
-      #     Deploy from a branch → 整个仓库当站点，Jekyll 处理，根目录无 index 则 404
-      #     GitHub Actions       → 只发布下面 _site 里装的东西，也就是只有文献地图
+      # 切换前是 "Deploy from a branch"（legacy 构建）：那个模式下 GitHub 用内置的
+      # "pages build and deployment" 工作流把 main 分支根目录整个发布出去——站点根
+      # 没有 index.html 所以 / 是 404，但 /litmap.html 能通，而且 data/、weekly/、
+      # scripts/ 也一起挂在站点上。切到 Actions 后，站点只由下面 _site 里装的东西生成，
+      # 也就是只有文献地图这一页。
       #
-      # 注意：configure-pages 的 enablement: true **开不了** Pages——开通要 admin
-      # 权限，GITHUB_TOKEN 没有。所以这一步只能由仓库所有者手动做，不是配置错误。
-      # 站点已存在时 enablement 只是读配置，不会重复调用创建接口。
+      # 两个容易踩的点：
+      #   1. **切 Source 本身不会触发部署。** 旧站点会一直挂着，直到本工作流跑完一次。
+      #      改了 Source 却没看到变化时，先确认跑过一次，再怀疑配置。
+      #   2. configure-pages 的 enablement: true **开不了** Pages——开通要 admin 权限，
+      #      GITHUB_TOKEN 没有。站点已存在时它只是读配置。这一步只能仓库所有者手动做，
+      #      不是配置错误。
+      #
+      # 另外：Pages 设置页那两张 "GitHub Pages Jekyll" / "Static HTML" 模板卡片
+      # **不要点 Configure**，那是给还没有工作流的人用的，会往仓库里塞第二份 workflow。
       - uses: actions/configure-pages@v5
         with:
           enablement: true
