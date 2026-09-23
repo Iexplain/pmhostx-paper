@@ -4,19 +4,19 @@
 
 ```text
 A_metatrans_host
-(metatranscriptomic*[tiab] OR metatranscriptom*[tiab]) AND (host[tiab] OR "host response"[tiab] OR "host gene"[tiab])
+(metatranscriptomic*[tiab] OR metatranscriptom*[tiab]) AND ("host response"[tiab] OR "host gene expression"[tiab] OR "host transcriptom*"[tiab] OR "human host"[tiab] OR "host-pathogen"[tiab])
 
 B_mngs_hostresp
 ("metagenomic next-generation sequencing"[tiab] OR mNGS[tiab] OR "metagenomic sequencing"[tiab] OR "metagenomics"[tiab]) AND ("host response"[tiab] OR "host gene expression"[tiab] OR "host transcriptom*"[tiab] OR "host RNA"[tiab])
 
 C_csf_host
-("cerebrospinal fluid"[tiab] OR CSF[tiab]) AND (transcriptom*[tiab] OR "host response"[tiab] OR "gene expression"[tiab] OR "RNA-seq"[tiab] OR "RNA sequencing"[tiab])
+("cerebrospinal fluid"[tiab]) AND (transcriptom*[tiab] OR "host response"[tiab] OR "gene expression"[tiab] OR "RNA-seq"[tiab] OR "RNA sequencing"[tiab])
 
 D_septicyte_genes
-(SeptiCyte[tiab] OR CEACAM4[tiab] OR PLAC8[tiab] OR PLA2G7[tiab] OR "LAMP1"[tiab])
+(SeptiCyte[tiab] OR CEACAM4[tiab] OR PLAC8[tiab] OR PLA2G7[tiab] OR "LAMP1"[tiab]) AND (sepsis[tiab] OR infection[tiab] OR "host response"[tiab])
 
 E_medmed_markers
-(MeMed[tiab] OR TRAIL[tiab] OR TNFSF10[tiab] OR "IP-10"[tiab] OR CXCL10[tiab] OR MX1[tiab]) AND (infection[tiab] OR sepsis[tiab] OR "host response"[tiab] OR viral[tiab])
+(MeMed[tiab] OR TRAIL[tiab] OR TNFSF10[tiab] OR "IP-10"[tiab] OR CXCL10[tiab] OR MX1[tiab]) AND (infection[tiab] OR sepsis[tiab] OR "host response"[tiab]) AND (diagnos*[tiab] OR biomarker*[tiab] OR "gene signature*"[tiab] OR "expression signature*"[tiab] OR assay*[tiab])
 
 F_pmseq
 (PMseq[tiab] OR "PM-seq"[tiab] OR "PMSEQ"[tiab])
@@ -64,12 +64,18 @@ T_csf_rnaseq_inf
 ("cerebrospinal fluid"[tiab] OR CSF[tiab] OR mening*[tiab] OR encephal*[tiab]) AND ("RNA sequencing"[tiab] OR "RNA-seq"[tiab] OR "transcriptomic profiling"[tiab] OR "transcriptome profiling"[tiab]) AND (infection[tiab] OR infectious[tiab] OR pathogen*[tiab] OR host[tiab] OR immune[tiab])
 
 U_hostvsmicrobe
-(host[tiab] AND (microb*[tiab] OR bacteri*[tiab] OR pathogen*[tiab])) AND (separat*[tiab] OR discriminat*[tiab] OR deplet*[tiab] OR classif*[tiab] OR differentiat*[tiab] OR benchmark*[tiab]) AND (transcriptom*[tiab] OR metatranscriptom*[tiab] OR "RNA-seq"[tiab] OR sequencing[tiab])
+(host[tiab] AND (microb*[tiab] OR bacteri*[tiab] OR pathogen*[tiab])) AND (separat*[tiab] OR discriminat*[tiab] OR deplet*[tiab] OR classif*[tiab] OR benchmark*[tiab] OR differentiat*[tiab]) AND ("RNA-seq"[tiab] OR transcriptom*[tiab] OR metatranscriptom*[tiab] OR "gene expression"[tiab])
 
 V_classifier_stability
 (transcriptom*[tiab] OR "gene expression"[tiab] OR "expression signature*"[tiab]) AND (classifier*[tiab] OR "machine learning"[tiab] OR "diagnostic model"[tiab] OR signature*[tiab]) AND ("batch effect*"[tiab] OR preprocessing[tiab] OR "external validation"[tiab] OR reproducibility[tiab] OR "cross-platform"[tiab] OR "cross-cohort"[tiab] OR overfit*[tiab] OR "decision curve"[tiab] OR benchmark*[tiab]) AND (infection[tiab] OR sepsis[tiab] OR "host response"[tiab] OR "host transcriptom*"[tiab])
 
 W_csf_hostmarker
 (meningit*[tiab] OR encephalit*[tiab] OR "central nervous system infection*"[tiab] OR "CNS infection*"[tiab]) AND ("cerebrospinal fluid"[tiab] OR CSF[tiab]) AND ("host response"[tiab] OR proteom*[tiab] OR transcriptom*[tiab] OR "immune mediator*"[tiab] OR "host biomarker*"[tiab] OR "host gene"[tiab])
+
+X_ml_hostresp_infection
+("machine learning"[tiab] OR "deep learning"[tiab] OR transformer*[tiab] OR "neural network*"[tiab] OR classif*[tiab] OR "diagnostic model*"[tiab]) AND ("host response"[tiab] OR "host transcriptom*"[tiab] OR "host gene expression"[tiab] OR "gene expression signature*"[tiab] OR "transcriptomic signature*"[tiab] OR "host biomarker*"[tiab]) AND (infection[tiab] OR sepsis[tiab] OR meningit*[tiab] OR encephalit*[tiab] OR tuberculosis[tiab])
+
+Y_ai_clinical_metagenomics
+(transformer*[tiab] OR "foundation model*"[tiab] OR "large language model*"[tiab] OR "self-supervised"[tiab] OR "attention-based"[tiab]) AND (metagenom*[tiab] OR metatranscriptom*[tiab] OR mNGS[tiab] OR "host transcriptom*"[tiab] OR "gene expression signature*"[tiab]) AND (infection[tiab] OR pathogen*[tiab] OR sepsis[tiab] OR antimicrobial[tiab])
 
 ```

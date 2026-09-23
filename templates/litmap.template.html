@@ -32,6 +32,7 @@
   --g3:#2E7D5B;
   --g4:#B03A3A;
   --g5:#55637A;
+  --g6:#6B4E9E;
   --pin-bg:#FDF1DC;
   --pin-ink:#8A5A12;
   --focus:#2A5FA8;
@@ -51,6 +52,7 @@
     --g3:#5FBF95;
     --g4:#E07A76;
     --g5:#94A3B3;
+    --g6:#A98BD6;
     --pin-bg:#392C13;
     --pin-ink:#E8C173;
     --focus:#74A9E8;
@@ -70,6 +72,7 @@
   --g3:#5FBF95;
   --g4:#E07A76;
   --g5:#94A3B3;
+  --g6:#A98BD6;
   --pin-bg:#392C13;
   --pin-ink:#E8C173;
   --focus:#74A9E8;
@@ -144,6 +147,8 @@ h1{
 .chip[data-g="3"] .dot{background:var(--g3);}
 .chip[data-g="4"] .dot{background:var(--g4);}
 .chip[data-g="5"] .dot{background:var(--g5);}
+.chip[data-g="6"] .dot{background:var(--g6);}
+/* data-g="7"（窗口外）故意不给配色，让它落回 .dot 默认的 --ink-3 中性灰 */
 .chip[data-g="0"] .dot{display:none;}
 
 /* ---------- sections ---------- */
@@ -152,7 +157,8 @@ section{margin-top:44px;}
 .well{width:11px;height:11px;border-radius:2px;flex:none;transform:translateY(-1px);}
 .sec1 .well{background:var(--g1);} .sec2 .well{background:var(--g2);}
 .sec3 .well{background:var(--g3);} .sec4 .well{background:var(--g4);}
-.sec5 .well{background:var(--g5);} .sec6 .well{background:var(--ink-3);}
+.sec5 .well{background:var(--g5);} .sec6 .well{background:var(--g6);}
+.sec7 .well{background:var(--ink-3);}
 h2{
   font-family:"Noto Serif SC","Spectral",serif;font-weight:700;
   font-size:19.5px;margin:0;letter-spacing:-.005em;flex:1 1 auto;
@@ -205,9 +211,9 @@ h2{
 .why p{margin:0;font-size:14.5px;color:var(--ink-2);line-height:1.62;}
 .why p strong{color:var(--ink);font-weight:500;}
 
-/* out-of-window */
-.sec6 .item{background:var(--surface-2);border:1px dashed var(--line);border-radius:3px;padding:18px;margin-bottom:12px;}
-.sec6 .item:last-child{margin-bottom:0;}
+/* out-of-window（第 7 组；第 6 组现在是正常的内容组） */
+.sec7 .item{background:var(--surface-2);border:1px dashed var(--line);border-radius:3px;padding:18px;margin-bottom:12px;}
+.sec7 .item:last-child{margin-bottom:0;}
 .oow{
   font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.08em;
   text-transform:uppercase;color:var(--g4);border:1px solid var(--g4);

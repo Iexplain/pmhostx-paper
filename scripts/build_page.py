@@ -24,10 +24,18 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
 TEMPLATES = ROOT / "templates"
 
-GROUP_CSS = {1: "sec1", 2: "sec2", 3: "sec3", 4: "sec4", 5: "sec5", 6: "sec6"}
+# 内容组是 1–6，窗口外固定排在最后。
+#
+# 窗口外的组号抽成常量，因为它在两处被引用（筛选按钮的 data-g、分组的 CSS class），
+# 以前是散落的字面量 "6" —— 加内容组时会撞号，而且撞了不报错：GROUP_CSS.get(g,'sec1')
+# 会静默回退到组 1 的配色，页面看起来正常，只是颜色错了。
+OOW_GROUP = 7
 
-# 组序号 → 筛选按钮短名
-GROUP_CHIP = {1: "方法学", 2: "标志物", 3: "临床", 4: "建库/去宿主", 5: "背景"}
+GROUP_CSS = {1: "sec1", 2: "sec2", 3: "sec3", 4: "sec4", 5: "sec5", 6: "sec6", 7: "sec7"}
+
+# 组序号 → 筛选按钮短名。窗口外那组不走这里（它用固定标签），
+# 所以这个字典只需覆盖内容组；缺键时回退到 sections 里的全名。
+GROUP_CHIP = {1: "方法学", 2: "标志物", 3: "临床", 4: "建库/去宿主", 5: "背景", 6: "建模"}
 
 
 def load(path: Path, default=None):
@@ -126,7 +134,7 @@ def build() -> str:
         chips.append(f'    <button class="chip" data-g="{g}" aria-pressed="false">'
                      f'<span class="dot"></span>{escape(label)}</button>')
     if out_window:
-        chips.append('    <button class="chip" data-g="6" aria-pressed="false">'
+        chips.append(f'    <button class="chip" data-g="{OOW_GROUP}" aria-pressed="false">'
                      '<span class="dot"></span>窗口外</button>')
     chips_html = "\n".join(chips)
 
@@ -158,7 +166,9 @@ def build() -> str:
         for d in sorted(added_dates, reverse=True):
             batch = sorted([e for e in entries if e.get("added") == d], key=lambda x: x["num"])
             for e in batch[:12]:
-                gname = GROUP_CHIP.get(e["group"], "窗口外" if e.get("out_of_window") else "—")
+                gname = ("窗口外" if e.get("out_of_window")
+                         else GROUP_CHIP.get(e["group"],
+                                             sections.get(str(e["group"]), {}).get("name", "—")))
                 url = e.get("title_url") or e.get("doi_url")
                 t = escape(e["title"])
                 if url:

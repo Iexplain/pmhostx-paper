@@ -21,6 +21,10 @@
       "desc": "用于引言定位与讨论框架，不是实验依据。"
     },
     "6": {
+      "name": "诊断建模与分类器 · 把宿主信号落成判读",
+      "desc": "PMHostX 不只是把宿主 mRNA 定量出来，还要把定量结果落成诊断判读。这一组是用机器学习 / transformer 在宿主表达谱或宏基因组上建模的工作——特征选择、验证设计、报告口径都可以直接对标。"
+    },
+    "7": {
       "name": "窗口外，但必须知道",
       "desc": "日期不满足 7/1–9/23，但立意与 PMHostX 高度重合，写引言或讨论时很难回避。"
     }
@@ -806,7 +810,7 @@
       "pubmed_indexed": true
     },
     {
-      "group": 6,
+      "group": 7,
       "num": 42,
       "title": "Translating Host-Derived Signals from Cerebrospinal Fluid Metagenomic Sequencing into a Diagnostic Tool for Autoimmune Encephalitis in Children",
       "title_url": "https://pubmed.ncbi.nlm.nih.gov/42018084/",
@@ -825,7 +829,7 @@
       "pubmed_indexed": true
     },
     {
-      "group": 6,
+      "group": 7,
       "num": 43,
       "title": "CSF Host Transcriptomics Differentiates Infectious Encephalitis from Autoimmune Encephalitis (S16.010)",
       "title_url": null,
@@ -1052,6 +1056,120 @@
       "out_of_window": false,
       "added": "2026-09-23",
       "pubmed_indexed": true
+    },
+    {
+      "group": 6,
+      "title": "Cepheid 9-gene host mRNA expression across the spectrum of Mycobacterium tuberculosis infection and disease: insights across the lifespan.",
+      "title_url": "https://doi.org/10.1016/j.ebiom.2026.106462",
+      "must_read": true,
+      "journal": "EBioMedicine",
+      "date": "2026-09-01",
+      "authors": "Seifert M, Gracia M, Catanzaro DG et al.",
+      "doi": "10.1016/j.ebiom.2026.106462",
+      "doi_url": "https://doi.org/10.1016/j.ebiom.2026.106462",
+      "why_html": "Cepheid 的 8 基因宿主 mRNA 检测（Xpert TB/LTBI，研究用）在 457 人上跑完整疾病谱：TBI / ATB / 无 TB。用 IL2+IFNG+MIG 拼「暴露」分类器、SLPI+VEGFA+PLAU+GBP5 拼第二个，再<b>按年龄段分层比较 AUC</b>——青少年 0.89、成人 0.82、老年 0.71。这是本组里最完整的一条「宿主基因表达 → 商用平台 → 分类器」链路，和 MeMed BV / SeptiCyte 是同一种产品逻辑，可直接对标报告口径；<strong>而 AUC 随年龄衰减这件事，是你讨论部分必须交代的局限</strong>——PMHostX 的队列若年龄偏大，对外部效能要有预期。",
+      "out_of_window": false,
+      "added": "2026-09-24",
+      "doi_verified": true,
+      "pmid": "42679603",
+      "id": "10-1016-j-ebiom-2026-106462",
+      "pubmed_indexed": true,
+      "num": 55
+    },
+    {
+      "group": 2,
+      "title": "Integration of functional immunomonitoring assays with PET/CT scans in TB patients identifies on-treatment biomarkers.",
+      "title_url": "https://doi.org/10.64898/2026.05.07.723467",
+      "must_read": false,
+      "journal": "bioRxiv : the preprint server for biology",
+      "date": "2026-07-02",
+      "authors": "Fan J, Rouilly V, Musvosvi M et al.",
+      "doi": "10.64898/2026.05.07.723467",
+      "doi_url": "https://doi.org/10.64898/2026.05.07.723467",
+      "why_html": "TruCulture 全血刺激 + PET/CT，在 Predict-TB 试验里纵向追踪 40 例 TB 患者 6 个月治疗全程，找<b>治疗反应与分层用的宿主标志物</b>。立项逻辑与 PMHostX 同源：不直接测病原，而是<b>先给宿主一个刺激、再读宿主反应</b>。与你的差别是它测蛋白/功能读出、你测 RNA。<strong>另注：这是一篇 bioRxiv 预印本，却已拿到 PMID 42388796</strong>——预印本被 PubMed 收录并非个例，检索时不能默认预印本找不到。",
+      "out_of_window": false,
+      "added": "2026-09-24",
+      "doi_verified": true,
+      "pmid": "42388796",
+      "id": "10-64898-2026-05-07-723467",
+      "pubmed_indexed": true,
+      "num": 56
+    },
+    {
+      "group": 6,
+      "title": "A HEK293T-derived explainable CatBoost signature for estimating HCoV-OC43 viral burden from host transcriptomes.",
+      "title_url": "https://doi.org/10.1016/j.compbiolchem.2026.109319",
+      "must_read": false,
+      "journal": "Computational biology and chemistry",
+      "date": "2026-08-14",
+      "authors": "Jeon H, Lee C",
+      "doi": "10.1016/j.compbiolchem.2026.109319",
+      "doi_url": "https://doi.org/10.1016/j.compbiolchem.2026.109319",
+      "why_html": "用 12,980 个 HEK293T 单细胞的转录组训 CatBoost 回归，<b>从宿主表达谱反推病毒载量</b>，并给出可解释性。方向上与 PMHostX 互为镜像：你从测序数据里把宿主那层定量出来，它把宿主那层当成预测病原丰度的输入。<strong>「可解释」这一条尤其值得借</strong>——分类器能不能说清用了哪些基因，正是临床审稿人会追问的。人源细胞系，符合物种口径。",
+      "out_of_window": false,
+      "added": "2026-09-24",
+      "doi_verified": true,
+      "pmid": "42600523",
+      "id": "10-1016-j-compbiolchem-2026-109319",
+      "pubmed_indexed": true,
+      "num": 57
+    },
+    {
+      "group": 6,
+      "title": "A Nomogram Integrating CD169%, Neutrophil CD64 Index, and C-Reactive Protein for Differential Diagnosis of Mixed Respiratory Tract Infections.",
+      "title_url": "https://doi.org/10.3390/diagnostics16152416",
+      "must_read": false,
+      "journal": "Diagnostics (Basel, Switzerland)",
+      "date": "2026-08-13",
+      "authors": "Fan Y, Zhang L, Zhao J et al.",
+      "doi": "10.3390/diagnostics16152416",
+      "doi_url": "https://doi.org/10.3390/diagnostics16152416",
+      "why_html": "CD169%、中性粒 CD64 指数、<b>CRP</b> 三者做列线图，鉴别混合呼吸道感染。CRP 是你 8 基因 panel 里的一员，而列线图是分类器落到临床床旁的一种呈现形式。<strong>PubMed 中该条无摘要字段</strong>，以上描述基于标题与期刊定位，引用前需下载全文核对入组与效能数据。",
+      "out_of_window": false,
+      "added": "2026-09-24",
+      "doi_verified": true,
+      "pmid": "42587653",
+      "id": "10-3390-diagnostics16152416",
+      "pubmed_indexed": true,
+      "num": 58
+    },
+    {
+      "group": 6,
+      "title": "The role of cellular senescence in sepsis and its mechanism in copper death: An analysis based on machine learning.",
+      "title_url": "https://doi.org/10.1097/MD.0000000000050020",
+      "must_read": false,
+      "journal": "Medicine",
+      "date": "2026-07-31",
+      "authors": "Ma Q, Yang HR, Wang JZ et al.",
+      "doi": "10.1097/MD.0000000000050020",
+      "doi_url": "https://doi.org/10.1097/MD.0000000000050020",
+      "why_html": "GEO 三个脓毒症数据集（GSE28750 / GSE54514 / GSE131761）+ 机器学习筛关键基因、建诊断模型再验证。收它的理由<b>主要是当反面对照</b>：全程依赖公共回顾性队列、无前瞻入组、无独立外部验证，这正是 PMHostX 用仁济前瞻队列可以主张的增量所在。<strong>做「同类工作的问题在哪」时引这条。</strong>",
+      "out_of_window": false,
+      "added": "2026-09-24",
+      "doi_verified": true,
+      "pmid": "42536548",
+      "id": "10-1097-md-0000000000050020",
+      "pubmed_indexed": true,
+      "num": 59
+    },
+    {
+      "group": 5,
+      "title": "Proteomic advances in extracellular vesicles: unlocking biomarkers for microbial infectious diseases.",
+      "title_url": "https://doi.org/10.1080/14789450.2026.2732072",
+      "must_read": false,
+      "journal": "Expert review of proteomics",
+      "date": "2026-09-08",
+      "authors": "Huang Y, Zhou J, Wang C et al.",
+      "doi": "10.1080/14789450.2026.2732072",
+      "doi_url": "https://doi.org/10.1080/14789450.2026.2732072",
+      "why_html": "细胞外囊泡蛋白组学用于感染病诊断的综述，明确采用<b>「病原来源 / 宿主反应」双轨</b>框架讨论标志物。与 PMHostX 的宿主信号思路可互相印证，写引言时用来支撑「宿主侧信号被系统性低估」这一判断。",
+      "out_of_window": false,
+      "added": "2026-09-24",
+      "doi_verified": true,
+      "pmid": "42711249",
+      "id": "10-1080-14789450-2026-2732072",
+      "pubmed_indexed": true,
+      "num": 60
     }
   ]
 }

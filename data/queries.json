@@ -1,11 +1,11 @@
 {
-  "_comment": "21 条 PubMed 检索式。fetch.py 会逐条执行。改这里等于改检索范围，改完请更新 queries.md（由 build_page.py 的 --queries-md 生成，或手工同步）。",
+  "_comment": "25 条 PubMed 检索式。fetch.py 会逐条执行。改这里等于改检索范围，改完请更新 queries.md（由 build_page.py 的 --queries-md 生成，或手工同步）。",
   "_endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
   "queries": [
     {
       "key": "A_metatrans_host",
       "topic": "宏转录组与宿主",
-      "term": "(metatranscriptomic*[tiab] OR metatranscriptom*[tiab]) AND (host[tiab] OR \"host response\"[tiab] OR \"host gene\"[tiab])"
+      "term": "(metatranscriptomic*[tiab] OR metatranscriptom*[tiab]) AND (\"host response\"[tiab] OR \"host gene expression\"[tiab] OR \"host transcriptom*\"[tiab] OR \"human host\"[tiab] OR \"host-pathogen\"[tiab])"
     },
     {
       "key": "B_mngs_hostresp",
@@ -15,17 +15,17 @@
     {
       "key": "C_csf_host",
       "topic": "脑脊液与转录组/宿主反应",
-      "term": "(\"cerebrospinal fluid\"[tiab] OR CSF[tiab]) AND (transcriptom*[tiab] OR \"host response\"[tiab] OR \"gene expression\"[tiab] OR \"RNA-seq\"[tiab] OR \"RNA sequencing\"[tiab])"
+      "term": "(\"cerebrospinal fluid\"[tiab]) AND (transcriptom*[tiab] OR \"host response\"[tiab] OR \"gene expression\"[tiab] OR \"RNA-seq\"[tiab] OR \"RNA sequencing\"[tiab])"
     },
     {
       "key": "D_septicyte_genes",
       "topic": "SeptiCyte 构成基因",
-      "term": "(SeptiCyte[tiab] OR CEACAM4[tiab] OR PLAC8[tiab] OR PLA2G7[tiab] OR \"LAMP1\"[tiab])"
+      "term": "(SeptiCyte[tiab] OR CEACAM4[tiab] OR PLAC8[tiab] OR PLA2G7[tiab] OR \"LAMP1\"[tiab]) AND (sepsis[tiab] OR infection[tiab] OR \"host response\"[tiab])"
     },
     {
       "key": "E_medmed_markers",
       "topic": "MeMed/FebriDx 构成基因",
-      "term": "(MeMed[tiab] OR TRAIL[tiab] OR TNFSF10[tiab] OR \"IP-10\"[tiab] OR CXCL10[tiab] OR MX1[tiab]) AND (infection[tiab] OR sepsis[tiab] OR \"host response\"[tiab] OR viral[tiab])"
+      "term": "(MeMed[tiab] OR TRAIL[tiab] OR TNFSF10[tiab] OR \"IP-10\"[tiab] OR CXCL10[tiab] OR MX1[tiab]) AND (infection[tiab] OR sepsis[tiab] OR \"host response\"[tiab]) AND (diagnos*[tiab] OR biomarker*[tiab] OR \"gene signature*\"[tiab] OR \"expression signature*\"[tiab] OR assay*[tiab])"
     },
     {
       "key": "F_pmseq",
@@ -105,7 +105,7 @@
     {
       "key": "U_hostvsmicrobe",
       "topic": "宿主/微生物信号分离与 benchmark",
-      "term": "(host[tiab] AND (microb*[tiab] OR bacteri*[tiab] OR pathogen*[tiab])) AND (separat*[tiab] OR discriminat*[tiab] OR deplet*[tiab] OR classif*[tiab] OR differentiat*[tiab] OR benchmark*[tiab]) AND (transcriptom*[tiab] OR metatranscriptom*[tiab] OR \"RNA-seq\"[tiab] OR sequencing[tiab])"
+      "term": "(host[tiab] AND (microb*[tiab] OR bacteri*[tiab] OR pathogen*[tiab])) AND (separat*[tiab] OR discriminat*[tiab] OR deplet*[tiab] OR classif*[tiab] OR benchmark*[tiab] OR differentiat*[tiab]) AND (\"RNA-seq\"[tiab] OR transcriptom*[tiab] OR metatranscriptom*[tiab] OR \"gene expression\"[tiab])"
     },
     {
       "key": "V_classifier_stability",
@@ -116,6 +116,16 @@
       "key": "W_csf_hostmarker",
       "topic": "脑脊液中的宿主标志物（不限转录组）",
       "term": "(meningit*[tiab] OR encephalit*[tiab] OR \"central nervous system infection*\"[tiab] OR \"CNS infection*\"[tiab]) AND (\"cerebrospinal fluid\"[tiab] OR CSF[tiab]) AND (\"host response\"[tiab] OR proteom*[tiab] OR transcriptom*[tiab] OR \"immune mediator*\"[tiab] OR \"host biomarker*\"[tiab] OR \"host gene\"[tiab])"
+    },
+    {
+      "key": "X_ml_hostresp_infection",
+      "topic": "机器学习/transformer 用宿主表达建模诊断感染",
+      "term": "(\"machine learning\"[tiab] OR \"deep learning\"[tiab] OR transformer*[tiab] OR \"neural network*\"[tiab] OR classif*[tiab] OR \"diagnostic model*\"[tiab]) AND (\"host response\"[tiab] OR \"host transcriptom*\"[tiab] OR \"host gene expression\"[tiab] OR \"gene expression signature*\"[tiab] OR \"transcriptomic signature*\"[tiab] OR \"host biomarker*\"[tiab]) AND (infection[tiab] OR sepsis[tiab] OR meningit*[tiab] OR encephalit*[tiab] OR tuberculosis[tiab])"
+    },
+    {
+      "key": "Y_ai_clinical_metagenomics",
+      "topic": "AI/LLM/transformer 用于临床宏基因组病原检测",
+      "term": "(transformer*[tiab] OR \"foundation model*\"[tiab] OR \"large language model*\"[tiab] OR \"self-supervised\"[tiab] OR \"attention-based\"[tiab]) AND (metagenom*[tiab] OR metatranscriptom*[tiab] OR mNGS[tiab] OR \"host transcriptom*\"[tiab] OR \"gene expression signature*\"[tiab]) AND (infection[tiab] OR pathogen*[tiab] OR sepsis[tiab] OR antimicrobial[tiab])"
     }
   ]
 }
