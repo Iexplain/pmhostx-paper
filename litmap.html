@@ -2,9 +2,14 @@
 <!-- 完整的 HTML 文档骨架（不是 Artifact 片段格式）。
      原因：本页发布到 GitHub Pages，缺 doctype 会让浏览器进 quirks mode，
      盒模型与部分布局行为随之改变。lang 用于中文的无障碍与字体回退。
-     若哪天要改用 Artifact 发布，需要去掉这几行——Artifact 会自己包骨架。 -->
+     若哪天要改用 Artifact 发布，需要去掉这几行——Artifact 会自己包骨架。
+
+     viewport 这行是必需的：没有它，手机浏览器按约 980px 的虚拟宽度渲染再整体
+     缩小，全页字变小，而且下面 @media (max-width:620px) 那段手机版布局永远
+     不会触发（虚拟宽度始终是 980px）——等于白写。 -->
 <html lang="zh-CN">
 <title>PMHostX 文献地图</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
 <meta name="description" content="PMHostX / PMseq-HostProfiler 论文的累积文献地图：按 6 组归类，每条标注与方法的哪个环节对得上。">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧬</text></svg>">
@@ -881,7 +886,7 @@ footer.foot{
 </div>
 
 <footer class="foot">
-  生成于 2026-09-23 23:08 · 窗口 2026-07-01 → 2026-09-22 · 54 条 条<br>
+  生成于 2026-09-24 00:06 · 窗口 2026-07-01 → 2026-09-22 · 54 条 条<br>
   检索式与全部原始留痕见仓库内 queries.md 与 data/ 目录。
 </footer>
 
