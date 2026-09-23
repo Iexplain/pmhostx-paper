@@ -242,7 +242,7 @@ footer.foot{
   <h1>PMHostX 文献地图</h1>
   <p class="lede">面向 <b>PMHostX / PMseq-HostProfiler</b>（脑脊液宏转录组宿主 mRNA 分离与定量）。每条按"与项目的哪一部分相关"归组，并注明可直接使用的点。日期均取自 PubMed <code>pubmed</code>/<code>epublish</code> 或 Europe PMC <code>firstPublicationDate</code> 字段实测值。</p>
   <div class="stats">
-    <div class="stat"><span class="n">41</span><span class="k">窗口内</span></div>
+    <div class="stat"><span class="n">52</span><span class="k">窗口内</span></div>
     <div class="stat"><span class="n">2</span><span class="k">窗口外必读</span></div>
     <div class="stat"><span class="n">1</span><span class="k">批收录</span></div>
     <div class="stat"><span class="n">23</span><span class="k">检索式</span></div>
@@ -267,7 +267,7 @@ footer.foot{
   <div class="sechead">
     <span class="well"></span>
     <h2>方法学核心 · 从宏组学数据中提取宿主信号</h2>
-    <span class="count">6 条</span>
+    <span class="count">9 条</span>
   </div>
   <p class="secdesc">与 PMHostX 做的是同一件事的两面：在宿主主导的测序数据里，把想要的那一层信号干净地分离并定量出来。</p>
 
@@ -330,13 +330,43 @@ footer.foot{
     <div class="meta"><span>bioRxiv 预印本</span><span class="sep">·</span><span>2026-08-14</span><span class="sep">·</span><span>Viz-Lasheras S et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.64898/2026.08.11.744042">10.64898/2026.08.11.744042</a></span></div>
     <div class="why"><span class="lbl">为何相关</span><p>迄今最大的儿科宿主转录组整合研究（发现集 1,683 / RNA-seq 验证 767 / 数字 PCR 确认 29），二分类与多分类 signature 均优于 30 余个已发表 signature，净获益超过 CRP。<strong>多队列宿主反应评分的构建模板</strong>。（bioRxiv API 记 08-18、Europe PMC 记 08-14，两者均在窗口内。）</p></div>
   </article>
+
+  <article class="item" data-g="1" data-id="10-1186-s13073-026-01707-w">
+    <div class="tline">
+      <span class="num">44</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1186/s13073-026-01707-w">Metagenomic analysis of blood virome in ischemic stroke reveals an increase in herpesvirus transcripts and host immune activation.</a></h3>
+      
+    </div>
+    <div class="meta"><span>Genome medicine</span><span class="sep">·</span><span>2026-07-11</span><span class="sep">·</span><span>Clarke MD, Falcione S, Boghozian R et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1186/s13073-026-01707-w">10.1186/s13073-026-01707-w</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>把 RNA-seq reads <strong>同时比对到人参考基因组和病毒基因组库</strong>，从同一份数据里同时取出病毒信号与宿主免疫激活信号（n=37 卒中 / 32 对照）。和你是同一件事的两个方向：你从宏转录组里取宿主 mRNA，它从宿主 RNA-seq 里取病毒。可用于 Introduction 论证「宿主与微生物信号共存于同一份测序数据」本身不新，<strong>难的是定量与判读</strong>。</p></div>
+  </article>
+
+  <article class="item" data-g="1" data-id="10-1128-spectrum-03593-25">
+    <div class="tline">
+      <span class="num">45</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1128/spectrum.03593-25">Multi-level aggregation analysis of microbiome composition and host gene expression reveals associations with systemic and local immunity.</a></h3>
+      
+    </div>
+    <div class="meta"><span>Microbiology spectrum</span><span class="sep">·</span><span>2026-08-10</span><span class="sep">·</span><span>Shagam LI, Elizarova A, Momozawa Y et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1128/spectrum.03593-25">10.1128/spectrum.03593-25</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>宿主基因表达与微生物组成的关联分析，n=315 健康人，用<strong>分层特征聚合</strong>（先主成分降维再聚合）处理「两边信号都稀疏、维度都爆炸」的问题。对应你从宏转录组分离宿主 reads 后做 FPKM/TPM 定量所面对的同一类稀疏性。</p></div>
+  </article>
+
+  <article class="item" data-g="1" data-id="10-1007-s12020-026-04754-w">
+    <div class="tline">
+      <span class="num">46</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1007/s12020-026-04754-w">Integrated analysis of the diabetic foot ulcer microbiome and host transcriptome supports a microenvironment-microbiota-host repair framework.</a></h3>
+      
+    </div>
+    <div class="meta"><span>Endocrine</span><span class="sep">·</span><span>2026-08-15</span><span class="sep">·</span><span>Lou J, Liu H, Xiang Z et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1007/s12020-026-04754-w">10.1007/s12020-026-04754-w</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>把 8 个公开糖尿病足溃疡队列按<strong>证据等级</strong>分层重处理（16S raw reads 重新处理、limma 差异分析），宿主判别用 fold-confined leave-one-sample-out + 100 次重复嵌套五折验证。<strong>这套验证设计可直接借用</strong>——你定量出宿主基因后同样面对队列小、批次杂的问题；它也是「公共数据复用的可靠性分层」这个论点的现成先例。</p></div>
+  </article>
 </section>
 
 <section class="sec2" data-g="2">
   <div class="sechead">
     <span class="well"></span>
     <h2>标志物与 panel · 你 8 个基因的商业对标</h2>
-    <span class="count">9 条</span>
+    <span class="count">10 条</span>
   </div>
   <p class="secdesc">PMHostX 的 marker 集（CRP / TNFSF10 / CXCL10 / MX1 / CEACAM4 / LAMP1 / PLAC8 / PLA2G7）分别对应 MeMed BV、FebriDx、SeptiCyte LAB 三条产品线。以下是窗口内这些基因与组合的临床证据。</p>
 
@@ -429,13 +459,23 @@ footer.foot{
     <div class="meta"><span>Internal and Emergency Medicine</span><span class="sep">·</span><span>2026-07-08</span><span class="sep">·</span><span>Ter Voert MA et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1007/s11739-026-04457-0">10.1007/s11739-026-04457-0</a></span></div>
     <div class="why"><span class="lbl">为何相关</span><p>29-mRNA 的 TriVerity（SeptiCyte 类检测的继任者）在 467 例荷兰急诊的真实世界表现：细菌感染 rule-in 特异度 89–94%、rule-out 敏感度 87–92%。<strong>你 panel 之外"多基因路线"的坐标</strong>。</p></div>
   </article>
+
+  <article class="item" data-g="2" data-id="10-1016-j-ijid-2026-108952">
+    <div class="tline">
+      <span class="num">54</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1016/j.ijid.2026.108952">Comparative assessment of host transcriptomic- and bacteriological- markers for monitoring treatment response among active tuberculosis patients: a longitudinal study.</a></h3>
+      
+    </div>
+    <div class="meta"><span>International journal of infectious diseases</span><span class="sep">·</span><span>2026-07-09</span><span class="sep">·</span><span>Nakiboneka R, Margaritella N, Nyirenda TS et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1016/j.ijid.2026.108952">10.1016/j.ijid.2026.108952</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>血液<strong>宿主转录标志物</strong>与细菌学标志物在活动性结核治疗反应监测上的头对头比较（马拉维前瞻队列）。两层意义：宿主标志物在<strong>纵向随访</strong>上的表现（你的 8 基因 panel 若要做动态监测，这是先例）；以及它的结论模式——宿主信号在监测上未必优于病原学，这类<strong>受限结论</strong>正是 Discussion 该引的。</p></div>
+  </article>
 </section>
 
 <section class="sec3" data-g="3">
   <div class="sechead">
     <span class="well"></span>
     <h2>脑脊液 / 中枢感染 · 宿主转录组与 mNGS 判读</h2>
-    <span class="count">8 条</span>
+    <span class="count">13 条</span>
   </div>
   <p class="secdesc">PMHostX 的样本是仁济脑脊液队列。这一组是同一基质、同一病种的宿主信号与 mNGS 定量判读证据。</p>
 
@@ -518,13 +558,63 @@ footer.foot{
     <div class="meta"><span>Journal of Clinical Microbiology</span><span class="sep">·</span><span>2026-08-20</span><span class="sep">·</span><span>Wang H et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1128/jcm.00446-26">10.1128/jcm.00446-26</a></span></div>
     <div class="why"><span class="lbl">为何相关</span><p>MeltArray 多重 PCR（85 个脑膜炎相关病原）与 mNGS 在 79 份 CSF 上头对头，再前瞻 255 例；检出限低至 5 copies/反应。你方法学之外的竞争技术基线。</p></div>
   </article>
+
+  <article class="item" data-g="3" data-id="10-7499-j-issn-1008-8830-2511025">
+    <div class="tline">
+      <span class="num">49</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.7499/j.issn.1008-8830.2511025">[Application of metagenomic next-generation sequencing in the pathogen spectrum analysis of suspected infections in neonatal blood and cerebrospinal fluid].</a></h3>
+      
+    </div>
+    <div class="meta"><span>Chinese journal of contemporary pediatrics</span><span class="sep">·</span><span>2026-07-16</span><span class="sep">·</span><span>Zhang YY, Gan MY, Zhu YQ et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.7499/j.issn.1008-8830.2511025">10.7499/j.issn.1008-8830.2511025</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p><strong>脑脊液与血液配对、648 例新生儿</strong>的 mNGS 病原谱与培养头对头比较（734 份 CSF + 733 份血），是这个基质上少见的样本量。用于结果对照：可直接作为「CSF 宏基因组检出率」的基准量级。中文期刊，引用前确认全文可得。</p></div>
+  </article>
+
+  <article class="item" data-g="3" data-id="10-2147-idr-s635205">
+    <div class="tline">
+      <span class="num">50</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.2147/IDR.S635205">Antimicrobial Decision-Making in Culture-Negative Bacterial Meningitis with mNGS-Detected Prevotella-Dominant Anaerobic Signals: Two Case Reports and a Literature Review.</a></h3>
+      <span class="pin">必读</span>
+    </div>
+    <div class="meta"><span>Infection and drug resistance</span><span class="sep">·</span><span>2026-09-10</span><span class="sep">·</span><span>Li Y, Hu Y, Yang Y et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.2147/IDR.S635205">10.2147/IDR.S635205</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>直接点出<strong>低生物量 CSF 结果必须显式报告质控、并评估污染与临床可信度</strong>：培养阴性的脑膜炎里 mNGS 报出厌氧菌优势信号，作者把它当补充证据而非诊断依据。这正是你的方法在 CSF 上会撞到的判读边界，Discussion 局限里可正面引用——<strong>不是所有从 CSF 里读出的信号都该当真</strong>。</p></div>
+  </article>
+
+  <article class="item" data-g="3" data-id="10-1111-dmcn-70467">
+    <div class="tline">
+      <span class="num">51</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1111/dmcn.70467">Shared dysregulation of complement and phosphorylation pathways in the cerebrospinal fluid of encephalitis, Aicardi-Goutières syndrome, and autism.</a></h3>
+      
+    </div>
+    <div class="meta"><span>Developmental medicine and child neurology</span><span class="sep">·</span><span>2026-08-19</span><span class="sep">·</span><span>Shadid OH, Hains PG, Han VX et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1111/dmcn.70467">10.1111/dmcn.70467</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>同一基质（<strong>儿童脑脊液</strong>）的宿主分子谱：n=15 脑炎 + 7 AGS + 自闭症对照，质谱蛋白质组发现补体与磷酸化通路的<strong>共享失调</strong>。与你的差异是蛋白质组而非转录组——可用于说明 CSF 里可测的宿主信号不止 mRNA 一层，并提供脑炎 CSF 宿主谱的对照基线。</p></div>
+  </article>
+
+  <article class="item" data-g="3" data-id="10-1002-advs-77608">
+    <div class="tline">
+      <span class="num">52</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1002/advs.77608">Single-Cell Profiling Reveals Clonally Expanded CX3CR1(+) T Cells in Anti-NMDA Receptor Encephalitis.</a></h3>
+      
+    </div>
+    <div class="meta"><span>Advanced science</span><span class="sep">·</span><span>2026-09-09</span><span class="sep">·</span><span>Yan L, Zhang E, Ma Y et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1002/advs.77608">10.1002/advs.77608</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p><strong>未治疗</strong>的抗 NMDAR 脑炎患者外周与<strong>脑脊液</strong>免疫图谱（scRNA + scTCR + CITE-seq），发现克隆扩增的 CX3CR1+ T 细胞。价值在鉴别诊断：自身免疫性脑炎是感染性脑炎最主要的鉴别对象，这篇给出 CSF 宿主细胞层面的差异特征——你的宿主 mRNA 定量若能区分这两类，参照系就在这里。</p></div>
+  </article>
+
+  <article class="item" data-g="3" data-id="10-1099-jgv-0-002302">
+    <div class="tline">
+      <span class="num">53</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1099/jgv.0.002302">Human pegivirus, Toscana virus and herpesviruses identified in cerebrospinal fluid from adults with unexplained neurologic disease, Spain, 2022-2023.</a></h3>
+      
+    </div>
+    <div class="meta"><span>Journal of general virology</span><span class="sep">·</span><span>2026-07-17</span><span class="sep">·</span><span>Donoso A, Pérez AB, Lopez-Dosil M et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1099/jgv.0.002302">10.1099/jgv.0.002302</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p><strong>常规诊断全阴</strong>的成人疑似中枢感染，用探针法病毒 mNGS 复查 40 例、检出 6 例。这是「mNGS 在 CSF 上的增量检出率」的直接数字（<strong>15%</strong>），可用于 Introduction 说明现有诊断缺口有多大，也可用于 Discussion 界定宏基因组方法的实际收益边界。</p></div>
+  </article>
 </section>
 
 <section class="sec4" data-g="4">
   <div class="sechead">
     <span class="well"></span>
     <h2>建库、去宿主与参考库卫生</h2>
-    <span class="count">9 条</span>
+    <span class="count">11 条</span>
   </div>
   <p class="secdesc">PMHostX 的 fastp → HISAT2 链条本质是&quot;in-silico 去宿主&quot;。这一组是湿实验去宿主、rRNA 去除与参考库污染控制的最新进展。</p>
 
@@ -616,6 +706,26 @@ footer.foot{
     </div>
     <div class="meta"><span>Bio-protocol</span><span class="sep">·</span><span>2026-08-13</span><span class="sep">·</span><span>Qasim SM et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.21769/BioProtoc.5764">10.21769/BioProtoc.5764</a></span></div>
     <div class="why"><span class="lbl">为何相关</span><p>一步法物种特异性生物素化反义探针去 rRNA。低成本自建探针的替代路线。</p></div>
+  </article>
+
+  <article class="item" data-g="4" data-id="10-1128-msystems-00550-26">
+    <div class="tline">
+      <span class="num">47</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1128/msystems.00550-26">HumanFilt: a multi-reference host depletion pipeline improves Fusobacterium detection accuracy in tumor WGS data sets.</a></h3>
+      <span class="pin">必读</span>
+    </div>
+    <div class="meta"><span>mSystems</span><span class="sep">·</span><span>2026-07-14</span><span class="sep">·</span><span>Frolova M, Maguire B, Duessmann H et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1128/msystems.00550-26">10.1128/msystems.00550-26</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p><strong>去宿主这一步的直接对标工具</strong>：用多参考序列做 human-read removal，再在 10 例黏液性直肠腺癌 WGS 上重分析，证明去宿主质量直接决定下游检出准确度。你 HISAT2 比对 hg38 是同一步骤，但你的下游是<strong>宿主定量</strong>而非微生物检出——同一步骤的两条相反用途，Methods 里可互引。</p></div>
+  </article>
+
+  <article class="item" data-g="4" data-id="10-1128-spectrum-04057-25">
+    <div class="tline">
+      <span class="num">48</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1128/spectrum.04057-25">Comparative evaluation of probe-capture and conventional metagenomic sequencing across multiple clinical sample types, with analysis of paired bronchoalveolar lavage fluid and blood samples.</a></h3>
+      <span class="pin">必读</span>
+    </div>
+    <div class="meta"><span>Microbiology spectrum</span><span class="sep">·</span><span>2026-08-04</span><span class="sep">·</span><span>Liu X, Fan X, Wu W et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1128/spectrum.04057-25">10.1128/spectrum.04057-25</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>明文指出常规 mNGS 受<strong>宿主核酸干扰</strong>、在低生物量样本上表现差，探针捕获（PC-mNGS）用杂交探针富集微生物目标以提高灵敏度，跨 BALF / 血液 / <strong>脑脊液</strong>做了系统比较。你是反方向：不去宿主、把宿主当信号。这构成 Methods 里「要不要去宿主」这个选择的<strong>对侧论证</strong>，并给出低生物量样本的实测差距。</p></div>
   </article>
 </section>
 
@@ -762,7 +872,7 @@ footer.foot{
 </div>
 
 <footer class="foot">
-  生成于 2026-09-23 19:35 · 窗口 2026-07-01 → 2026-09-22 · 43 条 条<br>
+  生成于 2026-09-23 20:32 · 窗口 2026-07-01 → 2026-09-22 · 54 条 条<br>
   检索式与全部原始留痕见仓库内 queries.md 与 data/ 目录。
 </footer>
 
