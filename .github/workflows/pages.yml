@@ -29,7 +29,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # enablement: true —— 仓库还没开 Pages 时由它代开，省掉手动去设置里点
+      # enablement: true 的实测结论：**开不了**。开通 Pages 要 admin 权限，
+      # 而 GITHUB_TOKEN 没有（首次运行即失败在 "Resource not accessible by
+      # integration"）。GitHub 的设计就是仓库所有者必须手动开一次。
+      #
+      # 一次性准备：仓库 Settings → Pages → Build and deployment →
+      #            Source 选 **GitHub Actions**（不是 "Deploy from a branch"，
+      #            后者是 legacy 构建，会让下面的 deploy-pages 报错）。
+      # 开完之后这个工作流每次推送自动部署。
+      #
+      # enablement 保留在此：站点已存在时它只是读配置，不会重复调用创建接口。
       - uses: actions/configure-pages@v5
         with:
           enablement: true
