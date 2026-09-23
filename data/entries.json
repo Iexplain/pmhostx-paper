@@ -841,7 +841,8 @@
       "doi_verified": false,
       "pmid": null,
       "id": "title-108964f5f6",
-      "pubmed_indexed": false
+      "pubmed_indexed": false,
+      "no_identifier_reason": "AAN 2026 会议摘要（S16.010），PubMed 无记录，DOI 与 PMID 均不存在"
     },
     {
       "id": "10-1186-s13073-026-01707-w",
