@@ -1,0 +1,808 @@
+<title>PMHostX 文献地图</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;1,400&family=Noto+Serif+SC:wght@500;700&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+:root{
+  --ground:#F6F7F9;
+  --surface:#FFFFFF;
+  --surface-2:#FBFCFD;
+  --ink:#121A24;
+  --ink-2:#5B6675;
+  --ink-3:#8A93A0;
+  --line:#E0E5EB;
+  --line-2:#EDF0F4;
+  --g1:#2A5FA8;
+  --g2:#A8701A;
+  --g3:#2E7D5B;
+  --g4:#B03A3A;
+  --g5:#55637A;
+  --pin-bg:#FDF1DC;
+  --pin-ink:#8A5A12;
+  --focus:#2A5FA8;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#0E131A;
+    --surface:#151C25;
+    --surface-2:#131A22;
+    --ink:#E7ECF2;
+    --ink-2:#9AA6B4;
+    --ink-3:#6E7A88;
+    --line:#242E39;
+    --line-2:#1C242E;
+    --g1:#74A9E8;
+    --g2:#D9A445;
+    --g3:#5FBF95;
+    --g4:#E07A76;
+    --g5:#94A3B3;
+    --pin-bg:#392C13;
+    --pin-ink:#E8C173;
+    --focus:#74A9E8;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0E131A;
+  --surface:#151C25;
+  --surface-2:#131A22;
+  --ink:#E7ECF2;
+  --ink-2:#9AA6B4;
+  --ink-3:#6E7A88;
+  --line:#242E39;
+  --line-2:#1C242E;
+  --g1:#74A9E8;
+  --g2:#D9A445;
+  --g3:#5FBF95;
+  --g4:#E07A76;
+  --g5:#94A3B3;
+  --pin-bg:#392C13;
+  --pin-ink:#E8C173;
+  --focus:#74A9E8;
+}
+
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  background:var(--ground);
+  color:var(--ink);
+  font-family:"Noto Sans SC","Source Sans 3",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:900px;margin:0 auto;padding:0 22px 90px;}
+a{color:inherit;}
+:focus-visible{outline:2px solid var(--focus);outline-offset:3px;border-radius:2px;}
+
+/* ---------- masthead ---------- */
+.mast{border-bottom:1px solid var(--line);padding:52px 0 26px;}
+.eyebrow{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 16px;
+}
+h1{
+  font-family:"Noto Serif SC","Spectral",serif;
+  font-weight:700;font-size:clamp(28px,4.4vw,40px);
+  line-height:1.2;margin:0 0 14px;text-wrap:balance;letter-spacing:-.01em;
+}
+.lede{font-size:16.5px;color:var(--ink-2);max-width:62ch;margin:0 0 26px;}
+.lede b{color:var(--ink);font-weight:500;}
+.stats{display:flex;flex-wrap:wrap;gap:0;border-top:1px solid var(--line-2);}
+.stat{padding:14px 26px 4px 0;margin-right:26px;border-right:1px solid var(--line-2);}
+.stat:last-child{border-right:0;margin-right:0;}
+.stat .n{
+  font-family:"IBM Plex Mono",monospace;font-size:19px;font-weight:500;
+  font-variant-numeric:tabular-nums;display:block;line-height:1.3;
+}
+.stat .k{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);}
+
+/* ---------- toolbar ---------- */
+.toolbar{
+  position:sticky;top:0;z-index:20;
+  background:var(--ground);
+  border-bottom:1px solid var(--line);
+  padding:12px 0;margin-bottom:8px;
+  display:flex;flex-wrap:wrap;gap:10px;align-items:center;
+}
+.search{
+  flex:1 1 220px;min-width:180px;
+  font-family:inherit;font-size:14.5px;
+  padding:8px 12px;
+  border:1px solid var(--line);border-radius:3px;
+  background:var(--surface);color:var(--ink);
+}
+.search::placeholder{color:var(--ink-3);}
+.chips{display:flex;flex-wrap:wrap;gap:6px;}
+.chip{
+  font-family:inherit;font-size:12.5px;line-height:1;
+  padding:8px 11px;border:1px solid var(--line);border-radius:3px;
+  background:var(--surface);color:var(--ink-2);cursor:pointer;
+  display:inline-flex;align-items:center;gap:7px;
+  transition:border-color .12s ease,color .12s ease;
+}
+.chip:hover{border-color:var(--ink-3);color:var(--ink);}
+.chip[aria-pressed="true"]{border-color:var(--ink);color:var(--ink);font-weight:500;}
+.chip .dot{width:8px;height:8px;border-radius:1px;flex:none;background:var(--ink-3);}
+.chip[data-g="1"] .dot{background:var(--g1);}
+.chip[data-g="2"] .dot{background:var(--g2);}
+.chip[data-g="3"] .dot{background:var(--g3);}
+.chip[data-g="4"] .dot{background:var(--g4);}
+.chip[data-g="5"] .dot{background:var(--g5);}
+.chip[data-g="0"] .dot{display:none;}
+
+/* ---------- sections ---------- */
+section{margin-top:44px;}
+.sechead{display:flex;align-items:baseline;gap:11px;border-bottom:1px solid var(--line);padding-bottom:9px;margin-bottom:2px;}
+.well{width:11px;height:11px;border-radius:2px;flex:none;transform:translateY(-1px);}
+.sec1 .well{background:var(--g1);} .sec2 .well{background:var(--g2);}
+.sec3 .well{background:var(--g3);} .sec4 .well{background:var(--g4);}
+.sec5 .well{background:var(--g5);} .sec6 .well{background:var(--ink-3);}
+h2{
+  font-family:"Noto Serif SC","Spectral",serif;font-weight:700;
+  font-size:19.5px;margin:0;letter-spacing:-.005em;flex:1 1 auto;
+}
+.count{
+  font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--ink-3);
+  font-variant-numeric:tabular-nums;flex:none;
+}
+.secdesc{font-size:14px;color:var(--ink-2);margin:11px 0 4px;max-width:64ch;}
+
+/* ---------- entries ---------- */
+.item{
+  padding:20px 0 21px;border-bottom:1px solid var(--line-2);
+  display:grid;grid-template-columns:1fr;gap:7px;
+}
+.item:last-child{border-bottom:0;}
+.item[hidden]{display:none;}
+.tline{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px;}
+.num{
+  font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--ink-3);
+  font-variant-numeric:tabular-nums;flex:none;padding-top:2px;
+}
+.ptitle{
+  font-family:"Spectral",Georgia,serif;font-weight:600;
+  font-size:17.5px;line-height:1.4;margin:0;flex:1 1 auto;max-width:68ch;
+  text-wrap:pretty;
+}
+.ptitle a{text-decoration:none;border-bottom:1px solid transparent;transition:border-color .12s ease;}
+.ptitle a:hover{border-bottom-color:var(--ink-3);}
+.pin{
+  font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.08em;
+  background:var(--pin-bg);color:var(--pin-ink);
+  padding:3px 7px;border-radius:2px;flex:none;text-transform:uppercase;
+}
+.meta{
+  font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--ink-2);
+  font-variant-numeric:tabular-nums;line-height:1.7;
+  display:flex;flex-wrap:wrap;gap:0 10px;
+}
+.meta .sep{color:var(--ink-3);}
+.meta .doi{color:var(--ink-3);}
+.meta .doi a{text-decoration:none;border-bottom:1px solid var(--line);}
+.meta .doi a:hover{border-bottom-color:var(--ink-2);color:var(--ink-2);}
+.meta .unverified{color:var(--ink-3);font-style:italic;}
+.why{margin-top:3px;max-width:68ch;}
+.why .lbl{
+  font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:3px;
+}
+.why p{margin:0;font-size:14.5px;color:var(--ink-2);line-height:1.62;}
+.why p strong{color:var(--ink);font-weight:500;}
+
+/* out-of-window */
+.sec6 .item{background:var(--surface-2);border:1px dashed var(--line);border-radius:3px;padding:18px;margin-bottom:12px;}
+.sec6 .item:last-child{margin-bottom:0;}
+.oow{
+  font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--g4);border:1px solid var(--g4);
+  padding:3px 7px;border-radius:2px;flex:none;
+}
+
+/* notes */
+.notes{margin-top:52px;border-top:1px solid var(--line);padding-top:26px;}
+.notes h2{font-size:17px;margin-bottom:12px;}
+.notes ul{margin:0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:11px;}
+.notes li{font-size:14.5px;color:var(--ink-2);max-width:68ch;padding-left:16px;position:relative;}
+.notes li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:1px;background:var(--ink-3);}
+.notes b{color:var(--ink);font-weight:500;}
+.empty{display:none;padding:34px 0;color:var(--ink-3);font-size:14.5px;}
+
+/* weekly changelog */
+.recent{margin-top:44px;}
+.recent h2{font-size:17px;margin-bottom:12px;}
+.recent ol{margin:0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:9px;}
+.recent li{font-size:14px;color:var(--ink-2);display:flex;gap:11px;align-items:baseline;}
+.recent .d{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--ink-3);flex:none;font-variant-numeric:tabular-nums;}
+.recent a{text-decoration:none;border-bottom:1px solid var(--line-2);}
+.recent a:hover{border-bottom-color:var(--ink-3);color:var(--ink);}
+.recent .g{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-3);flex:none;}
+
+footer.foot{
+  margin-top:40px;padding-top:20px;border-top:1px solid var(--line-2);
+  font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink-3);
+  font-variant-numeric:tabular-nums;
+}
+
+@media (max-width:620px){
+  .wrap{padding:0 16px 70px;}
+  .mast{padding:36px 0 20px;}
+  .stat{padding-right:16px;margin-right:16px;}
+  .ptitle{font-size:16.5px;}
+  .toolbar{padding:10px 0;}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;}}
+</style>
+
+<div class="wrap">
+
+<header class="mast">
+  <p class="eyebrow">文献短名单 · 检索窗口 2026-07-01 → 2026-09-22</p>
+  <h1>PMHostX 文献地图</h1>
+  <p class="lede">面向 <b>PMHostX / PMseq-HostProfiler</b>（脑脊液宏转录组宿主 mRNA 分离与定量）。每条按"与项目的哪一部分相关"归组，并注明可直接使用的点。日期均取自 PubMed <code>pubmed</code>/<code>epublish</code> 或 Europe PMC <code>firstPublicationDate</code> 字段实测值。</p>
+  <div class="stats">
+    <div class="stat"><span class="n">41</span><span class="k">窗口内</span></div>
+    <div class="stat"><span class="n">2</span><span class="k">窗口外必读</span></div>
+    <div class="stat"><span class="n">1</span><span class="k">批收录</span></div>
+    <div class="stat"><span class="n">23</span><span class="k">检索式</span></div>
+  </div>
+</header>
+
+<div class="toolbar">
+  <input class="search" id="q" type="search" placeholder="搜索标题、期刊、作者、关键词…" aria-label="搜索文献">
+  <div class="chips" role="group" aria-label="按主题筛选">
+    <button class="chip" data-g="0" aria-pressed="true"><span class="dot"></span>全部</button>
+    <button class="chip" data-g="1" aria-pressed="false"><span class="dot"></span>方法学</button>
+    <button class="chip" data-g="2" aria-pressed="false"><span class="dot"></span>标志物</button>
+    <button class="chip" data-g="3" aria-pressed="false"><span class="dot"></span>临床</button>
+    <button class="chip" data-g="4" aria-pressed="false"><span class="dot"></span>建库/去宿主</button>
+    <button class="chip" data-g="5" aria-pressed="false"><span class="dot"></span>背景</button>
+    <button class="chip" data-g="6" aria-pressed="false"><span class="dot"></span>窗口外</button>
+  </div>
+</div>
+
+<main id="list">
+<section class="sec1" data-g="1">
+  <div class="sechead">
+    <span class="well"></span>
+    <h2>方法学核心 · 从宏组学数据中提取宿主信号</h2>
+    <span class="count">6 条</span>
+  </div>
+  <p class="secdesc">与 PMHostX 做的是同一件事的两面：在宿主主导的测序数据里，把想要的那一层信号干净地分离并定量出来。</p>
+
+  <article class="item" data-g="1" data-id="10-1128-msystems-00897-26">
+    <div class="tline">
+      <span class="num">01</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1128/msystems.00897-26">Library strategies differentially shape microbial, functional, and host signals in clinical metagenomic sequencing</a></h3>
+      <span class="pin">必读</span>
+    </div>
+    <div class="meta"><span>mSystems</span><span class="sep">·</span><span>2026-09-14</span><span class="sep">·</span><span>Luo G et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1128/msystems.00897-26">10.1128/msystems.00897-26</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>同一样本平行比较 DNA 库 / RNA 库 / 总核酸库三种策略，跨 5 种临床标本类型，结论是<strong>三者不可互换、各自捕获同一标本的不同生物学维度</strong>，并专门评估宿主免疫特征的保留差异。你项目的前提就是"rRNA 去除建库 → 从宏转录组取宿主 mRNA"，这篇直接决定你的建库方案论证与宿主信号偏倚讨论。</p></div>
+  </article>
+
+  <article class="item" data-g="1" data-id="10-1093-bib-bbag454">
+    <div class="tline">
+      <span class="num">02</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1093/bib/bbag454">Benchmarking methods for extracting microbial signal from host-dominated metatranscriptomes</a></h3>
+      <span class="pin">必读</span>
+    </div>
+    <div class="meta"><span>Briefings in Bioinformatics</span><span class="sep">·</span><span>2026-09-03</span><span class="sep">·</span><span>Colajanni A et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1093/bib/bbag454">10.1093/bib/bbag454</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>宿主主导的 RNA-seq 里非人 reads 占比极低，该文系统评测"去宿主 + 转录本分类"的组装与非组装策略，并指出<strong>目前没有开箱即用的 pipeline</strong>。你要宿主、它要微生物——同一枚硬币的两面，其 benchmark 框架可直接对偶借用，也是你方法新颖性的论证支点。</p></div>
+  </article>
+
+  <article class="item" data-g="1" data-id="10-3389-fbinf-2026-1906036">
+    <div class="tline">
+      <span class="num">03</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.3389/fbinf.2026.1906036">LungMicroHostR: an R package for integrated host-microbiome analysis of bronchoalveolar lavage fluid metagenomic sequencing data</a></h3>
+      <span class="pin">必读</span>
+    </div>
+    <div class="meta"><span>Frontiers in Bioinformatics</span><span class="sep">·</span><span>2026-08-25</span><span class="sep">·</span><span>Li N et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.3389/fbinf.2026.1906036">10.3389/fbinf.2026.1906036</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>目前<strong>最接近 PMHostX 的已发表工具</strong>：从同一份 mNGS 数据同时产出微生物谱与宿主来源分子测量，统一处理低生物量信号、阴性对照与多特征表（GSE252118，402 例）。差异仅在样本类型（BALF vs 脑脊液），是你最需要在文中做区分度说明的相关工作。</p></div>
+  </article>
+
+  <article class="item" data-g="1" data-id="10-1371-journal-pone-0357585">
+    <div class="tline">
+      <span class="num">04</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1371/journal.pone.0357585">High AUROC can mask decision failure in sepsis transcriptomic classifiers: preprocessing stability outweighs post hoc calibration across cohorts</a></h3>
+      <span class="pin">必读</span>
+    </div>
+    <div class="meta"><span>PLoS ONE</span><span class="sep">·</span><span>2026-09-03</span><span class="sep">·</span><span>Zheng H, Chen W</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1371/journal.pone.0357585">10.1371/journal.pone.0357585</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>标定四个 GEO 全血队列后证明：训练集导出的标准化方式在跨平台固定阈值下会让平衡准确率崩到 0.50，<strong>AUROC 再高也掩盖不了判读失败</strong>，只有严格归纳式的样本秩标准化能守住。这篇直接打在你项目的已知隐患上——<code>calculate_fpkm_tpm.R</code> 用 exon 长度求和、<code>genename_tpm.R</code> 用基因起止跨度，两条路算出的 TPM 不可比，而 marker 打分恰恰依赖 TPM。</p></div>
+  </article>
+
+  <article class="item" data-g="1" data-id="10-1002-jmv-71122">
+    <div class="tline">
+      <span class="num">05</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1002/jmv.71122">Comprehensive Viral Detection and Profiling of Plasma Cell-Free RNA in Patients With Suspected Hemophagocytic Lymphohistiocytosis</a></h3>
+      
+    </div>
+    <div class="meta"><span>Journal of Medical Virology</span><span class="sep">·</span><span>2026-09-01</span><span class="sep">·</span><span>Fukuda Y et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1002/jmv.71122">10.1002/jmv.71122</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>同一次 mNGS 既出病毒 reads，又做宿主 cfRNA 转录组对比（1,053 个差异基因，病毒阳性组富集"adaptive immune response"）。窗口内<strong>"从宏基因组流程里顺带回收宿主信号"这一立意最接近的实证</strong>，只是基质是血浆而非脑脊液。</p></div>
+  </article>
+
+  <article class="item" data-g="1" data-id="10-64898-2026-08-11-744042">
+    <div class="tline">
+      <span class="num">06</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.64898/2026.08.11.744042">Host gene-expression signatures accurately distinguish bacterial, viral, and inflammatory diseases in febrile children across multiple cohorts</a></h3>
+      
+    </div>
+    <div class="meta"><span>bioRxiv 预印本</span><span class="sep">·</span><span>2026-08-14</span><span class="sep">·</span><span>Viz-Lasheras S et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.64898/2026.08.11.744042">10.64898/2026.08.11.744042</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>迄今最大的儿科宿主转录组整合研究（发现集 1,683 / RNA-seq 验证 767 / 数字 PCR 确认 29），二分类与多分类 signature 均优于 30 余个已发表 signature，净获益超过 CRP。<strong>多队列宿主反应评分的构建模板</strong>。（bioRxiv API 记 08-18、Europe PMC 记 08-14，两者均在窗口内。）</p></div>
+  </article>
+</section>
+
+<section class="sec2" data-g="2">
+  <div class="sechead">
+    <span class="well"></span>
+    <h2>标志物与 panel · 你 8 个基因的商业对标</h2>
+    <span class="count">9 条</span>
+  </div>
+  <p class="secdesc">PMHostX 的 marker 集（CRP / TNFSF10 / CXCL10 / MX1 / CEACAM4 / LAMP1 / PLAC8 / PLA2G7）分别对应 MeMed BV、FebriDx、SeptiCyte LAB 三条产品线。以下是窗口内这些基因与组合的临床证据。</p>
+
+  <article class="item" data-g="2" data-id="10-1186-s12871-026-04088-0">
+    <div class="tline">
+      <span class="num">07</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1186/s12871-026-04088-0">Clinical evaluation of the SeptiScore biomarker for the diagnosis of healthcare-associated infections in critically ill trauma patients: a multicenter derivation and validation cohort study</a></h3>
+      <span class="pin">必读</span>
+    </div>
+    <div class="meta"><span>BMC Anesthesiology</span><span class="sep">·</span><span>2026-07-10</span><span class="sep">·</span><span>Bouras M et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1186/s12871-026-04088-0">10.1186/s12871-026-04088-0</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>SeptiScore 的构成基因就是你 panel 里的 <strong>PLA2G7 / CEACAM4 / PLAC8 / LAMP1</strong>。两中心衍生（82 样本/44 患者）+ 独立验证（31/31），并与常规生物标志物对比。这是你给 marker 定阈值时最直接的依据。</p></div>
+  </article>
+
+  <article class="item" data-g="2" data-id="10-1097-pcc-0000000000004027">
+    <div class="tline">
+      <span class="num">08</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1097/PCC.0000000000004027">Validation of SeptiCyte RAPID to Discriminate Sepsis From Noninfectious Systemic Inflammation in Critically Ill Children</a></h3>
+      
+    </div>
+    <div class="meta"><span>Pediatric Critical Care Medicine</span><span class="sep">·</span><span>2026-08-07</span><span class="sep">·</span><span>Zimmerman JJ et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1097/PCC.0000000000004027">10.1097/PCC.0000000000004027</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>同一 panel 的儿童人群验证（n=284，美澳多中心，全部符合 SIRS），以 AUC、似然比与分档单调递增评估。补足 SeptiCyte 在儿童中的证据链。</p></div>
+  </article>
+
+  <article class="item" data-g="2" data-id="10-3390-diagnostics16152450">
+    <div class="tline">
+      <span class="num">09</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.3390/diagnostics16152450">Ruling In and Ruling Out Sepsis Using Likelihood Ratios of a Host Response Assay</a></h3>
+      
+    </div>
+    <div class="meta"><span>Diagnostics (Basel) 16(15):2450</span><span class="sep">·</span><span>2026-08-03</span><span class="sep">·</span><span>Navalkar KA et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.3390/diagnostics16152450">10.3390/diagnostics16152450</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>把 SeptiScore 改写成逐档的 LR+ / LR−（LR+ 中位 3.26–6.97，LR− 0.085–0.16），n=889、19 家欧美医院。<strong>你 panel 判读逻辑的现行参考</strong>。PubMed 未收录摘要，需下载全文核对。</p></div>
+  </article>
+
+  <article class="item" data-g="2" data-id="10-1007-s00431-026-07346-y">
+    <div class="tline">
+      <span class="num">10</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1007/s00431-026-07346-y">Performance of a host-protein score (MeMed BV score) for detecting bacterial infections in young children</a></h3>
+      
+    </div>
+    <div class="meta"><span>European Journal of Pediatrics</span><span class="sep">·</span><span>2026-08-20</span><span class="sep">·</span><span>Brel A et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1007/s00431-026-07346-y">10.1007/s00431-026-07346-y</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>MeMed BV = <strong>CRP + IP-10/CXCL10 + TRAIL</strong>，你 panel 里的 3 个基因。前瞻队列（&lt;3 岁不明原因发热）得 AUC 0.80、特异度 84.6%，但<strong>敏感度仅 47.1%，被降钙素原反超</strong>——一个很有价值的蛋白层面上限/阴性结果，可在讨论中用于说明标志物组合的边界。</p></div>
+  </article>
+
+  <article class="item" data-g="2" data-id="10-2147-idr-s648424">
+    <div class="tline">
+      <span class="num">11</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.2147/idr.s648424">Blood Host-Response mRNA Assays in Adult Acute Care: Diagnostic Performance, Translational Evidence, and the Clinical Implementation Gap</a></h3>
+      <span class="pin">必读</span>
+    </div>
+    <div class="meta"><span>Infection and Drug Resistance</span><span class="sep">·</span><span>2026-09-14</span><span class="sep">·</span><span>Li X et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.2147/idr.s648424">10.2147/idr.s648424</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>综述固定 panel 血样宿主反应 mRNA 检测，检索截至 2026-09-02。结论是临床有效性证据充分、但"检测指导结局改善"的证据薄弱，并给出分阶段转化框架。<strong>把你 panel 相对 MeMed BV / FebriDx / SeptiCyte 的位置讲得最清楚的一篇</strong>，写 Introduction 最好用。</p></div>
+  </article>
+
+  <article class="item" data-g="2" data-id="10-3389-fmicb-2026-1926383">
+    <div class="tline">
+      <span class="num">12</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.3389/fmicb.2026.1926383">Host-derived immune signatures as biomarkers to differentiate arboviral acute febrile illness from other causes of acute fever</a></h3>
+      
+    </div>
+    <div class="meta"><span>Frontiers in Microbiology</span><span class="sep">·</span><span>2026-09-18</span><span class="sep">·</span><span>Tiberti N et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.3389/fmicb.2026.1926383">10.3389/fmicb.2026.1926383</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>虫媒发热（n=89）vs 其他发热（n=51）：虫媒组 <strong>CXCL10、TRAIL 升高而 CRP/PCT 下降</strong>——你 panel 中 3 个基因在病毒感染方向上的反向证据，可用于解读 panel 的方向性。</p></div>
+  </article>
+
+  <article class="item" data-g="2" data-id="10-1016-j-jneuroim-2026-579020">
+    <div class="tline">
+      <span class="num">13</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1016/j.jneuroim.2026.579020">Prognostic value of cerebrospinal fluid and serum CXCL10 levels for neurological sequelae of viral encephalitis in children: A retrospective study</a></h3>
+      <span class="pin">必读</span>
+    </div>
+    <div class="meta"><span>Journal of Neuroimmunology</span><span class="sep">·</span><span>2026-07-10</span><span class="sep">·</span><span>Tan Z et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1016/j.jneuroim.2026.579020">10.1016/j.jneuroim.2026.579020</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>直接在<strong>脑脊液</strong>里测 CXCL10/IP-10（207 例患儿，倾向性评分匹配后 157 对），给出预后判读阈值。你 panel 成员在 CSF 基质中表现如何，这是最贴近的一手参考——你此前检索到的 CXCL10 证据多在血清。</p></div>
+  </article>
+
+  <article class="item" data-g="2" data-id="10-3389-fcimb-2026-1838120">
+    <div class="tline">
+      <span class="num">14</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.3389/fcimb.2026.1838120">Development and validation of a prognostic nomogram model for 28-day mortality based on IP-10 and clinical parameters in septic patients in the emergency department</a></h3>
+      
+    </div>
+    <div class="meta"><span>Frontiers in Cellular and Infection Microbiology</span><span class="sep">·</span><span>2026-09-22</span><span class="sep">·</span><span>Yang L et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.3389/fcimb.2026.1838120">10.3389/fcimb.2026.1838120</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>IP-10 联合常规临床参数的 655 例列线图（580 例入分析，7:3 训练/验证）。IP-10 单基因的临床效力与阈值参考。</p></div>
+  </article>
+
+  <article class="item" data-g="2" data-id="10-1007-s11739-026-04457-0">
+    <div class="tline">
+      <span class="num">15</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1007/s11739-026-04457-0">Real-world clinical evaluation of the Inflammatix TriVerity test for sepsis at the emergency department: an Acutelines study</a></h3>
+      
+    </div>
+    <div class="meta"><span>Internal and Emergency Medicine</span><span class="sep">·</span><span>2026-07-08</span><span class="sep">·</span><span>Ter Voert MA et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1007/s11739-026-04457-0">10.1007/s11739-026-04457-0</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>29-mRNA 的 TriVerity（SeptiCyte 类检测的继任者）在 467 例荷兰急诊的真实世界表现：细菌感染 rule-in 特异度 89–94%、rule-out 敏感度 87–92%。<strong>你 panel 之外"多基因路线"的坐标</strong>。</p></div>
+  </article>
+</section>
+
+<section class="sec3" data-g="3">
+  <div class="sechead">
+    <span class="well"></span>
+    <h2>脑脊液 / 中枢感染 · 宿主转录组与 mNGS 判读</h2>
+    <span class="count">8 条</span>
+  </div>
+  <p class="secdesc">PMHostX 的样本是仁济脑脊液队列。这一组是同一基质、同一病种的宿主信号与 mNGS 定量判读证据。</p>
+
+  <article class="item" data-g="3" data-id="10-3389-fcimb-2026-1905481">
+    <div class="tline">
+      <span class="num">16</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.3389/fcimb.2026.1905481">Clinical utility of CSF metagenomic next-generation sequencing in suspected CNS infection: performance against a composite reference standard and read-count stratification</a></h3>
+      <span class="pin">必读</span>
+    </div>
+    <div class="meta"><span>Frontiers in Cellular and Infection Microbiology</span><span class="sep">·</span><span>2026-08-12</span><span class="sep">·</span><span>Shi P et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.3389/fcimb.2026.1905481">10.3389/fcimb.2026.1905481</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>46 例疑似脑炎/脑膜炎，以 Definite / Probable / Unlikely 复合标准评估，给出 <strong>&lt;10 / 10–49 / ≥50 的 read-count 分层判读框架</strong>（敏感度 40.6%、特异度 100%、NPV 42.4%）。你做计数定量与判读阈值时最直接的 CSF-mNGS 对照臂。</p></div>
+  </article>
+
+  <article class="item" data-g="3" data-id="10-3389-fcimb-2026-1867160">
+    <div class="tline">
+      <span class="num">17</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.3389/fcimb.2026.1867160">Single-cell transcriptomic profiling of cerebrospinal fluid reveals immune-cell heterogeneity and multicompartment MIF/CD74-related communication in tuberculous and purulent meningitis</a></h3>
+      
+    </div>
+    <div class="meta"><span>Frontiers in Cellular and Infection Microbiology</span><span class="sep">·</span><span>2026-08-28</span><span class="sep">·</span><span>Hu H et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.3389/fcimb.2026.1867160">10.3389/fcimb.2026.1867160</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>脑脊液宿主细胞单细胞转录组（质控后 96,594 细胞），结核性 vs 化脓性脑膜炎。你的 bulk 宿主信号在细胞层面由谁贡献，这篇给出组成参考。</p></div>
+  </article>
+
+  <article class="item" data-g="3" data-id="10-1016-j-jinf-2026-106841">
+    <div class="tline">
+      <span class="num">18</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1016/j.jinf.2026.106841">Target enriched metagenomics in cerebrospinal fluid in central nervous system infections</a></h3>
+      
+    </div>
+    <div class="meta"><span>Journal of Infection</span><span class="sep">·</span><span>2026-08-24</span><span class="sep">·</span><span>Olie SE et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1016/j.jinf.2026.106841">10.1016/j.jinf.2026.106841</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>靶向富集 mNGS（Illumina RPIP 面板）在 136 例荷兰前瞻队列的表现，阳性一致性 59%，另检出 71 个非预期病原。低病原载量下提升检出的富集路线对照。</p></div>
+  </article>
+
+  <article class="item" data-g="3" data-id="10-1371-journal-pone-0358189">
+    <div class="tline">
+      <span class="num">19</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1371/journal.pone.0358189">Metagenomic sequencing in encephalitis diagnostics: Challenges and opportunities in clinical settings</a></h3>
+      
+    </div>
+    <div class="meta"><span>PLoS ONE</span><span class="sep">·</span><span>2026-09-15</span><span class="sep">·</span><span>Stentoft E et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1371/journal.pone.0358189">10.1371/journal.pone.0358189</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>17 例不明原因脑炎 + 11 例已知病毒对照，<strong>16/17 未检出病毒</strong>。阴性结果的诚实呈现，适合用于讨论检出上限与方法学局限。</p></div>
+  </article>
+
+  <article class="item" data-g="3" data-id="10-1038-s41467-026-75026-4">
+    <div class="tline">
+      <span class="num">20</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1038/s41467-026-75026-4">Absent pleocytosis in infant viral central nervous system infections reflects lymphocyte depletion and cytokine activation</a></h3>
+      
+    </div>
+    <div class="meta"><span>Nature Communications</span><span class="sep">·</span><span>2026-07-23</span><span class="sep">·</span><span>Mills C et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1038/s41467-026-75026-4">10.1038/s41467-026-75026-4</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>脑脊液检出病毒但无细胞增多症的婴儿，仍表现淋巴细胞减少与显著炎症/凋亡通路激活，作者主张这仍是真实的中枢感染。<strong>当你 CSF 常规细胞计数正常、宿主评分却升高时，这篇是解读依据。</strong></p></div>
+  </article>
+
+  <article class="item" data-g="3" data-id="10-1038-s41380-026-03737-7">
+    <div class="tline">
+      <span class="num">21</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1038/s41380-026-03737-7">Dynamic single-cell transcriptomic analysis of peripheral blood mononuclear cells identifies novel biomarkers for autoimmune encephalitis</a></h3>
+      
+    </div>
+    <div class="meta"><span>Molecular Psychiatry</span><span class="sep">·</span><span>2026-07-14</span><span class="sep">·</span><span>Wen L et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1038/s41380-026-03737-7">10.1038/s41380-026-03737-7</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>NKT 细胞（NKT-6 亚群）耗竭作为自免脑炎标志，并在视神经脊髓炎、多发性硬化、<strong>病毒性脑炎</strong>、抑郁症等对照中验证特异性，治疗 6 个月后逐步回复。脑炎鉴别诊断的宿主标志物候选。</p></div>
+  </article>
+
+  <article class="item" data-g="3" data-id="10-1177-08830738261465526">
+    <div class="tline">
+      <span class="num">22</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1177/08830738261465526">Integrating Cerebrospinal Fluid Metagenomic Next-Generation Sequencing and Immune Profiling in Recurrent HSV-1 Encephalitis: A Case Report and Narrative Review</a></h3>
+      
+    </div>
+    <div class="meta"><span>Journal of Child Neurology</span><span class="sep">·</span><span>2026-07-22</span><span class="sep">·</span><span>Xu C et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1177/08830738261465526">10.1177/08830738261465526</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>mNGS 与宿主免疫谱联合的个案 + 叙述性综述。你"mNGS 顺带产出宿主信息"这一论点的临床叙事素材。</p></div>
+  </article>
+
+  <article class="item" data-g="3" data-id="10-1128-jcm-00446-26">
+    <div class="tline">
+      <span class="num">23</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1128/jcm.00446-26">Etiologic diagnosis of suspected tuberculous meningitis by multiplex PCR of cerebrospinal fluid</a></h3>
+      
+    </div>
+    <div class="meta"><span>Journal of Clinical Microbiology</span><span class="sep">·</span><span>2026-08-20</span><span class="sep">·</span><span>Wang H et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1128/jcm.00446-26">10.1128/jcm.00446-26</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>MeltArray 多重 PCR（85 个脑膜炎相关病原）与 mNGS 在 79 份 CSF 上头对头，再前瞻 255 例；检出限低至 5 copies/反应。你方法学之外的竞争技术基线。</p></div>
+  </article>
+</section>
+
+<section class="sec4" data-g="4">
+  <div class="sechead">
+    <span class="well"></span>
+    <h2>建库、去宿主与参考库卫生</h2>
+    <span class="count">9 条</span>
+  </div>
+  <p class="secdesc">PMHostX 的 fastp → HISAT2 链条本质是&quot;in-silico 去宿主&quot;。这一组是湿实验去宿主、rRNA 去除与参考库污染控制的最新进展。</p>
+
+  <article class="item" data-g="4" data-id="10-1186-s12859-026-06533-w">
+    <div class="tline">
+      <span class="num">24</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1186/s12859-026-06533-w">RiboZAP: a species-agnostic pipeline for rRNA depletion probe design in metatranscriptomics</a></h3>
+      <span class="pin">必读</span>
+    </div>
+    <div class="meta"><span>BMC Bioinformatics</span><span class="sep">·</span><span>2026-07-10</span><span class="sep">·</span><span>Bunga S et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1186/s12859-026-06533-w">10.1186/s12859-026-06533-w</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>宏转录组中 rRNA 常占 ≥90%，而商品化去 rRNA 试剂盒按特定微生物组优化、换样本就失效。该文给物种无关的探针设计流程。<strong>你建库前提（rRNA 去除）的方法学依据</strong>，也解释了为什么人源 CSF 样本的去 rRNA 效率需要单独验证。</p></div>
+  </article>
+
+  <article class="item" data-g="4" data-id="10-3390-diagnostics16132065">
+    <div class="tline">
+      <span class="num">25</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.3390/diagnostics16132065">Optimization of Metagenomic Library Construction for Influenza A Virus and SARS-CoV-2: Systematic Comparison of rRNA Depletion Strategies and Fragmentation Orders</a></h3>
+      
+    </div>
+    <div class="meta"><span>Diagnostics (Basel)</span><span class="sep">·</span><span>2026-07-15</span><span class="sep">·</span><span>Sun Y et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.3390/diagnostics16132065">10.3390/diagnostics16132065</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>rRNA 去除策略与片段化先后顺序的系统比较。建库参数选择的直接实验依据。</p></div>
+  </article>
+
+  <article class="item" data-g="4" data-id="10-1186-s12967-026-08597-x">
+    <div class="tline">
+      <span class="num">26</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1186/s12967-026-08597-x">Nucleosome-targeted host DNA depletion enables automated plasma metagenomic sequencing for sensitive detection of bloodstream pathogens</a></h3>
+      
+    </div>
+    <div class="meta"><span>Journal of Translational Medicine</span><span class="sep">·</span><span>2026-07-10</span><span class="sep">·</span><span>Zhan S et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1186/s12967-026-08597-x">10.1186/s12967-026-08597-x</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>核小体靶向去宿主 DNA 结合自动化提取建库，107 例疑似血流感染，对标血培养与未去宿主的常规 mNGS。湿实验去宿主路线，与你 HISAT2 的 in-silico 路线互为对照。</p></div>
+  </article>
+
+  <article class="item" data-g="4" data-id="10-1093-clinchem-hvag089">
+    <div class="tline">
+      <span class="num">27</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1093/clinchem/hvag089">Enriching Microbial Cell-Free DNA in Clinical Metagenomics Using Epigenetic Filters</a></h3>
+      
+    </div>
+    <div class="meta"><span>Clinical Chemistry</span><span class="sep">·</span><span>2026-08-09</span><span class="sep">·</span><span>Liao T et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1093/clinchem/hvag089">10.1093/clinchem/hvag089</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>EpiMeta-seq：利用微生物与人类基因组甲基化差异，用 HpaII 选择性酶切未甲基化 CCGG 位点来富集微生物 cfDNA，绕开宿主背景压制。去宿主的一个新维度。</p></div>
+  </article>
+
+  <article class="item" data-g="4" data-id="10-1128-jcm-00397-26">
+    <div class="tline">
+      <span class="num">28</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1128/jcm.00397-26">Masking recurrent contaminants in reference sequences improves specificity of clinical metagenomic sequencing</a></h3>
+      <span class="pin">必读</span>
+    </div>
+    <div class="meta"><span>Journal of Clinical Microbiology</span><span class="sep">·</span><span>2026-07-20</span><span class="sep">·</span><span>Bergada-Pijuan J et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1128/jcm.00397-26">10.1128/jcm.00397-26</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>VirMask：先比对模拟人源 reads、再系统性屏蔽病毒参考序列内嵌的 rRNA / 载体 / 接头污染区，误判为人源病毒 reads 的比例最多下降 30%。<strong>你参考库卫生的直接工具</strong>——尤其影响 HISAT2 比对后的宿主/非宿主归属判断。</p></div>
+  </article>
+
+  <article class="item" data-g="4" data-id="10-64898-2026-07-22-739903">
+    <div class="tline">
+      <span class="num">29</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.64898/2026.07.22.739903">Contamination of widely used databases compromises rRNA based taxonomic assignment of metagenomes and metatranscriptomes</a></h3>
+      <span class="pin">必读</span>
+    </div>
+    <div class="meta"><span>bioRxiv 预印本</span><span class="sep">·</span><span>2026-07-22</span><span class="sep">·</span><span>Grant A, Davies CS</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.64898/2026.07.22.739903">10.64898/2026.07.22.739903</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>SILVA、GTDB、Eukaryome、SortMeRNA 库存在大量 LSU rRNA 污染，被误判为 SSU 的 reads 可占"SSU"序列的一半，<strong>凭空制造出优势类群</strong>。任何基于 rRNA 去除的宏转录组流程都必须引用的 QC 警示。</p></div>
+  </article>
+
+  <article class="item" data-g="4" data-id="10-1099-acmi-0-001302-v1">
+    <div class="tline">
+      <span class="num">30</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1099/acmi.0.001302.v1">A novel magnetic bead-based host depletion method for metagenomics workflows</a></h3>
+      
+    </div>
+    <div class="meta"><span>Access Microbiology</span><span class="sep">·</span><span>2026-08-07</span><span class="sep">·</span><span>Evans R et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1099/acmi.0.001302.v1">10.1099/acmi.0.001302.v1</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>选择性物理破碎宿主细胞 + 磁珠捕获，可去除最多 99% 宿主 DNA，<strong>但细菌 DNA 也显著损失且强烈依赖生物量</strong>。去宿主的代价与适用边界，适合在讨论"为何选择 in-silico 去宿主"时引用。</p></div>
+  </article>
+
+  <article class="item" data-g="4" data-id="10-64898-2026-09-17-752478">
+    <div class="tline">
+      <span class="num">31</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.64898/2026.09.17.752478">Vritra: gene-specific reference construction for species-resolved functional profiling of metagenomic and metatranscriptomic data</a></h3>
+      
+    </div>
+    <div class="meta"><span>bioRxiv 预印本</span><span class="sep">·</span><span>2026-09-21</span><span class="sep">·</span><span>Li H et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.64898/2026.09.17.752478">10.64898/2026.09.17.752478</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>构建带同源诱饵的基因特异性参考库，解析"某功能基因来自哪个物种"，对注释不良的基因回收率最高提升 3 倍。宿主/微生物信号分离的参考库侧解法。</p></div>
+  </article>
+
+  <article class="item" data-g="4" data-id="10-21769-bioprotoc-5764">
+    <div class="tline">
+      <span class="num">32</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.21769/BioProtoc.5764">DepStep: An Efficient One-Step rRNA Depletion Workflow for RNA Sequencing in Non-model Organisms</a></h3>
+      
+    </div>
+    <div class="meta"><span>Bio-protocol</span><span class="sep">·</span><span>2026-08-13</span><span class="sep">·</span><span>Qasim SM et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.21769/BioProtoc.5764">10.21769/BioProtoc.5764</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>一步法物种特异性生物素化反义探针去 rRNA。低成本自建探针的替代路线。</p></div>
+  </article>
+</section>
+
+<section class="sec5" data-g="5">
+  <div class="sechead">
+    <span class="well"></span>
+    <h2>背景、综述与研究框架</h2>
+    <span class="count">9 条</span>
+  </div>
+  <p class="secdesc">用于引言定位与讨论框架，不是实验依据。</p>
+
+  <article class="item" data-g="5" data-id="10-3389-fimmu-2026-1872111">
+    <div class="tline">
+      <span class="num">33</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.3389/fimmu.2026.1872111">Knowledge structure and thematic evolution of host response-oriented sepsis research: a multi-database bibliometric and LDA topic modeling study</a></h3>
+      <span class="pin">必读</span>
+    </div>
+    <div class="meta"><span>Frontiers in Immunology</span><span class="sep">·</span><span>2026-07-16</span><span class="sep">·</span><span>Qin C et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.3389/fimmu.2026.1872111">10.3389/fimmu.2026.1872111</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>WoS + Scopus + PubMed 合计 5,839 条记录、去重后 2,974 篇，用文献计量 + LDA 主题建模给出宿主反应研究的<strong>主题版图与时间演化</strong>。写引言做领域定位时，比逐篇引用高效得多。</p></div>
+  </article>
+
+  <article class="item" data-g="5" data-id="10-1016-j-aicoj-2026-100133">
+    <div class="tline">
+      <span class="num">34</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1016/j.aicoj.2026.100133">Genomic and integrative based progression biomarker discovery in adult sepsis: toward clinical stratification and precision medicine</a></h3>
+      
+    </div>
+    <div class="meta"><span>Annals of Intensive Care</span><span class="sep">·</span><span>2026-09-06</span><span class="sep">·</span><span>Gonzalez-Barbuzano S et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1016/j.aicoj.2026.100133">10.1016/j.aicoj.2026.100133</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>从遗传关联、多基因风险评分、孟德尔随机化到转录组/蛋白组内分型的成年脓毒症分层综述，文献覆盖至 2026 年 5 月。讨论"宿主分型"路线时的一站式引用。</p></div>
+  </article>
+
+  <article class="item" data-g="5" data-id="10-21203-rs-3-rs-10907969-v1">
+    <div class="tline">
+      <span class="num">35</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.21203/rs.3.rs-10907969/v1">Machine learning implementation for host-based infectious disease diagnostics</a></h3>
+      
+    </div>
+    <div class="meta"><span>Research Square 预印本</span><span class="sep">·</span><span>2026-09-03</span><span class="sep">·</span><span>Harrington S</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.21203/rs.3.rs-10907969/v1">10.21203/rs.3.rs-10907969/v1</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>21 项研究 / 54 个模型的系统综述（2020-01 至 2025-08），随机森林占 23/54。核心结论：<strong>各研究预处理与验证不一致，模型之间无法比较</strong>——与上面 PLoS ONE 那篇量化的是同一个可重复性问题。你若要建分类器，这是必须预先回应的批评。</p></div>
+  </article>
+
+  <article class="item" data-g="5" data-id="10-64898-2026-07-06-736269">
+    <div class="tline">
+      <span class="num">36</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.64898/2026.07.06.736269">Multi-omics integration identifies a reproducible inflammatory host-response axis in pediatric sepsis</a></h3>
+      
+    </div>
+    <div class="meta"><span>bioRxiv 预印本</span><span class="sep">·</span><span>2026-07-13</span><span class="sep">·</span><span>Ait Oumelloul M et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.64898/2026.07.06.736269">10.64898/2026.07.06.736269</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>对 22 例培养阳性的儿科脓毒症做 MOFA，发现主导的宿主反应轴<strong>主要由转录组变异驱动</strong>，并在独立 n=22 队列与三个外部全血 RNA-seq 数据集复现。支持"只用转录组一层即可近似整合信号"，对你只做 RNA 层的路线选择是正面证据。</p></div>
+  </article>
+
+  <article class="item" data-g="5" data-id="10-3389-fimmu-2026-1893602">
+    <div class="tline">
+      <span class="num">37</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.3389/fimmu.2026.1893602">Multi-omics integration in autoimmune encephalitis: from novel biomarker discovery to precision therapeutic strategies</a></h3>
+      
+    </div>
+    <div class="meta"><span>Frontiers in Immunology</span><span class="sep">·</span><span>2026-07-23</span><span class="sep">·</span><span>Chen X et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.3389/fimmu.2026.1893602">10.3389/fimmu.2026.1893602</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>自免脑炎基因组/转录组/蛋白组/代谢组/免疫组学的整合综述，含标志物验证框架的专门讨论。讨论脑炎鉴别诊断时的方法学边界参考。</p></div>
+  </article>
+
+  <article class="item" data-g="5" data-id="10-3390-ijms27167395">
+    <div class="tline">
+      <span class="num">38</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.3390/ijms27167395">Comorbidities and Inflammation: How Chronic Diseases Prime the Host Response in Sepsis</a></h3>
+      
+    </div>
+    <div class="meta"><span>International Journal of Molecular Sciences</span><span class="sep">·</span><span>2026-08-27</span><span class="sep">·</span><span>Miguel MVO et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.3390/ijms27167395">10.3390/ijms27167395</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>高血压、代谢综合征、糖尿病、酒精暴露、牙周炎等慢性病如何在感染发生前就"预置"宿主反应。用于解释宿主反应评分在合并症人群中的异质性——脑脊液队列里这类混杂很常见。</p></div>
+  </article>
+
+  <article class="item" data-g="5" data-id="10-1038-s41522-026-01075-8">
+    <div class="tline">
+      <span class="num">39</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1038/s41522-026-01075-8">Pharyngeal Microenvironment Associated with Human Rhinovirus Infection in Children: Insights from Metatranscriptomic Sequencing</a></h3>
+      
+    </div>
+    <div class="meta"><span>npj Biofilms and Microbiomes</span><span class="sep">·</span><span>2026-07-03</span><span class="sep">·</span><span>Noman M et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1038/s41522-026-01075-8">10.1038/s41522-026-01075-8</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>1,790 份样本筛查后取 47 例阳性 + 29 健康 + 27 阴性做宏转录组，<strong>同一次测序同时读出微生物组、宿主基因表达与耐药基因谱</strong>。与第 05 条同属"宏转录组顺带产出宿主信号"的实例，基质为咽部。</p></div>
+  </article>
+
+  <article class="item" data-g="5" data-id="10-1097-md-0000000000050671">
+    <div class="tline">
+      <span class="num">40</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1097/MD.0000000000050671">Ferroptosis-related SOCS1 as a candidate host-response biomarker in tuberculosis: An integrated transcriptomic and clinical validation study</a></h3>
+      
+    </div>
+    <div class="meta"><span>Medicine (Baltimore)</span><span class="sep">·</span><span>2026-09-15</span><span class="sep">·</span><span>Xu K et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1097/MD.0000000000050671">10.1097/MD.0000000000050671</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>"公共数据集筛选 → 独立临床样本验证"的宿主反应标志物发现路线示例，可作为你后续扩展 panel 时的方法模板。</p></div>
+  </article>
+
+  <article class="item" data-g="5" data-id="10-2174-0127722708440655260829134856">
+    <div class="tline">
+      <span class="num">41</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.2174/0127722708440655260829134856">Sepsis-reloaded: Next Generation Diagnostics, Biomarkers and Treatment Strategies</a></h3>
+      
+    </div>
+    <div class="meta"><span>Recent Advances in Inflammation &amp; Allergy Drug Discovery</span><span class="sep">·</span><span>2026-09-15</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.2174/0127722708440655260829134856">10.2174/0127722708440655260829134856</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>脓毒症新一代诊断、标志物与治疗策略的综述，含降钙素原等常规标志物的灵敏度/特异度现状。背景引用。</p></div>
+  </article>
+</section>
+
+<section class="sec6" data-g="6">
+  <div class="sechead">
+    <span class="well"></span>
+    <h2>窗口外，但必须知道</h2>
+    <span class="count">2 条</span>
+  </div>
+  <p class="secdesc">日期不满足 7/1–9/23，但立意与 PMHostX 高度重合，写引言或讨论时很难回避。</p>
+
+  <article class="item" data-g="6" data-id="pmid-42018084">
+    <div class="tline">
+      <span class="oow">2026-04-22</span>
+      <h3 class="ptitle"><a href="https://pubmed.ncbi.nlm.nih.gov/42018084/">Translating Host-Derived Signals from Cerebrospinal Fluid Metagenomic Sequencing into a Diagnostic Tool for Autoimmune Encephalitis in Children</a></h3>
+      
+    </div>
+    <div class="meta"><span>Journal of Clinical Immunology</span><span class="sep">·</span><span class="doi"><a href="https://pubmed.ncbi.nlm.nih.gov/42018084/">PMID 42018084</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p><strong>全库中与 PMHostX 立意最接近的一篇。</strong>明确主张"CSF mNGS 的宿主来源 RNA 成分通常被丢弃"，并把它转成自免脑炎诊断工具：180 例疑似脑炎患儿，88 例做宿主转录组分析，RAD54B 经 RT-qPCR 验证，多基因宿主反应模型 AUC &gt; 0.923。与你的差异在于它走 DNA 侧、你走 RNA 侧——这个差异正是你文章可主张的增量。</p></div>
+  </article>
+
+  <article class="item" data-g="6" data-id="title-108964f5f6">
+    <div class="tline">
+      <span class="oow">2026-06-10</span>
+      <h3 class="ptitle">CSF Host Transcriptomics Differentiates Infectious Encephalitis from Autoimmune Encephalitis (S16.010)</h3>
+      
+    </div>
+    <div class="meta"><span>Neurology（AAN 2026 会议摘要）</span><span class="sep">·</span><span class="unverified">未核到 DOI — 需人工核对</span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>47 例（11 例感染性脑炎 / 36 例自免脑炎）CSF bulk RNA-seq，1,310 个差异表达基因、805 个在感染性脑炎上调，以抗病毒与 1 型干扰素通路为主，并提到正在开发机器学习分类器。会议摘要，日期在窗口外但主题极近。</p></div>
+  </article>
+</section>
+</main>
+
+<p class="empty" id="empty">没有匹配的条目。换个关键词，或点"全部"。</p>
+
+<div class="notes">
+  <h2>检索说明与已知缺口</h2>
+  <ul>
+    <li><b>窗口严格按发表日期。</b>日期取自 PubMed 的 <code>pubmed</code> / <code>epublish</code> 字段，或 Europe PMC 的 <code>firstPublicationDate</code>，逐条实测。期刊期号落在窗口内但上线日期在 6 月底的约 10 篇（例如 <i>Microbiol Spectr</i> 6 月 3 日上线的 NGS vs TGS benchmark）未计入；此口径经确认不放宽。</li>
+    <li><b>FebriDx 在窗口内是空白。</b>针对 <code>SeptiCyte OR SeptiScore OR "MeMed BV" OR FebriDx OR TriVerity</code> 的检索命中 11 条期刊记录，<b>无一涉及 FebriDx</b>，预印本 0 条。marker panel 中 <b>MX1 这一支目前没有同期文献支撑</b>，措辞时需要单独处理。</li>
+    <li><b>两条需自行核对全文。</b>Diagnostics (Basel) 2026-08-03（<code>10.3390/diagnostics16152450</code>，LR 判读）与 Recent Adv Inflamm Allergy Drug Discov 2026-09-15（<code>10.2174/0127722708440655260829134856</code>）在 PubMed 中无摘要字段，描述基于标题与期刊定位，引用前请下载原文确认数据。</li>
+    <li><b>工具类论文的空白。</b>HISAT2 / featureCounts / FPKM / TPM 相关方法在窗口内无新论文——这些工具已成熟，处于被引用而非被重新发表的阶段。这本身也是方法学章节可以陈述的事实。</li>
+    <li><b>一条未核到 DOI。</b>窗口外的 AAN 会议摘要（S16.010）未检索到 DOI，页面中已标注为待核，未编造标识符。</li>
+  </ul>
+</div>
+
+<footer class="foot">
+  生成于 2026-09-23 19:35 · 窗口 2026-07-01 → 2026-09-22 · 43 条 条<br>
+  检索式与全部原始留痕见仓库内 queries.md 与 data/ 目录。
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var q=document.getElementById('q');
+  var chips=Array.prototype.slice.call(document.querySelectorAll('.chip'));
+  var items=Array.prototype.slice.call(document.querySelectorAll('.item'));
+  var sections=Array.prototype.slice.call(document.querySelectorAll('section'));
+  var empty=document.getElementById('empty');
+  var group='0';
+
+  function apply(){
+    var term=q.value.trim().toLowerCase();
+    var shown=0;
+    items.forEach(function(el){
+      var gOk = (group==='0') || (el.getAttribute('data-g')===group);
+      var tOk = !term || el.textContent.toLowerCase().indexOf(term)>-1;
+      var ok = gOk && tOk;
+      el.hidden = !ok;
+      if(ok) shown++;
+    });
+    sections.forEach(function(s){
+      var vis=s.querySelectorAll('.item:not([hidden])').length;
+      s.hidden = vis===0;
+    });
+    empty.style.display = shown===0 ? 'block' : 'none';
+  }
+
+  chips.forEach(function(c){
+    c.addEventListener('click',function(){
+      group=c.getAttribute('data-g');
+      chips.forEach(function(o){ o.setAttribute('aria-pressed', String(o===c)); });
+      apply();
+    });
+  });
+
+  q.addEventListener('input',apply);
+  apply();
+})();
+</script>

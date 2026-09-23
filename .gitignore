@@ -1,0 +1,13 @@
+# 每轮抓取的原始 XML，可再生，且单轮 40MB —— 不提交
+raw/
+
+# 候选池快照。体积大（每轮 ~2.6MB），且判断结果与理由已记在
+# data/seen.json（判断台账）和 weekly/*.md（周报）里，这里不必留档。
+data/candidates_*.json
+
+# 一次性诊断产物
+data/candidates_*.run*.json
+
+# Python 字节码
+__pycache__/
+*.pyc

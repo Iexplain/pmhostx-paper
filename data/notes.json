@@ -1,0 +1,11 @@
+{
+  "window_start": "2026-07-01",
+  "project": "PMHostX / PMseq-HostProfiler",
+  "notes": [
+    "<b>窗口严格按发表日期。</b>日期取自 PubMed 的 <code>pubmed</code> / <code>epublish</code> 字段，或 Europe PMC 的 <code>firstPublicationDate</code>，逐条实测。期刊期号落在窗口内但上线日期在 6 月底的约 10 篇（例如 <i>Microbiol Spectr</i> 6 月 3 日上线的 NGS vs TGS benchmark）未计入；此口径经确认不放宽。",
+    "<b>FebriDx 在窗口内是空白。</b>针对 <code>SeptiCyte OR SeptiScore OR \"MeMed BV\" OR FebriDx OR TriVerity</code> 的检索命中 11 条期刊记录，<b>无一涉及 FebriDx</b>，预印本 0 条。marker panel 中 <b>MX1 这一支目前没有同期文献支撑</b>，措辞时需要单独处理。",
+    "<b>两条需自行核对全文。</b>Diagnostics (Basel) 2026-08-03（<code>10.3390/diagnostics16152450</code>，LR 判读）与 Recent Adv Inflamm Allergy Drug Discov 2026-09-15（<code>10.2174/0127722708440655260829134856</code>）在 PubMed 中无摘要字段，描述基于标题与期刊定位，引用前请下载原文确认数据。",
+    "<b>工具类论文的空白。</b>HISAT2 / featureCounts / FPKM / TPM 相关方法在窗口内无新论文——这些工具已成熟，处于被引用而非被重新发表的阶段。这本身也是方法学章节可以陈述的事实。",
+    "<b>一条未核到 DOI。</b>窗口外的 AAN 会议摘要（S16.010）未检索到 DOI，页面中已标注为待核，未编造标识符。"
+  ]
+}
