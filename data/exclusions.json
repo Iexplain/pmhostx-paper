@@ -1,0 +1,10 @@
+{
+  "_comment": "来源排除口径。改这里等于改检索范围。每轮排除了多少条会记在 candidates 报告的 excluded_by_policy 字段里，条目本身也留档，所以排除了什么永远查得到——不要改成往检索式里塞 NOT，那样规则会变成隐形的。",
+  "_why": "排除 Frontiers Media 出版的期刊。DOI 前缀 10.3389 是该社的注册前缀，最可靠；刊名前缀是兜底，覆盖没有 DOI 的记录。",
+  "exclude_doi_prefix": [
+    "10.3389/"
+  ],
+  "exclude_journal_prefix": [
+    "Frontiers"
+  ]
+}

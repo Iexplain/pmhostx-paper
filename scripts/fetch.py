@@ -172,6 +172,23 @@ def extract_doi(rec: dict) -> str | None:
     return None
 
 
+def exclusion_reason(item: dict, excl: dict) -> str | None:
+    """来源排除。命中返回理由，否则 None。
+
+    在【取回之后】过滤而不是往检索式里拼 NOT —— 这样每轮排除了多少条能量出来、
+    排除了哪些也留档。塞进检索式就变成隐形的了，永远看不到它拦掉了什么。
+    """
+    doi = item.get("doi") or ""
+    for p in excl.get("exclude_doi_prefix", []):
+        if doi.startswith(p):
+            return f"来源排除：DOI 前缀 {p}"
+    j = item.get("journal") or ""
+    for p in excl.get("exclude_journal_prefix", []):
+        if j.startswith(p):
+            return f"来源排除：刊名以 {p} 开头"
+    return None
+
+
 # ---------------------------------------------------------------- 主流程
 
 def load_json(path: Path, default):
@@ -193,6 +210,7 @@ def main():
     # 只记收录的话，被拒的下周会原样再来一遍，流程永远不收敛。
     seen = {k: v for k, v in load_json(DATA / "seen.json", {}).items()
             if not k.startswith("_")}
+    excl = load_json(DATA / "exclusions.json", {})
     last_run = load_json(DATA / "last_run.json", {})
 
     if not queries:
@@ -223,7 +241,10 @@ def main():
 
     print(f"收录窗口: {win_start} → {today}")
     print(f"检索区间: {search_from} → {today}  (edat，含 {LOOKBACK_DAYS} 天回溯余量；{why})")
-    print(f"检索式: {len(queries)} 条 | 已判断: {len(seen)} 条")
+    print(f"检索式: {len(queries)} 条 | 已判断: {len(seen)} 条", end="")
+    rules = [f"DOI {p}*" for p in excl.get("exclude_doi_prefix", [])] + \
+            [f"刊名 {p}*" for p in excl.get("exclude_journal_prefix", [])]
+    print(f" | 来源排除: {'、'.join(rules)}" if rules else "")
     print()
 
     # --- 1. 逐条检索 ---
@@ -290,7 +311,8 @@ def main():
           f"已收录 {already['in']} / 判断不收 {already['out']} / 标题分诊 {already['skip']}）")
 
     if not surviving:
-        write_report(win_start, today, [], hits, already, len(queries))
+        write_report(win_start, today, [], hits, already, len(queries),
+                     policy_excluded=[])
         return 0
 
     # --- 3. efetch 取严格发表日期 ---
@@ -304,7 +326,7 @@ def main():
     RAW.mkdir(exist_ok=True)
     (RAW / f"efetch_{today}.xml").write_text("\n".join(chunks), encoding="utf-8")
 
-    candidates, out_of_window = [], []
+    candidates, out_of_window, policy_excluded = [], [], []
     try:
         for art in iter_articles(chunks):
             pmid = art.findtext(".//PMID")
@@ -324,7 +346,10 @@ def main():
             }
             # 收录判据用【整个窗口】而不是本次 since —— 去重由 seen.json 负责。
             # 这样延迟索引的论文、以及上一版按 pdat 检索时漏掉的论文都能自动补回来。
-            if pubdate is None:
+            reason = exclusion_reason(item, excl)
+            if reason:
+                policy_excluded.append({**item, "reason": reason})
+            elif pubdate is None:
                 out_of_window.append({**item, "reason": "无 pubmed/epublish 日期，无法判定"})
             elif date.fromisoformat(pubdate) < win_start:
                 out_of_window.append({**item, "reason": f"上线日期 {pubdate} 早于窗口起点 {win_start}"})
@@ -337,9 +362,11 @@ def main():
         return 1
 
     candidates.sort(key=lambda x: (x["pubdate"], x["journal"]))
-    print(f"  窗口内 {len(candidates)} 条 | 被严格日期口径排除 {len(out_of_window)} 条")
+    print(f"  窗口内 {len(candidates)} 条 | 被严格日期口径排除 {len(out_of_window)} 条"
+          f" | 被来源口径排除 {len(policy_excluded)} 条")
 
-    write_report(win_start, today, candidates, hits, already, len(queries), out_of_window)
+    write_report(win_start, today, candidates, hits, already, len(queries),
+                 out_of_window, policy_excluded)
     return 0
 
 
@@ -356,7 +383,8 @@ def authors_str(art) -> str:
     return s
 
 
-def write_report(win_start, today, candidates, hits, already, n_queries, out_of_window=None):
+def write_report(win_start, today, candidates, hits, already, n_queries,
+                 out_of_window=None, policy_excluded=None):
     DATA.mkdir(exist_ok=True)
     out = DATA / f"candidates_{today}.json"
     out.write_text(json.dumps({
@@ -368,6 +396,7 @@ def write_report(win_start, today, candidates, hits, already, n_queries, out_of_
         "already_seen": sum(already.values()),
         "candidates": candidates,
         "excluded_by_date": out_of_window or [],
+        "excluded_by_policy": policy_excluded or [],
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"\n→ {out.relative_to(ROOT)}")
     print(f"  窗口内新候选 {len(candidates)} 条，待判断。")
