@@ -262,7 +262,7 @@ footer.foot{
   <h1>PMHostX 文献地图</h1>
   <p class="lede">面向 <b>PMHostX / PMseq-HostProfiler</b>（脑脊液宏转录组宿主 mRNA 分离与定量）。每条按"与项目的哪一部分相关"归组，并注明可直接使用的点。日期均取自 PubMed <code>pubmed</code>/<code>epublish</code> 或 Europe PMC <code>firstPublicationDate</code> 字段实测值。</p>
   <div class="stats">
-    <div class="stat"><span class="n">58</span><span class="k">窗口内</span></div>
+    <div class="stat"><span class="n">84</span><span class="k">窗口内</span></div>
     <div class="stat"><span class="n">2</span><span class="k">窗口外必读</span></div>
     <div class="stat"><span class="n">2</span><span class="k">批收录</span></div>
     <div class="stat"><span class="n">25</span><span class="k">检索式</span></div>
@@ -288,7 +288,7 @@ footer.foot{
   <div class="sechead">
     <span class="well"></span>
     <h2>方法学核心 · 从宏组学数据中提取宿主信号</h2>
-    <span class="count">9 条</span>
+    <span class="count">13 条</span>
   </div>
   <p class="secdesc">与 PMHostX 做的是同一件事的两面：在宿主主导的测序数据里，把想要的那一层信号干净地分离并定量出来。</p>
 
@@ -381,13 +381,53 @@ footer.foot{
     <div class="meta"><span>Endocrine</span><span class="sep">·</span><span>2026-08-15</span><span class="sep">·</span><span>Lou J, Liu H, Xiang Z et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1007/s12020-026-04754-w">10.1007/s12020-026-04754-w</a></span></div>
     <div class="why"><span class="lbl">为何相关</span><p>把 8 个公开糖尿病足溃疡队列按<strong>证据等级</strong>分层重处理（16S raw reads 重新处理、limma 差异分析），宿主判别用 fold-confined leave-one-sample-out + 100 次重复嵌套五折验证。<strong>这套验证设计可直接借用</strong>——你定量出宿主基因后同样面对队列小、批次杂的问题；它也是「公共数据复用的可靠性分层」这个论点的现成先例。</p></div>
   </article>
+
+  <article class="item" data-g="1" data-id="10-3791-73334">
+    <div class="tline">
+      <span class="num">73</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.3791/73334">Compartment-Aware Benchmarking of Respiratory-Virus Transcriptomes for Nasal and Blood Host-Response Modules: A Computational Study.</a></h3>
+      
+    </div>
+    <div class="meta"><span>Journal of visualized experiments : JoVE</span><span class="sep">·</span><span>2026-09-19</span><span class="sep">·</span><span>Han S, Jin S</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.3791/73334">10.3791/73334</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p><strong>compartment-aware 的宿主反应模块基准测试</strong>：系统处理公共转录组的混杂来源（组织来源、对照定义、研究设计），再判断宿主反应活性是否可复现，同时保住鼻拭子与全血的生物学语境。PMHostX 的仁济队列同样要在对照定义与批次间保持可比，这套流程可直接借鉴。</p></div>
+  </article>
+
+  <article class="item" data-g="1" data-id="10-1128-mbio-00637-26">
+    <div class="tline">
+      <span class="num">76</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1128/mbio.00637-26">Discovery of Staphylococcus aureus small RNAs highly expressed during human chronic infection.</a></h3>
+      
+    </div>
+    <div class="meta"><span>mBio</span><span class="sep">·</span><span>2026-08-07</span><span class="sep">·</span><span>Briaud P, Schumacher J, Whiteley M</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1128/mbio.00637-26">10.1128/mbio.00637-26</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>NEMO：基于泛基因组的框架，<strong>直接从自然感染样本里读微生物基因表达</strong>，绕过「实验室培养推断调控网络」这一步。与 PMHostX 是同一种动机的两侧——它从临床宏转录组里取微生物那一层，你取宿主那一层；「体内行为与体外培养不同，所以要直接读临床样本」这个论证可以直接借。</p></div>
+  </article>
+
+  <article class="item" data-g="1" data-id="10-1016-j-jinf-2026-106839">
+    <div class="tline">
+      <span class="num">80</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1016/j.jinf.2026.106839">Clinical validation of an optimised metagenomic nanopore sequencing method for detecting viral respiratory pathogens.</a></h3>
+      
+    </div>
+    <div class="meta"><span>The Journal of infection</span><span class="sep">·</span><span>2026-08-22</span><span class="sep">·</span><span>Sanderson ND, Dingle KE, Hopkins KMV et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1016/j.jinf.2026.106839">10.1016/j.jinf.2026.106839</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p><strong>临床宏基因组测序的方法学基准与流程批判</strong>：这篇把优化后的纳米孔临床宏基因组流程放进常规诊疗通道做临床验证，量化了非侵入呼吸道样本上病毒病原的检出能力，并把<strong>宿主核酸背景过高（high host biomass）</strong>与测序成本点名为宏基因组无法下沉为高通量常规检测的主要技术瓶颈，同时给出了当前方案的灵敏度边界与失败模式。对 PMHostX 的用处有三层：一是它与我们「从临床样本里抽宿主信号」的路线共享同一个约束——宿主 reads 占比直接决定低丰度信号的检出下限，可作为我们在 CSF 单端短读宏转录组上做去宿主与宿主 mRNA 抽取时预估收益的对照证据；二是它示范了把「成本 + 宿主背景」写进验证报告的写法，正好是我们后续做基准测试时可以对齐的指标框架；三是它对长读纳米孔方案与非靶向短读方案在覆盖面和成本上的取舍给出了实测数据，方便我们在建库决策章节里直接引用论证选型。</p></div>
+  </article>
+
+  <article class="item" data-g="1" data-id="10-3390-biom16070993">
+    <div class="tline">
+      <span class="num">83</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.3390/biom16070993">Extracellular Particles Isolated from Leftover Discarded Formalin-Fixed Tissues Exhibit Atypical Extracellular RNA Profiles.</a></h3>
+      
+    </div>
+    <div class="meta"><span>Biomolecules</span><span class="sep">·</span><span>2026-07-28</span><span class="sep">·</span><span>Tallapaneni V, Okeoma BC, Sachidanandam R et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.3390/biom16070993">10.3390/biom16070993</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>从残余废弃的<strong>福尔马林固定组织</strong>里分离细胞外颗粒并做 exRNA 定量，实测其 RNA 高度片段化、谱型异常，并明确指出解读这类临床标本来源的宿主 RNA 数据时必须交代<strong>降解/片段化、微生物混杂（microbial confounders）与固定相关伪影</strong>。PMHostX 面对的是同一类风险的一半：CSF 属低生物量基质，RNA 完整性有限，所谓「宿主人 mRNA 信号」可能掺入非宿主或试剂来源序列——该文可作为流程批判与混杂来源讨论的引证，用来交代检出信号的边界条件。<strong>需注意基质差异</strong>：该文用的是福尔马林固定组织，固定相关伪影这一层与新鲜 CSF 无关，引用时应只取片段化与微生物混杂这两层。</p></div>
+  </article>
 </section>
 
 <section class="sec2" data-g="2">
   <div class="sechead">
     <span class="well"></span>
     <h2>标志物与 panel · 你 8 个基因的商业对标</h2>
-    <span class="count">11 条</span>
+    <span class="count">15 条</span>
   </div>
   <p class="secdesc">PMHostX 的 marker 集（CRP / TNFSF10 / CXCL10 / MX1 / CEACAM4 / LAMP1 / PLAC8 / PLA2G7）分别对应 MeMed BV、FebriDx、SeptiCyte LAB 三条产品线。以下是窗口内这些基因与组合的临床证据。</p>
 
@@ -500,13 +540,53 @@ footer.foot{
     <div class="meta"><span>bioRxiv : the preprint server for biology</span><span class="sep">·</span><span>2026-07-02</span><span class="sep">·</span><span>Fan J, Rouilly V, Musvosvi M et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.64898/2026.05.07.723467">10.64898/2026.05.07.723467</a></span></div>
     <div class="why"><span class="lbl">为何相关</span><p>TruCulture 全血刺激 + PET/CT，在 Predict-TB 试验里纵向追踪 40 例 TB 患者 6 个月治疗全程，找<b>治疗反应与分层用的宿主标志物</b>。立项逻辑与 PMHostX 同源：不直接测病原，而是<b>先给宿主一个刺激、再读宿主反应</b>。与你的差别是它测蛋白/功能读出、你测 RNA。<strong>另注：这是一篇 bioRxiv 预印本，却已拿到 PMID 42388796</strong>——预印本被 PubMed 收录并非个例，检索时不能默认预印本找不到。</p></div>
   </article>
+
+  <article class="item" data-g="2" data-id="10-3390-diagnostics16152416">
+    <div class="tline">
+      <span class="num">58</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.3390/diagnostics16152416">A Nomogram Integrating CD169%, Neutrophil CD64 Index, and C-Reactive Protein for Differential Diagnosis of Mixed Respiratory Tract Infections.</a></h3>
+      
+    </div>
+    <div class="meta"><span>Diagnostics (Basel, Switzerland)</span><span class="sep">·</span><span>2026-08-13</span><span class="sep">·</span><span>Fan Y, Zhang L, Zhao J et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.3390/diagnostics16152416">10.3390/diagnostics16152416</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>流式细胞术来源的宿主免疫标志物组合——<strong>CD169 阳性率、中性粒细胞 CD64 指数与 CRP</strong>——用于呼吸道感染<strong>病毒／细菌／混合</strong>三类的鉴别，AUC 0.8947（敏感度 81.25%、特异度 80.70%）。PMHostX 的判读同样要在「感染 vs 非感染」之上再分病毒与细菌，而 CRP 本就属于常规炎症指标一类——这篇正好示范了<strong>「常规指标不够特异，需要叠加宿主免疫标志物」</strong>这一论证如何用头对头准确度数据讲清楚，其效能报告口径（AUC + 敏感度/特异度 + 三分类而非二分类）可直接对照 PMHostX 的效能陈述。归组 2 而非组 6：它的增量在标志物组合本身，是单队列诊断准确度研究，不是特征选择或跨数据集建模的方法学。</p></div>
+  </article>
+
+  <article class="item" data-g="2" data-id="10-7759-cureus-112064">
+    <div class="tline">
+      <span class="num">64</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.7759/cureus.112064">Diagnostic Accuracy of Immature Granulocyte Count for Early Sepsis Detection: A Comparative Evaluation With C-Reactive Protein and Procalcitonin.</a></h3>
+      
+    </div>
+    <div class="meta"><span>Cureus</span><span class="sep">·</span><span>2026-08-05</span><span class="sep">·</span><span>Taver R, Gupta V, Saxena P et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.7759/cureus.112064">10.7759/cureus.112064</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>未成熟粒细胞计数用于早期脓毒症诊断，<strong>与 CRP、降钙素原做头对头准确度比较</strong>。CRP 是你 8 基因 panel 里的一员。这类「新指标 vs 现有指标」的比较设计与效能报告口径，可直接借鉴到 PMHostX 的效能陈述方式。</p></div>
+  </article>
+
+  <article class="item" data-g="2" data-id="10-1007-s40291-026-00860-7">
+    <div class="tline">
+      <span class="num">66</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1007/s40291-026-00860-7">Cost-Effectiveness of a Host-Response Point-of-Care Assay for Early Sepsis Diagnosis in UK Emergency Departments.</a></h3>
+      
+    </div>
+    <div class="meta"><span>Molecular diagnosis &amp; therapy</span><span class="sep">·</span><span>2026-08-11</span><span class="sep">·</span><span>Plata-Menchaca EP, Hernández-Jiménez E, Caus-Capdevila Q et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1007/s40291-026-00860-7">10.1007/s40291-026-00860-7</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p><strong>宿主反应 POCT 检测的成本效果分析</strong>（英国急诊），对照现行 NEWS2 + 临床判断。PMHostX 若要主张转化价值，成本效果这一环绕不开；这篇给出建模口径、阈值假设与「补足临床评估漏诊」的论证模板。</p></div>
+  </article>
+
+  <article class="item" data-g="2" data-id="10-3390-medsci14040465">
+    <div class="tline">
+      <span class="num">86</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.3390/medsci14040465">Early Identification of a Cytokine-Low Immune Phenotype in Suspected Sepsis Using a Point-of-Care Whole-Blood TNF-α Release Assay.</a></h3>
+      
+    </div>
+    <div class="meta"><span>Medical sciences (Basel, Switzerland)</span><span class="sep">·</span><span>2026-08-26</span><span class="sep">·</span><span>Plata-Menchaca EP, Cisteró B, Ceccato A et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.3390/medsci14040465">10.3390/medsci14040465</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p><strong>感染功能性宿主标志物的 POCT 落地证据</strong>：这篇在急诊疑似脓毒症人群里评估全血 LPS 诱导 TNF-α 释放试验（TARA），先指出常规生物标志物与临床评分<strong>并不直接反映宿主免疫功能状态</strong>，再证明 TARA 能在早期识别「细胞因子偏低」的免疫表型，并与现有指标做了头对头关联。对 PMHostX 的价值在于它示范了一整套宿主反应读数替代或补充常规临床指标的验证范式：前瞻纳入、急诊真实场景、POCT 形态、报告效应量与判别能力，并在结论里明确自我限定「需外部验证与临床影响评估」。这与我们从 CSF 宿主 mRNA 反推感染判读的论证结构同源——都需要先说明常规指标测不到宿主状态，再给出可操作的宿主读数；它同时提示了这类宿主标志物在落地前必须补上的证据门槛（外部验证、临床影响评估），可直接用于我们讨论宿主转录组判读的临床转化路径与局限。</p></div>
+  </article>
 </section>
 
 <section class="sec3" data-g="3">
   <div class="sechead">
     <span class="well"></span>
     <h2>脑脊液 / 中枢感染 · 宿主转录组与 mNGS 判读</h2>
-    <span class="count">13 条</span>
+    <span class="count">16 条</span>
   </div>
   <p class="secdesc">PMHostX 的样本是仁济脑脊液队列。这一组是同一基质、同一病种的宿主信号与 mNGS 定量判读证据。</p>
 
@@ -639,13 +719,43 @@ footer.foot{
     <div class="meta"><span>Journal of general virology</span><span class="sep">·</span><span>2026-07-17</span><span class="sep">·</span><span>Donoso A, Pérez AB, Lopez-Dosil M et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1099/jgv.0.002302">10.1099/jgv.0.002302</a></span></div>
     <div class="why"><span class="lbl">为何相关</span><p><strong>常规诊断全阴</strong>的成人疑似中枢感染，用探针法病毒 mNGS 复查 40 例、检出 6 例。这是「mNGS 在 CSF 上的增量检出率」的直接数字（<strong>15%</strong>），可用于 Introduction 说明现有诊断缺口有多大，也可用于 Discussion 界定宏基因组方法的实际收益边界。</p></div>
   </article>
+
+  <article class="item" data-g="3" data-id="10-1007-s00109-026-02698-2">
+    <div class="tline">
+      <span class="num">74</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1007/s00109-026-02698-2">Proteomic analysis reveals divergent inflammatory mechanisms of COVID-associated Guillain-Barré syndrome.</a></h3>
+      
+    </div>
+    <div class="meta"><span>Journal of molecular medicine (Berlin, Germany)</span><span class="sep">·</span><span>2026-07-04</span><span class="sep">·</span><span>Ulutekin C, Can A, Súkeníková L et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1007/s00109-026-02698-2">10.1007/s00109-026-02698-2</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>COVID 相关吉兰-巴雷综合征的<strong>脑脊液 + 血清</strong>免疫介质蛋白组，对照组设了非 COVID 的 GBS 与「COVID 但无神经系统并发症」两层。同一基质（CSF）、同一类鉴别困境（感染后神经免疫 vs 感染本身），PMHostX 的 CSF 队列同样要在感染性与非感染性神经炎症之间分清。</p></div>
+  </article>
+
+  <article class="item" data-g="3" data-id="10-1177-13524585261473068">
+    <div class="tline">
+      <span class="num">75</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1177/13524585261473068">Borrelia miyamotoi meningoradiculitis complicating ocrelizumab treatment for multiple sclerosis: A report of three cases.</a></h3>
+      <span class="pin">必读</span>
+    </div>
+    <div class="meta"><span>Multiple sclerosis (Houndmills, Basingstoke, England)</span><span class="sep">·</span><span>2026-08-04</span><span class="sep">·</span><span>Nicolas P, Beigneux Y, Guennoc AM et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1177/13524585261473068">10.1177/13524585261473068</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p><strong>常规检查全部阴性，靠 CSF 宏转录组定诊</strong>：3 例多发性硬化患者用 ocrelizumab 后出现重型脑膜神经根炎，病原最终锁定为 <i>Borrelia miyamotoi</i>。免疫抑制人群的 CSF 感染正是「培养与常规 PCR 阴性但确有病原」的高发场景——这篇既证明宏转录组在该场景的定诊能力，也给出报告写法。与你同一基质、同一技术、同一困境。</p></div>
+  </article>
+
+  <article class="item" data-g="3" data-id="10-1016-j-diagmicrobio-2026-117546">
+    <div class="tline">
+      <span class="num">79</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1016/j.diagmicrobio.2026.117546">Emerging importance of bio-bank for precision diagnostics and research in neuroinfections - a narrative review.</a></h3>
+      <span class="pin">必读</span>
+    </div>
+    <div class="meta"><span>Diagnostic microbiology and infectious disease</span><span class="sep">·</span><span>2026-07-19</span><span class="sep">·</span><span>N B, Radhakrishnan SSR, V RS et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1016/j.diagmicrobio.2026.117546">10.1016/j.diagmicrobio.2026.117546</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>围绕中枢神经系统感染诊断困境的叙述性综述，对象是结核性脑膜炎、病毒性脑炎、HIV 神经系统受累与新冠后神经综合征等，直指现有诊断的核心痛点：监测不足、症状非特异、常规实验室敏感性不够、取材受限，因此主张以神经感染生物样本库叠加数字分析来加速标志物验证与诊断创新。这篇对 PMHostX 是立论支点级的引用：它把「常规培养/PCR 常常阴性、只能靠分子检测定诊」这一临床缺口写成明确的证据，并把 CSF 作为核心基质，正好对应本研究以 CSF 为样本、用宏转录组宿主 mRNA 做判读的定位；其中的标志物验证链条（发现—外部验证—临床落地）也可以直接借来组织本研究的验证章节。</p></div>
+  </article>
 </section>
 
 <section class="sec4" data-g="4">
   <div class="sechead">
     <span class="well"></span>
     <h2>建库、去宿主与参考库卫生</h2>
-    <span class="count">11 条</span>
+    <span class="count">13 条</span>
   </div>
   <p class="secdesc">PMHostX 的 fastp → HISAT2 链条本质是&quot;in-silico 去宿主&quot;。这一组是湿实验去宿主、rRNA 去除与参考库污染控制的最新进展。</p>
 
@@ -758,13 +868,33 @@ footer.foot{
     <div class="meta"><span>Microbiology spectrum</span><span class="sep">·</span><span>2026-08-04</span><span class="sep">·</span><span>Liu X, Fan X, Wu W et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1128/spectrum.04057-25">10.1128/spectrum.04057-25</a></span></div>
     <div class="why"><span class="lbl">为何相关</span><p>明文指出常规 mNGS 受<strong>宿主核酸干扰</strong>、在低生物量样本上表现差，探针捕获（PC-mNGS）用杂交探针富集微生物目标以提高灵敏度，跨 BALF / 血液 / <strong>脑脊液</strong>做了系统比较。你是反方向：不去宿主、把宿主当信号。这构成 Methods 里「要不要去宿主」这个选择的<strong>对侧论证</strong>，并给出低生物量样本的实测差距。</p></div>
   </article>
+
+  <article class="item" data-g="4" data-id="10-1016-j-cell-2026-08-024">
+    <div class="tline">
+      <span class="num">78</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1016/j.cell.2026.08.024">Metax enables accurate cross-domain taxonomic profiling of metagenomes.</a></h3>
+      
+    </div>
+    <div class="meta"><span>Cell</span><span class="sep">·</span><span>2026-09-11</span><span class="sep">·</span><span>Deng ZL, Safaei N, McHardy AC</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1016/j.cell.2026.08.024">10.1016/j.cell.2026.08.024</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>跨域物种分类器，但它的立论与实验设计完全踩在组 4 的议题上：<strong>专门针对「低生物量、宿主主导」样本</strong>，并把「参考库代表性不足」单列为 benchmark 条件（>600 样本，含低生物量临床场景）。最有价值的是它的一个具体结果——<strong>在血浆 cfDNA 里识别出试剂来源污染与参考序列错误组装</strong>。cfDNA 与 CSF 同属低生物量、宿主核酸海量过剩的基质，PMHostX 面对的正是这两个陷阱：污染 reads 会被误当成信号、参考库的错误组装会把宿主 reads 派错位置。这篇既给出可引用的定量证据，也给出「如何自证一个低生物量信号不是假象」的论证写法。需注意：它的产出是微生物丰度，不是宿主表达定量，引用时应限于污染与参考库卫生这一层。</p></div>
+  </article>
+
+  <article class="item" data-g="4" data-id="10-3390-biomedicines14081708">
+    <div class="tline">
+      <span class="num">84</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.3390/biomedicines14081708">Dual-Omics Profiling of Carotid Plaques Reveals Stage-Dependent Host-Microbiome Interaction Dynamics from Formation to Rupture.</a></h3>
+      
+    </div>
+    <div class="meta"><span>Biomedicines</span><span class="sep">·</span><span>2026-08-27</span><span class="sep">·</span><span>Zhou S, Zhang M, Bai S et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.3390/biomedicines14081708">10.3390/biomedicines14081708</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>架构上与 PMHostX 同源：<strong>从同一份人 RNA-seq 里同时取出宿主转录组与微生物 reads</strong>（GATK PathSeq + 严格的 in silico 去污染），并显式处理低生物量测序固有的噪声与假象。PMseq 同样是一份数据同时给出微生物 reads 与宿主 mRNA，CSF 更是典型的低生物量基质——这篇的<strong>去污染流程与「低生物量下如何自证信号为真」的写法</strong>可直接借鉴。需注意区别：它的诊断落点是跨界的宿主基因+细菌 panel（斑块稳定性），基质是颈动脉斑块，并非 CNS 感染；引用时应只取其建库与去污染的方法学，不照搬其结论。</p></div>
+  </article>
 </section>
 
 <section class="sec5" data-g="5">
   <div class="sechead">
     <span class="well"></span>
     <h2>背景、综述与研究框架</h2>
-    <span class="count">10 条</span>
+    <span class="count">19 条</span>
   </div>
   <p class="secdesc">用于引言定位与讨论框架，不是实验依据。</p>
 
@@ -867,13 +997,103 @@ footer.foot{
     <div class="meta"><span>Expert review of proteomics</span><span class="sep">·</span><span>2026-09-08</span><span class="sep">·</span><span>Huang Y, Zhou J, Wang C et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1080/14789450.2026.2732072">10.1080/14789450.2026.2732072</a></span></div>
     <div class="why"><span class="lbl">为何相关</span><p>细胞外囊泡蛋白组学用于感染病诊断的综述，明确采用<b>「病原来源 / 宿主反应」双轨</b>框架讨论标志物。与 PMHostX 的宿主信号思路可互相印证，写引言时用来支撑「宿主侧信号被系统性低估」这一判断。</p></div>
   </article>
+
+  <article class="item" data-g="5" data-id="10-64898-2026-06-11-26355454">
+    <div class="tline">
+      <span class="num">61</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.64898/2026.06.11.26355454">Paired plasma and EV-enriched plasma proteomics reveal nonredundant sepsis-associated host-response signatures in critical illness.</a></h3>
+      
+    </div>
+    <div class="meta"><span>medRxiv : the preprint server for health sciences</span><span class="sep">·</span><span>2026-07-03</span><span class="sep">·</span><span>Rice SJ, Ardabili AK, Ruiz-Velasco V et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.64898/2026.06.11.26355454">10.64898/2026.06.11.26355454</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>前瞻观察队列，56 例危重患者（脓毒症 40 / 危重非感染对照 16），配对比较血浆与 EV 富集血浆的蛋白组。<strong>关键在对照的选择</strong>：它拿「危重但非感染」当对照，而不是健康人——这正是 PMHostX 在 CSF 里最难分的那一类（非感染性炎症）。宿主反应签名能否在真实鉴别诊断场景成立，这篇给的是蛋白组学侧的实证先例。</p></div>
+  </article>
+
+  <article class="item" data-g="5" data-id="10-1186-s13054-026-06169-5">
+    <div class="tline">
+      <span class="num">62</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1186/s13054-026-06169-5">The molecular ICU: a primer on omics, informatics and the future of precision critical care.</a></h3>
+      
+    </div>
+    <div class="meta"><span>Critical care (London, England)</span><span class="sep">·</span><span>2026-07-07</span><span class="sep">·</span><span>Van Nynatten LR, Raheel H, Basmaji J et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1186/s13054-026-06169-5">10.1186/s13054-026-06169-5</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>Critical Care 的组学/信息学入门综述，核心论点：<strong>以综合征命名（sepsis / ARDS / TBI）把不同的病理生物学状态混在一个标签下，正是几百个中性随机试验失败的原因</strong>，主张用高维组学做分层。PMHostX 引言里回答「为什么不能靠临床综合征、要做宿主分子判读」时，这是最直接的框架引用。</p></div>
+  </article>
+
+  <article class="item" data-g="5" data-id="10-1556-1886-2026-00039">
+    <div class="tline">
+      <span class="num">63</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1556/1886.2026.00039">Recent advances in screening, diagnosis, prognosis and personalized treatment of sepsis.</a></h3>
+      
+    </div>
+    <div class="meta"><span>European journal of microbiology &amp; immunology</span><span class="sep">·</span><span>2026-07-30</span><span class="sep">·</span><span>Whitfield Jones NN, Clements C, Rasania S et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1556/1886.2026.00039">10.1556/1886.2026.00039</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>脓毒症筛查/诊断/预后/个体化治疗的叙述性综述，覆盖 <strong>2025 年 1 月 – 2026 年 6 月</strong>。文中直接称临床与生理定义的综合征是「差的分类器」（poor classifiers）。综述窗口与本项目高度重叠，可用于确认「宿主分子判读替代综合征分类」这一主张的当下共识程度。</p></div>
+  </article>
+
+  <article class="item" data-g="5" data-id="10-1016-j-jinf-2026-106828">
+    <div class="tline">
+      <span class="num">65</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1016/j.jinf.2026.106828">Mycobacterium tuberculosis pathogen load and associated inflammatory responses define infection severity in HIV-associated TB and interact with age to predict mortality.</a></h3>
+      
+    </div>
+    <div class="meta"><span>The Journal of infection</span><span class="sep">·</span><span>2026-08-09</span><span class="sep">·</span><span>Boloko L, Schutz C, Ward A et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1016/j.jinf.2026.106828">10.1016/j.jinf.2026.106828</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>HIV 相关重症结核前瞻队列，<strong>同时量化病原载量与宿主炎症反应</strong>，论证两者联合（并与年龄交互）才定义严重度与死亡风险。PMHostX 的宏转录组天然同时给出微生物 reads 与宿主 mRNA——这篇是「双读出优于单读出」在临床队列上的论证依据。</p></div>
+  </article>
+
+  <article class="item" data-g="5" data-id="10-1016-s1473-3099-26-00373-7">
+    <div class="tline">
+      <span class="num">69</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1016/S1473-3099(26)00373-7">Sepsis, endemic and emerging infectious diseases: converging concepts and clinical implications.</a></h3>
+      
+    </div>
+    <div class="meta"><span>The Lancet. Infectious diseases</span><span class="sep">·</span><span>2026-09-03</span><span class="sep">·</span><span>Salomão R, Leite GGF, Salomão MC et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1016/S1473-3099(26)00373-7">10.1016/S1473-3099(26)00373-7</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>Lancet Infectious Diseases 综述：脓毒症（宿主反应失调）与疟疾、钩端螺旋体病、结核等地方病的<strong>边界正在模糊</strong>，85% 病例与死亡发生在中低收入国家，主张按疾病特异性轨迹重新划分。把「宿主反应」当作跨病种统一视角时，这是层级最高的引用。</p></div>
+  </article>
+
+  <article class="item" data-g="5" data-id="10-1007-s11894-026-01057-y">
+    <div class="tline">
+      <span class="num">70</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1007/s11894-026-01057-y">Do Multi-Omics Approaches Improve the Diagnosis of Microbial Overgrowth Syndromes?</a></h3>
+      
+    </div>
+    <div class="meta"><span>Current gastroenterology reports</span><span class="sep">·</span><span>2026-09-07</span><span class="sep">·</span><span>de Freitas Germano J, Leite G, Pimentel M</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1007/s11894-026-01057-y">10.1007/s11894-026-01057-y</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>直接追问<strong>「多组学到底有没有改善微生物过生长综合征的诊断」</strong>，横跨呼气试验、小肠培养、宏基因组、宏转录组、转录组与蛋白组。问题结构与 PMHostX 同构：新增一层分子信号，究竟有没有换来诊断增量。</p></div>
+  </article>
+
+  <article class="item" data-g="5" data-id="10-4266-acc-003224">
+    <div class="tline">
+      <span class="num">71</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.4266/acc.003224">Rapid microbiological diagnostics for sepsis in critical care: integrating technological advances with antimicrobial stewardship.</a></h3>
+      
+    </div>
+    <div class="meta"><span>Acute and critical care</span><span class="sep">·</span><span>2026-09-11</span><span class="sep">·</span><span>Kim KH, Yi J</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.4266/acc.003224">10.4266/acc.003224</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>脓毒症快速微生物诊断综述，明确点出两头短板：<strong>传统宿主反应标志物缺乏病原特异性，而血培养要 48–72 小时</strong>。这正是 PMHostX 定位段的现成对照——宿主信号快但不特异、病原检测特异但慢，两者互补关系可直接引。</p></div>
+  </article>
+
+  <article class="item" data-g="5" data-id="10-1080-10408347-2026-2733903">
+    <div class="tline">
+      <span class="num">77</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1080/10408347.2026.2733903">Integrating Transcriptomics and Metabolomics for Clinical Disease Detection: A Critical Review of Emerging Diagnostic Methodologies.</a></h3>
+      
+    </div>
+    <div class="meta"><span>Critical reviews in analytical chemistry</span><span class="sep">·</span><span>2026-09-21</span><span class="sep">·</span><span>Thummar K, Nair SM, Ravat F et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1080/10408347.2026.2733903">10.1080/10408347.2026.2733903</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>转录组 + 代谢组用于临床疾病检测的方法学批判性综述，核心论点：<strong>两层组学在分子层级上互补——转录组刻画上游调控失调，代谢组刻画下游生化后果，单用任一层都只是局部视图</strong>。PMHostX 主张「宿主 mRNA 这一层值得单独取出来」，这篇提供「为什么需要多一层」的一般性论证。</p></div>
+  </article>
+
+  <article class="item" data-g="5" data-id="10-3390-ijms27135918">
+    <div class="tline">
+      <span class="num">85</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.3390/ijms27135918">Mitochondrial Immunometabolism in Sepsis: From Oxidative Stress and mtDAMP Signaling to Biomarker-Guided Therapy.</a></h3>
+      
+    </div>
+    <div class="meta"><span>International journal of molecular sciences</span><span class="sep">·</span><span>2026-07-15</span><span class="sep">·</span><span>Kim M, Khin PP, Jung H et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.3390/ijms27135918">10.3390/ijms27135918</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>脓毒症宿主线粒体免疫代谢的综述：把氧化/亚硝化应激、线粒体质量控制、mtDNA 与 mtDAMP 释放等宿主来源分子，串成一条「宿主反应读到什么、如何判读感染」的证据链，并落到标志物指导的分层治疗。对 PMHostX 的直接用处有两处：一是它提供了「用宿主分子反应而不是临床综合征来定义感染状态」的论证，这正是 CSF 宿主 mRNA 判读要借用的逻辑；二是它给出线粒体/免疫代谢这一类宿主基因作为感染严重度与鉴别诊断候选标志物的先验清单，可用于解释为何从 rRNA 去除后的宏转录组里专门看宿主 mRNA 的免疫代谢通路，也可作为讨论部分把宿主转录组信号与已成熟的血源标志物做对照的引用。</p></div>
+  </article>
 </section>
 
 <section class="sec6" data-g="6">
   <div class="sechead">
     <span class="well"></span>
     <h2>诊断建模与分类器 · 把宿主信号落成判读</h2>
-    <span class="count">4 条</span>
+    <span class="count">8 条</span>
   </div>
   <p class="secdesc">PMHostX 不只是把宿主 mRNA 定量出来，还要把定量结果落成诊断判读。这一组是用机器学习 / transformer 在宿主表达谱或宏基因组上建模的工作——特征选择、验证设计、报告口径都可以直接对标。</p>
 
@@ -897,16 +1117,6 @@ footer.foot{
     <div class="why"><span class="lbl">为何相关</span><p>用 12,980 个 HEK293T 单细胞的转录组训 CatBoost 回归，<b>从宿主表达谱反推病毒载量</b>，并给出可解释性。方向上与 PMHostX 互为镜像：你从测序数据里把宿主那层定量出来，它把宿主那层当成预测病原丰度的输入。<strong>「可解释」这一条尤其值得借</strong>——分类器能不能说清用了哪些基因，正是临床审稿人会追问的。人源细胞系，符合物种口径。</p></div>
   </article>
 
-  <article class="item" data-g="6" data-id="10-3390-diagnostics16152416">
-    <div class="tline">
-      <span class="num">58</span>
-      <h3 class="ptitle"><a href="https://doi.org/10.3390/diagnostics16152416">A Nomogram Integrating CD169%, Neutrophil CD64 Index, and C-Reactive Protein for Differential Diagnosis of Mixed Respiratory Tract Infections.</a></h3>
-      
-    </div>
-    <div class="meta"><span>Diagnostics (Basel, Switzerland)</span><span class="sep">·</span><span>2026-08-13</span><span class="sep">·</span><span>Fan Y, Zhang L, Zhao J et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.3390/diagnostics16152416">10.3390/diagnostics16152416</a></span></div>
-    <div class="why"><span class="lbl">为何相关</span><p>CD169%、中性粒 CD64 指数、<b>CRP</b> 三者做列线图，鉴别混合呼吸道感染。CRP 是你 8 基因 panel 里的一员，而列线图是分类器落到临床床旁的一种呈现形式。<strong>PubMed 中该条无摘要字段</strong>，以上描述基于标题与期刊定位，引用前需下载全文核对入组与效能数据。</p></div>
-  </article>
-
   <article class="item" data-g="6" data-id="10-1097-md-0000000000050020">
     <div class="tline">
       <span class="num">59</span>
@@ -915,6 +1125,56 @@ footer.foot{
     </div>
     <div class="meta"><span>Medicine</span><span class="sep">·</span><span>2026-07-31</span><span class="sep">·</span><span>Ma Q, Yang HR, Wang JZ et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1097/MD.0000000000050020">10.1097/MD.0000000000050020</a></span></div>
     <div class="why"><span class="lbl">为何相关</span><p>GEO 三个脓毒症数据集（GSE28750 / GSE54514 / GSE131761）+ 机器学习筛关键基因、建诊断模型再验证。收它的理由<b>主要是当反面对照</b>：全程依赖公共回顾性队列、无前瞻入组、无独立外部验证，这正是 PMHostX 用仁济前瞻队列可以主张的增量所在。<strong>做「同类工作的问题在哪」时引这条。</strong></p></div>
+  </article>
+
+  <article class="item" data-g="6" data-id="10-1007-s00210-026-05786-9">
+    <div class="tline">
+      <span class="num">67</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1007/s00210-026-05786-9">Network-guided transcriptomics identifies drug-linked host-response biomarkers in tuberculosis disease-state transition.</a></h3>
+      
+    </div>
+    <div class="meta"><span>Naunyn-Schmiedeberg&#x27;s archives of pharmacology</span><span class="sep">·</span><span>2026-08-11</span><span class="sep">·</span><span>Alquraini A, Alahmari M, Alkholifi FK et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1007/s00210-026-05786-9">10.1007/s00210-026-05786-9</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>血液基因表达 + <strong>网络引导</strong>筛特征，构建从活动性结核到治疗后状态的聚焦转录签名（发现队列 n=57，1086 个差异基因收敛到可解释的少数），并强调跨数据集可复现。组 6 里「特征选择 + 跨数据集验证 + 可解释性」这条链路示范得最完整的一篇。</p></div>
+  </article>
+
+  <article class="item" data-g="6" data-id="10-1016-j-ccc-2026-05-008">
+    <div class="tline">
+      <span class="num">68</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1016/j.ccc.2026.05.008">Real-time Subgrouping of Sepsis and Systemic Inflammatory Syndromes.</a></h3>
+      
+    </div>
+    <div class="meta"><span>Critical care clinics</span><span class="sep">·</span><span>2026-09-03</span><span class="sep">·</span><span>McMullan R, Bhavani SV, Sinha P</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1016/j.ccc.2026.05.008">10.1016/j.ccc.2026.05.008</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>论证实时亚组分型需要<strong>两阶段流水线</strong>：先判定患者是否属于某亚组，再做分类；并指出宿主反应派生的脓毒症亚组在临床、蛋白标志物、转录组三个维度上可重复。若 PMHostX 要做成可落地的判读工具，这篇给的是<strong>部署框架</strong>，不只是建模方法。</p></div>
+  </article>
+
+  <article class="item" data-g="6" data-id="10-1007-s00011-026-02366-8">
+    <div class="tline">
+      <span class="num">72</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1007/s00011-026-02366-8">Identification of immune cell mitochondrial dysfunction characteristics and clinical predictive biomarkers in sepsis via multi-cohort machine learning and single-cell RNA sequencing.</a></h3>
+      
+    </div>
+    <div class="meta"><span>Inflammation research : official journal of the European Histamine Research Society ... [et al.]</span><span class="sep">·</span><span>2026-09-19</span><span class="sep">·</span><span>Le X, Fan Y, Xu S et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1007/s00011-026-02366-8">10.1007/s00011-026-02366-8</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>整合 5 个 GEO 数据集共 1,256 例，<strong>横向比较十种机器学习算法</strong>选最优诊断模型，再用单细胞数据验证。同类工作里做得最扎实的一篇。要陈述这类「公共队列 + 机器学习筛标志物」方法学上限时，引这篇而不是引单队列的。</p></div>
+  </article>
+
+  <article class="item" data-g="6" data-id="10-1152-physiolgenomics-00328-2025">
+    <div class="tline">
+      <span class="num">81</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1152/physiolgenomics.00328.2025">A Novel Immune-Escape Signature and Classifier for Predicting Sepsis Constructed by Integrative Bioinformatics.</a></h3>
+      
+    </div>
+    <div class="meta"><span>Physiological genomics</span><span class="sep">·</span><span>2026-09-01</span><span class="sep">·</span><span>Zhu H, Zhu H, Liu D et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1152/physiolgenomics.00328.2025">10.1152/physiolgenomics.00328.2025</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>在公共队列上把「差异表达 + WGCNA 筛特征 → 诊断基因对 → 列线图/DCA → 共识聚类分亚型」这条链路走完整的一篇，且<strong>用 GSE95233 作独立验证队列</strong>（训练集 GSE65682），不只是同一批数据内部交叉验证。PMHostX 若要主张宿主 mRNA 判读可落地，「外部验证 + 临床效用曲线」是绕不开的举证标准——这篇正好是这套标准在同类工作里的完整示范，也是同类文献中值得引用的上限而非下限。</p></div>
+  </article>
+
+  <article class="item" data-g="6" data-id="10-1177-15303667261486623">
+    <div class="tline">
+      <span class="num">82</span>
+      <h3 class="ptitle"><a href="https://doi.org/10.1177/15303667261486623">Single-Cell Transcriptomic Profiling and Machine Learning Reveal Stage-Specific Gene Dynamics in Brucellosis.</a></h3>
+      
+    </div>
+    <div class="meta"><span>Vector borne and zoonotic diseases (Larchmont, N.Y.)</span><span class="sep">·</span><span>2026-09-21</span><span class="sep">·</span><span>Yang S, Liu J, Wang X et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1177/15303667261486623">10.1177/15303667261486623</a></span></div>
+    <div class="why"><span class="lbl">为何相关</span><p>对急性、亚急性、慢性布鲁菌病患者的外周血单个核细胞做单细胞转录组测序，用机器学习做特征选择，筛出 14 个核心基因并建立疾病分期／慢性化预测框架，同时给出 CD8⁺T 细胞与干扰素信号等可解释通路。<strong>这是本批里唯一一篇「人类临床感染样本 + 宿主转录组特征 + 机器学习分类器」的完整范例</strong>，与 PMHostX 用 CSF 宿主 mRNA 打分判读中枢感染在任务形式上是同构的：同样回答「宿主表达谱能否独立于病原学检查给出感染判读」。其单细胞层面的核心基因列表可直接作为 PMHostX 宿主标志物 panel 的候选池，其分期建模思路也可作为「先分症候群、再定感染」两阶段流水线的参照。</p></div>
   </article>
 </section>
 
@@ -956,9 +1216,16 @@ footer.foot{
       <li><span class="d">2026-09-24</span><span class="g">建模</span><span><a href="https://doi.org/10.1016/j.ebiom.2026.106462">Cepheid 9-gene host mRNA expression across the spectrum of Mycobacterium tuberculosis infection and disease: insights across the lifespan.</a></span></li>
       <li><span class="d">2026-09-24</span><span class="g">标志物</span><span><a href="https://doi.org/10.64898/2026.05.07.723467">Integration of functional immunomonitoring assays with PET/CT scans in TB patients identifies on-treatment biomarkers.</a></span></li>
       <li><span class="d">2026-09-24</span><span class="g">建模</span><span><a href="https://doi.org/10.1016/j.compbiolchem.2026.109319">A HEK293T-derived explainable CatBoost signature for estimating HCoV-OC43 viral burden from host transcriptomes.</a></span></li>
-      <li><span class="d">2026-09-24</span><span class="g">建模</span><span><a href="https://doi.org/10.3390/diagnostics16152416">A Nomogram Integrating CD169%, Neutrophil CD64 Index, and C-Reactive Protein for Differential Diagnosis of Mixed Respiratory Tract Infections.</a></span></li>
+      <li><span class="d">2026-09-24</span><span class="g">标志物</span><span><a href="https://doi.org/10.3390/diagnostics16152416">A Nomogram Integrating CD169%, Neutrophil CD64 Index, and C-Reactive Protein for Differential Diagnosis of Mixed Respiratory Tract Infections.</a></span></li>
       <li><span class="d">2026-09-24</span><span class="g">建模</span><span><a href="https://doi.org/10.1097/MD.0000000000050020">The role of cellular senescence in sepsis and its mechanism in copper death: An analysis based on machine learning.</a></span></li>
       <li><span class="d">2026-09-24</span><span class="g">背景</span><span><a href="https://doi.org/10.1080/14789450.2026.2732072">Proteomic advances in extracellular vesicles: unlocking biomarkers for microbial infectious diseases.</a></span></li>
+      <li><span class="d">2026-09-24</span><span class="g">背景</span><span><a href="https://doi.org/10.64898/2026.06.11.26355454">Paired plasma and EV-enriched plasma proteomics reveal nonredundant sepsis-associated host-response signatures in critical illness.</a></span></li>
+      <li><span class="d">2026-09-24</span><span class="g">背景</span><span><a href="https://doi.org/10.1186/s13054-026-06169-5">The molecular ICU: a primer on omics, informatics and the future of precision critical care.</a></span></li>
+      <li><span class="d">2026-09-24</span><span class="g">背景</span><span><a href="https://doi.org/10.1556/1886.2026.00039">Recent advances in screening, diagnosis, prognosis and personalized treatment of sepsis.</a></span></li>
+      <li><span class="d">2026-09-24</span><span class="g">标志物</span><span><a href="https://doi.org/10.7759/cureus.112064">Diagnostic Accuracy of Immature Granulocyte Count for Early Sepsis Detection: A Comparative Evaluation With C-Reactive Protein and Procalcitonin.</a></span></li>
+      <li><span class="d">2026-09-24</span><span class="g">背景</span><span><a href="https://doi.org/10.1016/j.jinf.2026.106828">Mycobacterium tuberculosis pathogen load and associated inflammatory responses define infection severity in HIV-associated TB and interact with age to predict mortality.</a></span></li>
+      <li><span class="d">2026-09-24</span><span class="g">标志物</span><span><a href="https://doi.org/10.1007/s40291-026-00860-7">Cost-Effectiveness of a Host-Response Point-of-Care Assay for Early Sepsis Diagnosis in UK Emergency Departments.</a></span></li>
+      <li><span class="d"></span><span class="g"></span><span>…本批另 20 条</span></li>
       <li><span class="d">2026-09-23</span><span class="g">方法学</span><span><a href="https://doi.org/10.1128/msystems.00897-26">Library strategies differentially shape microbial, functional, and host signals in clinical metagenomic sequencing</a></span></li>
       <li><span class="d">2026-09-23</span><span class="g">方法学</span><span><a href="https://doi.org/10.1093/bib/bbag454">Benchmarking methods for extracting microbial signal from host-dominated metatranscriptomes</a></span></li>
       <li><span class="d">2026-09-23</span><span class="g">方法学</span><span><a href="https://doi.org/10.3389/fbinf.2026.1906036">LungMicroHostR: an R package for integrated host-microbiome analysis of bronchoalveolar lavage fluid metagenomic sequencing data</a></span></li>
@@ -984,11 +1251,13 @@ footer.foot{
     <li><b>工具类论文的空白。</b>HISAT2 / featureCounts / FPKM / TPM 相关方法在窗口内无新论文——这些工具已成熟，处于被引用而非被重新发表的阶段。这本身也是方法学章节可以陈述的事实。</li>
     <li><b>一条未核到 DOI。</b>窗口外的 AAN 会议摘要（S16.010）未检索到 DOI，页面中已标注为待核，未编造标识符。</li>
     <li><b>预印本是否被 PubMed 收录，只能逐条实测。</b>此前按 DOI 前缀整类判断（<code>10.64898/…</code> 一律视为无 PubMed 记录），2026-09-24 实测证明是错的：同一批里两条 bioRxiv 预印本已有 PMID（42388796、42427735）并被正常收录，而清单中原有 7 条标 <code>pubmed_indexed: false</code> 的条目用 DOI 回查仍全部无记录。结论是<b>前缀不能作为是否被收录的依据</b>——已检索命中的预印本照常判断，未命中的仍按人工维护处理。</li>
+    <li><b>取消纯标题分诊。</b>此前 578 条 <code>skip</code> 是<b>只看了标题</b>就分诊掉的，而其中 97% 的摘要其实就在磁盘上。判断层拿半截信息做决定，等于把「像不像」当成了「是不是」。2026-09-24 已全部按标题 + 摘要重审（分三档 49 / 65 / 464 条），<b>26 条改判收录</b>，其余维持但判词全部改写为摘要依据。台账里已不再有任何凭标题分诊的旧判词，校验脚本新增一项专抓「读了却漏写回」的漏交代。</li>
+    <li><b>摘要曾被静默截断，已修复并回填。</b>抓取脚本取摘要用的是 <code>t.text</code>，它只返回元素内<b>第一个子标签之前</b>的文字；PubMed 的结构化摘要里到处是 <code>&lt;i&gt;</code>（学名）、<code>&lt;sup&gt;</code>（如 <code>CD45RB&lt;sup&gt;low&lt;/sup&gt;</code>）这类行内标记，标记之后的全部内容都存在子节点的 <code>.tail</code> 里、被整个丢掉——症状是摘要齐刷刷断在「Seashore paspalum (」这种开括号处，688 条候选里 134 条因此残缺。已改用 <code>itertext()</code>，并从本地 <code>raw/</code> XML 回填 <b>389 条</b>记录（其中 16 条一直标着「无摘要」的其实有完整摘要）。判词建立在空摘要或残摘要上的 99 条已逐条重读，<b>0 条改判</b>——缺陷损害的是判词质量，不是收录结果。</li>
   </ul>
 </div>
 
 <footer class="foot">
-  生成于 2026-09-24 10:15 · 窗口 2026-07-01 → 2026-09-22 · 60 条<br>
+  生成于 2026-09-24 11:31 · 窗口 2026-07-01 → 2026-09-22 · 86 条<br>
   检索式与全部原始留痕见仓库内 queries.md 与 data/ 目录。
 </footer>
 

@@ -334,8 +334,14 @@ def main():
                 continue
             pubdate, status = strict_pubdate(art)
             meta = surviving[pmid]
+            # 必须用 itertext()，不能用 .text。PubMed 的结构化摘要里到处是
+            # <i>（学名）、<sup>（如 CD45RB<sup>low</sup>）这类行内标记，而
+            # .text 只取元素内第一个子标签【之前】的文字，标记之后的全部内容
+            # 存在子节点的 .tail 里、会被整个丢掉。踩过的坑：摘要齐刷刷断在
+            # "Seashore paspalum (" / "The common bed bug (" 这种开括号处，
+            # 688 条候选里 134 条的摘要因此残缺，判断层是拿半截摘要做的分诊。
             abstract = clean(" ".join(
-                (t.text or "") for t in art.findall(".//Abstract/AbstractText")))
+                "".join(t.itertext()) for t in art.findall(".//Abstract/AbstractText")))
             item = {
                 **meta,
                 "pmid": pmid,
