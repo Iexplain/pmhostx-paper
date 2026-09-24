@@ -207,7 +207,9 @@ def build() -> str:
             .replace("{{NOTES}}", notes_html)
             .replace("{{GENERATED_AT}}", datetime.now().strftime("%Y-%m-%d %H:%M"))
             .replace("{{WINDOW}}", window)
-            .replace("{{TOTAL}}", f"{len(in_window) + len(out_window)} 条"))
+            # TOTAL 只给数字：模板里已经写了「{{TOTAL}} 条」，
+            # 这里再带「条」会渲染成「60 条 条」。
+            .replace("{{TOTAL}}", str(len(in_window) + len(out_window))))
 
     out = ROOT / "litmap.html"
     out.write_text(html, encoding="utf-8")
