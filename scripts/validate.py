@@ -181,6 +181,30 @@ def main():
                         f"摘要重审还没写完，或写完时漏了它们。前几条：\n      "
                         + "\n      ".join(stale[:6]))
 
+    # 7. 声称「无摘要」必须为真。
+    #    口径已改成「每条候选都读摘要」，唯一的例外是记录确实没有摘要——而例外
+    #    一旦可以口头声明，就会有人拿它走回头路。这条把声明变成可核对的：
+    #      · 理由里提到无摘要 / 凭题录，但记录里明明有摘要 → 假账（必须改理由或重判）
+    #      · 台账里 skip / out 必须都有非空理由 —— 空理由等于这条判断没有交代，
+    #        事后无法重审，物种校验也无从查起
+    #    「」里的内容先剥掉：写更正说明时必然要引用旧判词
+    #    （"原判词写「摘要缺失、凭题录定性」"），那是谈论，不是声称。
+    NOABS = re.compile(r"无摘要|摘要缺失|凭题录|凭标题")
+    for k, v in led.items():
+        if k.startswith("_") or not isinstance(v, dict):
+            continue
+        why = v.get("why") or ""
+        if v.get("v") in ("skip", "out") and not why.strip():
+            problems.append(f"台账里 {k} 是 {v.get('v')}，但没有理由 —— "
+                            f"这条判断没有交代，事后无法重审")
+            continue
+        if k not in allrec or not NOABS.search(re.sub(r"「[^」]*」", "", why)):
+            continue
+        if (allrec[k].get("abstract") or "").strip():
+            problems.append(f"{k} 的理由声称「无摘要」，但记录里其实有摘要"
+                            f"（{len(allrec[k]['abstract'])} 字符）—— 判词与磁盘不符\n"
+                            f"      {allrec[k].get('title','')[:100]}")
+
     if problems:
         print(f"检查未通过，{len(problems)} 个问题：\n", file=sys.stderr)
         for p in problems:
