@@ -141,25 +141,22 @@ def main():
             problems.append(f"entries.json 编号 {e.get('num')} 既无 DOI 也无 PMID，"
                             f"且未声明 no_identifier_reason —— 要么补标识符，要么显式声明为什么没有")
 
-    # 5. 分组的三个层面必须对齐：entries 用到的组号、sections 的定义、
-    #    模板里的配色 class。少任何一层都不会报错 —— build_page 的
-    #    GROUP_CSS.get(g,'sec1') 会静默回退到组 1 的配色，页面看着正常、颜色是错的。
+    # 5. 分组的三个层面必须对齐：entries 用到的组号、sections 的定义、样式表里的组色。
+    #    少任何一层都不会报错——页面照样生成，只是标题变成「组 N」或颜色缺失。
     sys.path.insert(0, str(ROOT / "scripts"))
-    from build_page import GROUP_CSS, OOW_GROUP          # 单一真相源，不重复定义
+    from build_page import GROUP_CHIP, OOW_GROUP          # 单一真相源，不重复定义
     sections = load("entries.json", {}).get("sections", {})
-    tpl = (ROOT / "templates" / "litmap.template.html").read_text(encoding="utf-8")
+    css = (ROOT / "templates" / "site" / "style.css").read_text(encoding="utf-8")
 
     used_groups = {e["group"] for e in entries}
     for g in sorted(used_groups):
         if str(g) not in sections:
             problems.append(f"组 {g} 有 {sum(1 for e in entries if e['group'] == g)} 条条目，"
-                            f"但 entries.json 的 sections 里没有 \"{g}\" 的定义 —— 页面上会显示「组 {g}」")
-    for g in sorted(GROUP_CSS):
-        if g not in used_groups:
-            continue
-        if f".sec{g} .well" not in tpl:
-            problems.append(f"组 {g} 在用，但模板里没有 .sec{g} 的配色规则 —— "
-                            f"页面会静默回退到组 1 的颜色")
+                            f"但 entries.json 的 sections 里没有 \"{g}\" 的定义")
+        if g not in GROUP_CHIP:
+            problems.append(f"组 {g} 在用，但 build_page.py 的 GROUP_CHIP 里没有它的短名")
+        if f".g{g}{{--gc:var(--g{g});}}" not in css or f"--g{g}:" not in css:
+            problems.append(f"组 {g} 在用，但 templates/site/style.css 里没有 --g{g} 组色")
 
     # 窗口外必须且只能是 OOW_GROUP；内容组不得占用该组号
     for e in entries:
@@ -167,8 +164,13 @@ def main():
             problems.append(f"编号 {e.get('num')} 标了 out_of_window，组号却是 {e['group']}，"
                             f"应为 {OOW_GROUP}")
         if not e.get("out_of_window") and e["group"] == OOW_GROUP:
-            problems.append(f"编号 {e.get('num')} 没标 out_of_window，却用了窗口外组号 "
-                            f"{OOW_GROUP} —— 它不会出现在筛选按钮里")
+            problems.append(f"编号 {e.get('num')} 没标 out_of_window，却用了窗口外组号 {OOW_GROUP}")
+
+    # 5b. 每条收录都要落在某一期周页上：added 必须在 runs.json 里有对应批次
+    run_ids = {r["id"] for r in load("runs.json", {}).get("runs", [])}
+    orphan = sorted({e.get("added") for e in entries} - run_ids)
+    if orphan:
+        problems.append(f"这些收录批次在 runs.json 里没有记录，条目不会出现在任何周页上：{orphan}")
 
     # 6. 分诊口径已改为「必须看摘要」，所以台账里不该再有任何凭标题分诊的理由。
     #    这条抓的是【漏交代】：重审时读完一批、却漏把其中若干条写回台账，

@@ -23,7 +23,7 @@ exec > >(tee -a "$LOG") 2>&1
 
 # 流程会改动的受版本控制文件。失败时只回滚这些，不碰别的
 TRACKED=(data/seen.json data/entries.json data/rejudge.json data/last_run.json data/runs.json
-         litmap.html queries.generated.md)
+         site queries.generated.md)
 WEEKLY="weekly/${DATE}.md"
 APPLIED=0
 
@@ -32,6 +32,8 @@ rollback() {
   [[ $APPLIED == 1 ]] || return 0
   echo "回滚数据文件……"
   git checkout -- "${TRACKED[@]}" 2>/dev/null
+  # site/ 整体是生成物：失败那轮新建的周页要删掉，否则下次预检会看到残页
+  git clean -fdq -- site 2>/dev/null
   [[ ${WEEKLY_EXISTED:-1} == 0 ]] && rm -f "$WEEKLY"
 }
 fail() {
@@ -78,15 +80,18 @@ if [[ -n "$(git status --porcelain --untracked-files=no)" ]]; then
   fail "判断阶段后受版本控制的文件被改动了——判断层不应碰任何文件"
 fi
 
-step "4/6 写入台账与清单（apply_judgments.py）"
+step "4/6 写入台账、清单与批次记录（apply_judgments.py）→ 校验"
 APPLIED=1
 python3 scripts/apply_judgments.py apply "$DATE" || fail "apply_judgments.py 失败"
+# finalize 写 runs.json 与 last_run.json，要在校验和建页之前：validate 要核对每条收录都有批次，
+# 周页按 runs.json 生成，页面「数据截至」读 last_run.json。
+# last_run 决定下次补漏起点——它在这里写入，但只有整轮提交成功才算数：
+# 之后任何一步失败，rollback 都会把它恢复原样。
+python3 scripts/apply_judgments.py finalize "$DATE" || fail "写 runs.json / last_run.json 失败"
 python3 scripts/validate.py || fail "validate.py 未通过——数据已回滚，不提交"
 
 step "5/6 生成页面（build_page.py）"
 python3 scripts/build_page.py --queries-md || fail "build_page.py 失败"
-# last_run.json 决定下次补漏起点，必须最后写：写早了会永久漏掉这段时间的文献
-python3 scripts/apply_judgments.py finalize "$DATE" || fail "写 last_run.json 失败"
 
 step "6/6 提交与推送"
 MSG="$(python3 - "$DATE" <<'PY'

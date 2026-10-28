@@ -1,12 +1,15 @@
 name: 发布文献地图
 
-# 只发布 litmap.html 到 Pages。仓库本身是公开的，但站点只从这个工作流
-# 上传的那一个文件生成——所以 pages 上只有文献地图，不含 data/ 与 weekly/。
+# 只发布 site/ 目录到 Pages。仓库本身是公开的，但站点只从这个工作流
+# 上传的 site/ 生成——所以 pages 上只有周报与文献地图，不含 data/ 与 weekly/。
+#
+# site/ 由 scripts/build_page.py 整体生成（首页 = 最新一期，w/<批次>.html，map.html），
+# 在本机构建后随提交推上来，这里只拷贝、不构建。
 on:
   push:
     branches: [main]
     paths:
-      - litmap.html
+      - 'site/**'
       - .github/workflows/pages.yml
   workflow_dispatch:
 
@@ -54,9 +57,8 @@ jobs:
       - name: 组装站点
         run: |
           mkdir -p _site
-          # 两份：index.html 给干净的根地址，litmap.html 保住换模式前已在用的地址
-          cp litmap.html _site/index.html
-          cp litmap.html _site/litmap.html
+          # site/litmap.html 是跳转页，保住换成多页结构之前已在用的地址
+          cp -r site/. _site/
           touch _site/.nojekyll
 
       - uses: actions/upload-pages-artifact@v3

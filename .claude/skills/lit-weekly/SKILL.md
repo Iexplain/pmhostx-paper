@@ -15,7 +15,7 @@ bash scripts/run_weekly.sh
 ```
 
 定时任务调它，手动跑也调它——两条路径完全一样。不要绕开它手工执行各步：
-「抓取失败就停」「校验不过不提交」「last_run 最后写」这些约束都在脚本里，手工跑就没了。
+「抓取失败就停」「校验不过不提交」「失败回滚、last_run 不前移」这些约束都在脚本里，手工跑就没了。
 
 | 退出码 | 含义 |
 |---|---|
@@ -38,7 +38,7 @@ bash scripts/run_weekly.sh
 2. **抓取失败 ≠ 没有新文献。** `fetch.py` 退出码非 0 时整轮停止，**绝不**产出「本周无新增」。
    PubMed 抽风被静默当成「真的没新文献」，是这套流程最危险的失效模式。
 3. **日期只认 `pubdate` 字段**（`pubmed` / `epublish` 的真实上线日期），不用期刊期号日期。
-4. **只碰 `data/` 下的真相源，不手改 `litmap.html`**——页面是生成的。
+4. **只碰 `data/` 下的真相源，不手改 `site/`**——整个站点每次由 `build_page.py` 重建，手改会丢。
 5. **检索范围是 PubMed；预印本是否被收录按 DOI 逐条实测，不按前缀整类推断。**
    2026-09-24 实测：`10.64898/…`（bioRxiv）里有拿到 PMID 的（42388796、42427735），
    也有回查仍无记录的（编号 6/29/30/31/35/36，只能人工维护）。
@@ -53,8 +53,8 @@ bash scripts/run_weekly.sh
 | 1 抓取 | `fetch.py` → `data/candidates_<今天>.json` | 停（硬约束 2） |
 | 2 补摘要 | `enrich.py` → `data/meta_cache.json` | 只告警：只影响页面摘要展示 |
 | 3 判断 | `judge.py`：分批交给 `claude -p --tools ""` | 停；已判批次保留，重跑续判 |
-| 4 写入 | `apply_judgments.py apply` → `seen.json`、`entries.json`、`weekly/<今天>.md`；再跑 `validate.py` | 回滚，不提交 |
-| 5 页面 | `build_page.py --queries-md`；`apply_judgments.py finalize` 写 `last_run.json` / `runs.json` | 回滚 |
+| 4 写入 | `apply_judgments.py apply` → `seen.json`、`entries.json`、`weekly/<今天>.md`；`finalize` → `runs.json`、`last_run.json`；再跑 `validate.py` | 回滚，不提交 |
+| 5 页面 | `build_page.py --queries-md` 重建整个 `site/` | 回滚 |
 | 6 提交 | 只 add 流程改动的文件；提交后推送 | 推送失败退出码 3 |
 
 **窗口。** `fetch.py` 从 `last_run.json` 的 `last_success` 次日抓到今天（含 60 天回溯余量），
@@ -65,7 +65,9 @@ bash scripts/run_weekly.sh
 过滤在取回之后做、不往检索式里塞 `NOT`，所以每轮排除了多少能量出来、条目留在
 `excluded_by_policy` 里可查。**某周排除数异常大或明显该收的候选不见了，先看这个文件。**
 
-**`last_run.json` 必须最后写。** 它决定下次补漏起点，写早了会永久漏掉这段时间的文献。
+**`last_run.json` 只有整轮成功才算数。** 它决定下次补漏起点，写早了会永久漏掉这段时间的文献。
+它在第 4 步写入（校验要核对批次、周页要按 `runs.json` 生成、页面要显示「数据截至」），之后任何一步失败，
+回滚都会把它恢复原样——所以「写入」和「生效」之间隔着提交这一步。
 
 ## 判断层
 
