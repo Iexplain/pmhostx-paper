@@ -5,12 +5,12 @@
       "desc": "与 PMHostX 做的是同一件事的两面：在宿主主导的测序数据里，把想要的那一层信号干净地分离并定量出来。"
     },
     "2": {
-      "name": "标志物与 panel · 你 8 个基因的商业对标",
-      "desc": "PMHostX 的 marker 集（CRP / TNFSF10 / CXCL10 / MX1 / CEACAM4 / LAMP1 / PLAC8 / PLA2G7）分别对应 MeMed BV、FebriDx、SeptiCyte LAB 三条产品线。以下是窗口内这些基因与组合的临床证据。"
+      "name": "标志物与 panel · 宿主反应检测的临床证据",
+      "desc": "MeMed BV、FebriDx、SeptiCyte、TriVerity 等宿主反应检测，以及单个宿主标志物在感染鉴别中的临床证据。"
     },
     "3": {
-      "name": "脑脊液 / 中枢感染 · 宿主转录组与 mNGS 判读",
-      "desc": "PMHostX 的样本是仁济脑脊液队列。这一组是同一基质、同一病种的宿主信号与 mNGS 定量判读证据。"
+      "name": "中枢感染 · 宿主转录组与 mNGS 判读",
+      "desc": "脑膜炎、脑炎等中枢感染的宿主信号与 mNGS 定量判读证据，多为脑脊液标本。全血与 BALF 的临床判读按用途分在其他组，可用「标本」筛选查看。"
     },
     "4": {
       "name": "建库、去宿主与参考库卫生",
@@ -22,7 +22,7 @@
     },
     "6": {
       "name": "诊断建模与分类器 · 把宿主信号落成判读",
-      "desc": "PMHostX 不只是把宿主 mRNA 定量出来，还要把定量结果落成诊断判读。这一组是用机器学习 / transformer 在宿主表达谱或宏基因组上建模的工作——特征选择、验证设计、报告口径都可以直接对标。"
+      "desc": "PMHostX 不只是把宿主 mRNA 定量出来，还要把定量结果落成诊断判读：判别感染与否、细菌 / 病毒 / 真菌。这一组是用机器学习 / transformer 在宿主表达谱或宏基因组上建模的工作——特征选择、验证设计、报告口径都可以直接对标。"
     },
     "7": {
       "name": "窗口外，但必须知道",
@@ -155,7 +155,7 @@
       "authors": "Bouras M et al.",
       "doi": "10.1186/s12871-026-04088-0",
       "doi_url": "https://doi.org/10.1186/s12871-026-04088-0",
-      "why_html": "SeptiScore 的构成基因就是你 panel 里的 <strong>PLA2G7 / CEACAM4 / PLAC8 / LAMP1</strong>。两中心衍生（82 样本/44 患者）+ 独立验证（31/31），并与常规生物标志物对比。这是你给 marker 定阈值时最直接的依据。",
+      "why_html": "SeptiScore 由 <strong>PLA2G7 / CEACAM4 / PLAC8 / LAMP1</strong> 四个宿主基因构成。两中心衍生（82 样本/44 患者）+ 独立验证（31/31），并与常规生物标志物对比。宿主表达分数怎么定阈值、怎么做独立验证，这是最直接的参照。",
       "out_of_window": false,
       "added": "2026-09-23",
       "doi_verified": true,
@@ -212,7 +212,7 @@
       "authors": "Brel A et al.",
       "doi": "10.1007/s00431-026-07346-y",
       "doi_url": "https://doi.org/10.1007/s00431-026-07346-y",
-      "why_html": "MeMed BV = <strong>CRP + IP-10/CXCL10 + TRAIL</strong>，你 panel 里的 3 个基因。前瞻队列（&lt;3 岁不明原因发热）得 AUC 0.80、特异度 84.6%，但<strong>敏感度仅 47.1%，被降钙素原反超</strong>——一个很有价值的蛋白层面上限/阴性结果，可在讨论中用于说明标志物组合的边界。",
+      "why_html": "MeMed BV = <strong>CRP + IP-10/CXCL10 + TRAIL</strong> 三蛋白组合。前瞻队列（&lt;3 岁不明原因发热）得 AUC 0.80、特异度 84.6%，但<strong>敏感度仅 47.1%，被降钙素原反超</strong>——一个很有价值的蛋白层面上限/阴性结果，可在讨论中用于说明标志物组合的边界。",
       "out_of_window": false,
       "added": "2026-09-23",
       "doi_verified": true,
@@ -250,7 +250,7 @@
       "authors": "Tiberti N et al.",
       "doi": "10.3389/fmicb.2026.1926383",
       "doi_url": "https://doi.org/10.3389/fmicb.2026.1926383",
-      "why_html": "虫媒发热（n=89）vs 其他发热（n=51）：虫媒组 <strong>CXCL10、TRAIL 升高而 CRP/PCT 下降</strong>——你 panel 中 3 个基因在病毒感染方向上的反向证据，可用于解读 panel 的方向性。",
+      "why_html": "虫媒发热（n=89）vs 其他发热（n=51）：虫媒组 <strong>CXCL10、TRAIL 升高而 CRP/PCT 下降</strong>——宿主标志物在病毒 vs 其他感染上方向相反的直接证据，可用于解读宿主信号区分病原类别的方向性。",
       "out_of_window": false,
       "added": "2026-09-23",
       "doi_verified": true,
@@ -269,7 +269,7 @@
       "authors": "Tan Z et al.",
       "doi": "10.1016/j.jneuroim.2026.579020",
       "doi_url": "https://doi.org/10.1016/j.jneuroim.2026.579020",
-      "why_html": "直接在<strong>脑脊液</strong>里测 CXCL10/IP-10（207 例患儿，倾向性评分匹配后 157 对），给出预后判读阈值。你 panel 成员在 CSF 基质中表现如何，这是最贴近的一手参考——你此前检索到的 CXCL10 证据多在血清。",
+      "why_html": "直接在<strong>脑脊液</strong>里测 CXCL10/IP-10（207 例患儿，倾向性评分匹配后 157 对），给出预后判读阈值。宿主标志物在 CSF 标本里怎么表现，这是最贴近的一手参考——同一标志物的证据多来自血清，换到 CSF 未必成立。",
       "out_of_window": false,
       "added": "2026-09-23",
       "doi_verified": true,
@@ -1052,7 +1052,7 @@
       "doi_url": "https://doi.org/10.1016/j.ijid.2026.108952",
       "doi_verified": true,
       "pmid": "42419448",
-      "why_html": "血液<strong>宿主转录标志物</strong>与细菌学标志物在活动性结核治疗反应监测上的头对头比较（马拉维前瞻队列）。两层意义：宿主标志物在<strong>纵向随访</strong>上的表现（你的 8 基因 panel 若要做动态监测，这是先例）；以及它的结论模式——宿主信号在监测上未必优于病原学，这类<strong>受限结论</strong>正是 Discussion 该引的。",
+      "why_html": "血液<strong>宿主转录标志物</strong>与细菌学标志物在活动性结核治疗反应监测上的头对头比较（马拉维前瞻队列）。两层意义：宿主标志物在<strong>纵向随访</strong>上的表现（宿主表达模型若要做动态监测，这是先例）；以及它的结论模式——宿主信号在监测上未必优于病原学，这类<strong>受限结论</strong>正是 Discussion 该引的。",
       "out_of_window": false,
       "added": "2026-09-23",
       "pubmed_indexed": true
@@ -1143,7 +1143,7 @@
       "authors": "Ma Q, Yang HR, Wang JZ et al.",
       "doi": "10.1097/MD.0000000000050020",
       "doi_url": "https://doi.org/10.1097/MD.0000000000050020",
-      "why_html": "GEO 三个脓毒症数据集（GSE28750 / GSE54514 / GSE131761）+ 机器学习筛关键基因、建诊断模型再验证。收它的理由<b>主要是当反面对照</b>：全程依赖公共回顾性队列、无前瞻入组、无独立外部验证，这正是 PMHostX 用仁济前瞻队列可以主张的增量所在。<strong>做「同类工作的问题在哪」时引这条。</strong>",
+      "why_html": "GEO 三个脓毒症数据集（GSE28750 / GSE54514 / GSE131761）+ 机器学习筛关键基因、建诊断模型再验证。收它的理由<b>主要是当反面对照</b>：全程依赖公共回顾性数据、无独立外部验证、也不分标本报告。PMHostX 用自有临床样本建模并按标本类型分层评估，正好能在这几点上主张增量。<strong>做「同类工作的问题在哪」时引这条。</strong>",
       "out_of_window": false,
       "added": "2026-09-24",
       "doi_verified": true,
@@ -1238,7 +1238,7 @@
       "authors": "Taver R, Gupta V, Saxena P et al.",
       "doi": "10.7759/cureus.112064",
       "doi_url": "https://doi.org/10.7759/cureus.112064",
-      "why_html": "未成熟粒细胞计数用于早期脓毒症诊断，<strong>与 CRP、降钙素原做头对头准确度比较</strong>。CRP 是你 8 基因 panel 里的一员。这类「新指标 vs 现有指标」的比较设计与效能报告口径，可直接借鉴到 PMHostX 的效能陈述方式。",
+      "why_html": "未成熟粒细胞计数用于早期脓毒症诊断，<strong>与 CRP、降钙素原做头对头准确度比较</strong>。这类「新指标 vs 现有指标」的比较设计与效能报告口径，可直接借鉴到 PMHostX 的效能陈述方式。",
       "out_of_window": false,
       "added": "2026-09-24",
       "doi_verified": true,
@@ -1409,7 +1409,7 @@
       "authors": "Han S, Jin S",
       "doi": "10.3791/73334",
       "doi_url": "https://doi.org/10.3791/73334",
-      "why_html": "<strong>compartment-aware 的宿主反应模块基准测试</strong>：系统处理公共转录组的混杂来源（组织来源、对照定义、研究设计），再判断宿主反应活性是否可复现，同时保住鼻拭子与全血的生物学语境。PMHostX 的仁济队列同样要在对照定义与批次间保持可比，这套流程可直接借鉴。",
+      "why_html": "<strong>compartment-aware 的宿主反应模块基准测试</strong>：系统处理公共转录组的混杂来源（组织来源、对照定义、研究设计），再判断宿主反应活性是否可复现，同时保住鼻拭子与全血的生物学语境。PMHostX 面对的是同一个问题：标本类型本身会抬高三种标本合并算出的指标，所以必须分标本报告——这套「先按组织来源处理混杂、再判可复现」的流程可直接借鉴。",
       "out_of_window": false,
       "added": "2026-09-24",
       "doi_verified": true,

@@ -4,7 +4,7 @@
 
 流程：
   1. 定窗口：data/last_run.json 的 last_success（补漏）→ 今天，不早于 window_start
-  2. 逐条跑 data/queries.json 里的 21 条检索式（esearch）→ PMID
+  2. 逐条跑 data/queries.json 里的检索式（esearch）→ PMID；新加的检索式自动从窗口起点补抓
   3. esummary 取 DOI，与 data/seen.json 去重
   4. 幸存者用 efetch 取 PubMedPubDate，按【严格发表日期】过滤
      —— 只认 PubStatus 为 pubmed / epublish 的日期，不用 esummary 的 pubdate（那是期刊期号日期）
@@ -237,7 +237,7 @@ def main():
     # 一篇 9/20 上线的论文可能到 10/5 才被索引，那时它的"上线日期"已早于当次 since。
     # 靠回溯余量把它捞回来，再由 seen.json 决定是否已处理过。
     search_from = since - timedelta(days=LOOKBACK_DAYS)
-    mindate, maxdate = search_from.strftime("%Y/%m/%d"), today.strftime("%Y/%m/%d")
+    maxdate = today.strftime("%Y/%m/%d")
 
     print(f"收录窗口: {win_start} → {today}")
     print(f"检索区间: {search_from} → {today}  (edat，含 {LOOKBACK_DAYS} 天回溯余量；{why})")
@@ -248,11 +248,19 @@ def main():
     print()
 
     # --- 1. 逐条检索 ---
+    # 新加的检索式（added 晚于上次成功运行）要从【窗口起点】补抓，而不是从本次 since。
+    # 否则它只往前回溯 LOOKBACK_DAYS：窗口里更早的那一段，旧检索式早已跑过，
+    # 新检索式却从来没跑过，会被永久漏掉。以前靠"记得手动加 --since"，
+    # 无人值守时没人会记得，所以改成由 added 字段自动判定。
+    backfill_from = win_start - timedelta(days=LOOKBACK_DAYS)
+    last_ok = last_run.get("last_success")
     hits: dict[str, set] = {}      # pmid -> 命中的检索式 key
     truncated = []
     for q in queries:
+        is_new = bool(q.get("added")) and (not last_ok or q["added"] > last_ok)
+        q_from = min(search_from, backfill_from) if is_new else search_from
         try:
-            count, ids = esearch(q["term"], mindate, maxdate)
+            count, ids = esearch(q["term"], q_from.strftime("%Y/%m/%d"), maxdate)
         except Exception as e:
             print(f"检索式 {q['key']} 失败: {e}", file=sys.stderr)
             return 1
@@ -260,7 +268,8 @@ def main():
             truncated.append((q["key"], count))
         for p in ids:
             hits.setdefault(p, set()).add(q["key"])
-        print(f"  {q['key']:22} 命中 {count:>5}  累计去重 {len(hits)}")
+        tag = f"  （新检索式，从 {q_from} 补抓）" if is_new and q_from < search_from else ""
+        print(f"  {q['key']:22} 命中 {count:>5}  累计去重 {len(hits)}{tag}")
         time.sleep(SLEEP)
 
     if truncated:
@@ -271,7 +280,7 @@ def main():
         return 1
 
     if not hits:
-        print("\n窗口内 21 条检索式均无命中。")
+        print(f"\n窗口内 {len(queries)} 条检索式均无命中。")
     print(f"\n合计命中 {len(hits)} 个 PMID")
 
     if args.dry_run:

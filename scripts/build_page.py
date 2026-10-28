@@ -35,7 +35,8 @@ GROUP_CSS = {1: "sec1", 2: "sec2", 3: "sec3", 4: "sec4", 5: "sec5", 6: "sec6", 7
 
 # 组序号 → 筛选按钮短名。窗口外那组不走这里（它用固定标签），
 # 所以这个字典只需覆盖内容组；缺键时回退到 sections 里的全名。
-GROUP_CHIP = {1: "方法学", 2: "标志物", 3: "临床", 4: "建库/去宿主", 5: "背景", 6: "建模"}
+GROUP_CHIP = {1: "宿主信号提取", 2: "标志物与 panel", 3: "中枢感染", 4: "建库与去宿主",
+              5: "综述与背景", 6: "诊断建模"}
 
 
 def load(path: Path, default=None):
@@ -192,7 +193,8 @@ def build() -> str:
 
     eyebrow = f"文献短名单 · 检索窗口 {win_start} → {win_end}"
     lede = (f'面向 <b>{escape(notes.get("project", "PMHostX"))}</b>'
-            f'（脑脊液宏转录组宿主 mRNA 分离与定量）。每条按"与项目的哪一部分相关"归组，'
+            f'（宏转录组宿主 mRNA 分离定量，并以宿主表达建模判别感染；全血 / BALF / CSF 三种标本）。'
+            f'每条按"与项目的哪一部分相关"归组，'
             f'并注明可直接使用的点。日期均取自 PubMed <code>pubmed</code>/<code>epublish</code> '
             f'或 Europe PMC <code>firstPublicationDate</code> 字段实测值。')
 

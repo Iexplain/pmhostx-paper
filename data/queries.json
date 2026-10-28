@@ -1,5 +1,5 @@
 {
-  "_comment": "25 条 PubMed 检索式。fetch.py 会逐条执行。改这里等于改检索范围，改完请更新 queries.md（由 build_page.py 的 --queries-md 生成，或手工同步）。",
+  "_comment": "PubMed 检索式，fetch.py 逐条执行。改这里等于改检索范围，改完跑 build_page.py --queries-md 重新生成 queries.generated.md。新加的检索式写上 added（YYYY-MM-DD）：晚于上次成功运行的，fetch.py 会自动从窗口起点补抓。",
   "_endpoint": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
   "queries": [
     {
@@ -126,6 +126,24 @@
       "key": "Y_ai_clinical_metagenomics",
       "topic": "AI/LLM/transformer 用于临床宏基因组病原检测",
       "term": "(transformer*[tiab] OR \"foundation model*\"[tiab] OR \"large language model*\"[tiab] OR \"self-supervised\"[tiab] OR \"attention-based\"[tiab]) AND (metagenom*[tiab] OR metatranscriptom*[tiab] OR mNGS[tiab] OR \"host transcriptom*\"[tiab] OR \"gene expression signature*\"[tiab]) AND (infection[tiab] OR pathogen*[tiab] OR sepsis[tiab] OR antimicrobial[tiab])"
+    },
+    {
+      "key": "Z_lrti_host",
+      "topic": "BALF / 下呼吸道 × 宿主转录组（诊断向）",
+      "term": "(BALF[tiab] OR \"bronchoalveolar lavage\"[tiab] OR \"lower respiratory tract infection*\"[tiab] OR \"tracheal aspirate*\"[tiab] OR \"lower airway\"[tiab]) AND (\"host response\"[tiab] OR \"host transcriptom*\"[tiab] OR \"host gene expression\"[tiab] OR \"transcriptomic signature*\"[tiab] OR \"gene expression signature*\"[tiab] OR \"RNA-seq\"[tiab] OR \"RNA sequencing\"[tiab] OR metatranscriptom*[tiab]) AND (diagnos*[tiab] OR biomarker*[tiab] OR classif*[tiab] OR discriminat*[tiab] OR distinguish*[tiab])",
+      "added": "2026-10-28"
+    },
+    {
+      "key": "AA_balf_mngs",
+      "topic": "BALF mNGS × 宿主层",
+      "term": "(BALF[tiab] OR \"bronchoalveolar lavage\"[tiab] OR \"lower respiratory\"[tiab]) AND (mNGS[tiab] OR \"metagenomic next-generation sequencing\"[tiab] OR metatranscriptom*[tiab] OR \"metagenomic sequencing\"[tiab]) AND (host[tiab] OR \"human reads\"[tiab] OR \"host response\"[tiab] OR \"host gene\"[tiab] OR transcriptom*[tiab] OR \"RNA-seq\"[tiab])",
+      "added": "2026-10-28"
+    },
+    {
+      "key": "AB_pathogen_class_host",
+      "topic": "宿主表达判别细菌 / 病毒 / 真菌",
+      "term": "(bacterial[tiab] AND (viral[tiab] OR fungal[tiab])) AND (\"host response\"[tiab] OR \"host gene expression\"[tiab] OR \"host transcriptom*\"[tiab] OR \"gene expression signature*\"[tiab] OR \"transcriptomic signature*\"[tiab] OR \"host biomarker*\"[tiab] OR \"host RNA\"[tiab]) AND (distinguish*[tiab] OR discriminat*[tiab] OR differentiat*[tiab] OR classif*[tiab])",
+      "added": "2026-10-28"
     }
   ]
 }

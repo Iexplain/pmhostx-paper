@@ -78,4 +78,13 @@ X_ml_hostresp_infection
 Y_ai_clinical_metagenomics
 (transformer*[tiab] OR "foundation model*"[tiab] OR "large language model*"[tiab] OR "self-supervised"[tiab] OR "attention-based"[tiab]) AND (metagenom*[tiab] OR metatranscriptom*[tiab] OR mNGS[tiab] OR "host transcriptom*"[tiab] OR "gene expression signature*"[tiab]) AND (infection[tiab] OR pathogen*[tiab] OR sepsis[tiab] OR antimicrobial[tiab])
 
+Z_lrti_host
+(BALF[tiab] OR "bronchoalveolar lavage"[tiab] OR "lower respiratory tract infection*"[tiab] OR "tracheal aspirate*"[tiab] OR "lower airway"[tiab]) AND ("host response"[tiab] OR "host transcriptom*"[tiab] OR "host gene expression"[tiab] OR "transcriptomic signature*"[tiab] OR "gene expression signature*"[tiab] OR "RNA-seq"[tiab] OR "RNA sequencing"[tiab] OR metatranscriptom*[tiab]) AND (diagnos*[tiab] OR biomarker*[tiab] OR classif*[tiab] OR discriminat*[tiab] OR distinguish*[tiab])
+
+AA_balf_mngs
+(BALF[tiab] OR "bronchoalveolar lavage"[tiab] OR "lower respiratory"[tiab]) AND (mNGS[tiab] OR "metagenomic next-generation sequencing"[tiab] OR metatranscriptom*[tiab] OR "metagenomic sequencing"[tiab]) AND (host[tiab] OR "human reads"[tiab] OR "host response"[tiab] OR "host gene"[tiab] OR transcriptom*[tiab] OR "RNA-seq"[tiab])
+
+AB_pathogen_class_host
+(bacterial[tiab] AND (viral[tiab] OR fungal[tiab])) AND ("host response"[tiab] OR "host gene expression"[tiab] OR "host transcriptom*"[tiab] OR "gene expression signature*"[tiab] OR "transcriptomic signature*"[tiab] OR "host biomarker*"[tiab] OR "host RNA"[tiab]) AND (distinguish*[tiab] OR discriminat*[tiab] OR differentiat*[tiab] OR classif*[tiab])
+
 ```

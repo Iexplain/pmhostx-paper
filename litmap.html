@@ -11,7 +11,7 @@
 <title>PMHostX 文献地图</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<meta name="description" content="PMHostX / PMseq-HostProfiler 论文的累积文献地图：按 6 组归类，每条标注与方法的哪个环节对得上。">
+<meta name="description" content="PMHostX / PMseq-HostProfiler 论文的累积文献地图：宏转录组宿主 mRNA 定量与感染判别建模，按主题归类，每条标注与方法的哪个环节对得上。">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧬</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -260,12 +260,12 @@ footer.foot{
 <header class="mast">
   <p class="eyebrow">文献短名单 · 检索窗口 2026-07-01 → 2026-09-22</p>
   <h1>PMHostX 文献地图</h1>
-  <p class="lede">面向 <b>PMHostX / PMseq-HostProfiler</b>（脑脊液宏转录组宿主 mRNA 分离与定量）。每条按"与项目的哪一部分相关"归组，并注明可直接使用的点。日期均取自 PubMed <code>pubmed</code>/<code>epublish</code> 或 Europe PMC <code>firstPublicationDate</code> 字段实测值。</p>
+  <p class="lede">面向 <b>PMHostX / PMseq-HostProfiler</b>（宏转录组宿主 mRNA 分离定量，并以宿主表达建模判别感染；全血 / BALF / CSF 三种标本）。每条按"与项目的哪一部分相关"归组，并注明可直接使用的点。日期均取自 PubMed <code>pubmed</code>/<code>epublish</code> 或 Europe PMC <code>firstPublicationDate</code> 字段实测值。</p>
   <div class="stats">
     <div class="stat"><span class="n">84</span><span class="k">窗口内</span></div>
     <div class="stat"><span class="n">2</span><span class="k">窗口外必读</span></div>
     <div class="stat"><span class="n">2</span><span class="k">批收录</span></div>
-    <div class="stat"><span class="n">25</span><span class="k">检索式</span></div>
+    <div class="stat"><span class="n">28</span><span class="k">检索式</span></div>
   </div>
 </header>
 
@@ -273,12 +273,12 @@ footer.foot{
   <input class="search" id="q" type="search" placeholder="搜索标题、期刊、作者、关键词…" aria-label="搜索文献">
   <div class="chips" role="group" aria-label="按主题筛选">
     <button class="chip" data-g="0" aria-pressed="true"><span class="dot"></span>全部</button>
-    <button class="chip" data-g="1" aria-pressed="false"><span class="dot"></span>方法学</button>
-    <button class="chip" data-g="2" aria-pressed="false"><span class="dot"></span>标志物</button>
-    <button class="chip" data-g="3" aria-pressed="false"><span class="dot"></span>临床</button>
-    <button class="chip" data-g="4" aria-pressed="false"><span class="dot"></span>建库/去宿主</button>
-    <button class="chip" data-g="5" aria-pressed="false"><span class="dot"></span>背景</button>
-    <button class="chip" data-g="6" aria-pressed="false"><span class="dot"></span>建模</button>
+    <button class="chip" data-g="1" aria-pressed="false"><span class="dot"></span>宿主信号提取</button>
+    <button class="chip" data-g="2" aria-pressed="false"><span class="dot"></span>标志物与 panel</button>
+    <button class="chip" data-g="3" aria-pressed="false"><span class="dot"></span>中枢感染</button>
+    <button class="chip" data-g="4" aria-pressed="false"><span class="dot"></span>建库与去宿主</button>
+    <button class="chip" data-g="5" aria-pressed="false"><span class="dot"></span>综述与背景</button>
+    <button class="chip" data-g="6" aria-pressed="false"><span class="dot"></span>诊断建模</button>
     <button class="chip" data-g="7" aria-pressed="false"><span class="dot"></span>窗口外</button>
   </div>
 </div>
@@ -389,7 +389,7 @@ footer.foot{
       
     </div>
     <div class="meta"><span>Journal of visualized experiments : JoVE</span><span class="sep">·</span><span>2026-09-19</span><span class="sep">·</span><span>Han S, Jin S</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.3791/73334">10.3791/73334</a></span></div>
-    <div class="why"><span class="lbl">为何相关</span><p><strong>compartment-aware 的宿主反应模块基准测试</strong>：系统处理公共转录组的混杂来源（组织来源、对照定义、研究设计），再判断宿主反应活性是否可复现，同时保住鼻拭子与全血的生物学语境。PMHostX 的仁济队列同样要在对照定义与批次间保持可比，这套流程可直接借鉴。</p></div>
+    <div class="why"><span class="lbl">为何相关</span><p><strong>compartment-aware 的宿主反应模块基准测试</strong>：系统处理公共转录组的混杂来源（组织来源、对照定义、研究设计），再判断宿主反应活性是否可复现，同时保住鼻拭子与全血的生物学语境。PMHostX 面对的是同一个问题：标本类型本身会抬高三种标本合并算出的指标，所以必须分标本报告——这套「先按组织来源处理混杂、再判可复现」的流程可直接借鉴。</p></div>
   </article>
 
   <article class="item" data-g="1" data-id="10-1128-mbio-00637-26">
@@ -426,10 +426,10 @@ footer.foot{
 <section class="sec2" data-g="2">
   <div class="sechead">
     <span class="well"></span>
-    <h2>标志物与 panel · 你 8 个基因的商业对标</h2>
+    <h2>标志物与 panel · 宿主反应检测的临床证据</h2>
     <span class="count">15 条</span>
   </div>
-  <p class="secdesc">PMHostX 的 marker 集（CRP / TNFSF10 / CXCL10 / MX1 / CEACAM4 / LAMP1 / PLAC8 / PLA2G7）分别对应 MeMed BV、FebriDx、SeptiCyte LAB 三条产品线。以下是窗口内这些基因与组合的临床证据。</p>
+  <p class="secdesc">MeMed BV、FebriDx、SeptiCyte、TriVerity 等宿主反应检测，以及单个宿主标志物在感染鉴别中的临床证据。</p>
 
   <article class="item" data-g="2" data-id="10-1186-s12871-026-04088-0">
     <div class="tline">
@@ -438,7 +438,7 @@ footer.foot{
       <span class="pin">必读</span>
     </div>
     <div class="meta"><span>BMC Anesthesiology</span><span class="sep">·</span><span>2026-07-10</span><span class="sep">·</span><span>Bouras M et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1186/s12871-026-04088-0">10.1186/s12871-026-04088-0</a></span></div>
-    <div class="why"><span class="lbl">为何相关</span><p>SeptiScore 的构成基因就是你 panel 里的 <strong>PLA2G7 / CEACAM4 / PLAC8 / LAMP1</strong>。两中心衍生（82 样本/44 患者）+ 独立验证（31/31），并与常规生物标志物对比。这是你给 marker 定阈值时最直接的依据。</p></div>
+    <div class="why"><span class="lbl">为何相关</span><p>SeptiScore 由 <strong>PLA2G7 / CEACAM4 / PLAC8 / LAMP1</strong> 四个宿主基因构成。两中心衍生（82 样本/44 患者）+ 独立验证（31/31），并与常规生物标志物对比。宿主表达分数怎么定阈值、怎么做独立验证，这是最直接的参照。</p></div>
   </article>
 
   <article class="item" data-g="2" data-id="10-1097-pcc-0000000000004027">
@@ -468,7 +468,7 @@ footer.foot{
       
     </div>
     <div class="meta"><span>European Journal of Pediatrics</span><span class="sep">·</span><span>2026-08-20</span><span class="sep">·</span><span>Brel A et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1007/s00431-026-07346-y">10.1007/s00431-026-07346-y</a></span></div>
-    <div class="why"><span class="lbl">为何相关</span><p>MeMed BV = <strong>CRP + IP-10/CXCL10 + TRAIL</strong>，你 panel 里的 3 个基因。前瞻队列（&lt;3 岁不明原因发热）得 AUC 0.80、特异度 84.6%，但<strong>敏感度仅 47.1%，被降钙素原反超</strong>——一个很有价值的蛋白层面上限/阴性结果，可在讨论中用于说明标志物组合的边界。</p></div>
+    <div class="why"><span class="lbl">为何相关</span><p>MeMed BV = <strong>CRP + IP-10/CXCL10 + TRAIL</strong> 三蛋白组合。前瞻队列（&lt;3 岁不明原因发热）得 AUC 0.80、特异度 84.6%，但<strong>敏感度仅 47.1%，被降钙素原反超</strong>——一个很有价值的蛋白层面上限/阴性结果，可在讨论中用于说明标志物组合的边界。</p></div>
   </article>
 
   <article class="item" data-g="2" data-id="10-2147-idr-s648424">
@@ -488,7 +488,7 @@ footer.foot{
       
     </div>
     <div class="meta"><span>Frontiers in Microbiology</span><span class="sep">·</span><span>2026-09-18</span><span class="sep">·</span><span>Tiberti N et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.3389/fmicb.2026.1926383">10.3389/fmicb.2026.1926383</a></span></div>
-    <div class="why"><span class="lbl">为何相关</span><p>虫媒发热（n=89）vs 其他发热（n=51）：虫媒组 <strong>CXCL10、TRAIL 升高而 CRP/PCT 下降</strong>——你 panel 中 3 个基因在病毒感染方向上的反向证据，可用于解读 panel 的方向性。</p></div>
+    <div class="why"><span class="lbl">为何相关</span><p>虫媒发热（n=89）vs 其他发热（n=51）：虫媒组 <strong>CXCL10、TRAIL 升高而 CRP/PCT 下降</strong>——宿主标志物在病毒 vs 其他感染上方向相反的直接证据，可用于解读宿主信号区分病原类别的方向性。</p></div>
   </article>
 
   <article class="item" data-g="2" data-id="10-1016-j-jneuroim-2026-579020">
@@ -498,7 +498,7 @@ footer.foot{
       <span class="pin">必读</span>
     </div>
     <div class="meta"><span>Journal of Neuroimmunology</span><span class="sep">·</span><span>2026-07-10</span><span class="sep">·</span><span>Tan Z et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1016/j.jneuroim.2026.579020">10.1016/j.jneuroim.2026.579020</a></span></div>
-    <div class="why"><span class="lbl">为何相关</span><p>直接在<strong>脑脊液</strong>里测 CXCL10/IP-10（207 例患儿，倾向性评分匹配后 157 对），给出预后判读阈值。你 panel 成员在 CSF 基质中表现如何，这是最贴近的一手参考——你此前检索到的 CXCL10 证据多在血清。</p></div>
+    <div class="why"><span class="lbl">为何相关</span><p>直接在<strong>脑脊液</strong>里测 CXCL10/IP-10（207 例患儿，倾向性评分匹配后 157 对），给出预后判读阈值。宿主标志物在 CSF 标本里怎么表现，这是最贴近的一手参考——同一标志物的证据多来自血清，换到 CSF 未必成立。</p></div>
   </article>
 
   <article class="item" data-g="2" data-id="10-3389-fcimb-2026-1838120">
@@ -528,7 +528,7 @@ footer.foot{
       
     </div>
     <div class="meta"><span>International journal of infectious diseases</span><span class="sep">·</span><span>2026-07-09</span><span class="sep">·</span><span>Nakiboneka R, Margaritella N, Nyirenda TS et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1016/j.ijid.2026.108952">10.1016/j.ijid.2026.108952</a></span></div>
-    <div class="why"><span class="lbl">为何相关</span><p>血液<strong>宿主转录标志物</strong>与细菌学标志物在活动性结核治疗反应监测上的头对头比较（马拉维前瞻队列）。两层意义：宿主标志物在<strong>纵向随访</strong>上的表现（你的 8 基因 panel 若要做动态监测，这是先例）；以及它的结论模式——宿主信号在监测上未必优于病原学，这类<strong>受限结论</strong>正是 Discussion 该引的。</p></div>
+    <div class="why"><span class="lbl">为何相关</span><p>血液<strong>宿主转录标志物</strong>与细菌学标志物在活动性结核治疗反应监测上的头对头比较（马拉维前瞻队列）。两层意义：宿主标志物在<strong>纵向随访</strong>上的表现（宿主表达模型若要做动态监测，这是先例）；以及它的结论模式——宿主信号在监测上未必优于病原学，这类<strong>受限结论</strong>正是 Discussion 该引的。</p></div>
   </article>
 
   <article class="item" data-g="2" data-id="10-64898-2026-05-07-723467">
@@ -558,7 +558,7 @@ footer.foot{
       
     </div>
     <div class="meta"><span>Cureus</span><span class="sep">·</span><span>2026-08-05</span><span class="sep">·</span><span>Taver R, Gupta V, Saxena P et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.7759/cureus.112064">10.7759/cureus.112064</a></span></div>
-    <div class="why"><span class="lbl">为何相关</span><p>未成熟粒细胞计数用于早期脓毒症诊断，<strong>与 CRP、降钙素原做头对头准确度比较</strong>。CRP 是你 8 基因 panel 里的一员。这类「新指标 vs 现有指标」的比较设计与效能报告口径，可直接借鉴到 PMHostX 的效能陈述方式。</p></div>
+    <div class="why"><span class="lbl">为何相关</span><p>未成熟粒细胞计数用于早期脓毒症诊断，<strong>与 CRP、降钙素原做头对头准确度比较</strong>。这类「新指标 vs 现有指标」的比较设计与效能报告口径，可直接借鉴到 PMHostX 的效能陈述方式。</p></div>
   </article>
 
   <article class="item" data-g="2" data-id="10-1007-s40291-026-00860-7">
@@ -585,10 +585,10 @@ footer.foot{
 <section class="sec3" data-g="3">
   <div class="sechead">
     <span class="well"></span>
-    <h2>脑脊液 / 中枢感染 · 宿主转录组与 mNGS 判读</h2>
+    <h2>中枢感染 · 宿主转录组与 mNGS 判读</h2>
     <span class="count">16 条</span>
   </div>
-  <p class="secdesc">PMHostX 的样本是仁济脑脊液队列。这一组是同一基质、同一病种的宿主信号与 mNGS 定量判读证据。</p>
+  <p class="secdesc">脑膜炎、脑炎等中枢感染的宿主信号与 mNGS 定量判读证据，多为脑脊液标本。全血与 BALF 的临床判读按用途分在其他组，可用「标本」筛选查看。</p>
 
   <article class="item" data-g="3" data-id="10-3389-fcimb-2026-1905481">
     <div class="tline">
@@ -1095,7 +1095,7 @@ footer.foot{
     <h2>诊断建模与分类器 · 把宿主信号落成判读</h2>
     <span class="count">8 条</span>
   </div>
-  <p class="secdesc">PMHostX 不只是把宿主 mRNA 定量出来，还要把定量结果落成诊断判读。这一组是用机器学习 / transformer 在宿主表达谱或宏基因组上建模的工作——特征选择、验证设计、报告口径都可以直接对标。</p>
+  <p class="secdesc">PMHostX 不只是把宿主 mRNA 定量出来，还要把定量结果落成诊断判读：判别感染与否、细菌 / 病毒 / 真菌。这一组是用机器学习 / transformer 在宿主表达谱或宏基因组上建模的工作——特征选择、验证设计、报告口径都可以直接对标。</p>
 
   <article class="item" data-g="6" data-id="10-1016-j-ebiom-2026-106462">
     <div class="tline">
@@ -1124,7 +1124,7 @@ footer.foot{
       
     </div>
     <div class="meta"><span>Medicine</span><span class="sep">·</span><span>2026-07-31</span><span class="sep">·</span><span>Ma Q, Yang HR, Wang JZ et al.</span><span class="sep">·</span><span class="doi"><a href="https://doi.org/10.1097/MD.0000000000050020">10.1097/MD.0000000000050020</a></span></div>
-    <div class="why"><span class="lbl">为何相关</span><p>GEO 三个脓毒症数据集（GSE28750 / GSE54514 / GSE131761）+ 机器学习筛关键基因、建诊断模型再验证。收它的理由<b>主要是当反面对照</b>：全程依赖公共回顾性队列、无前瞻入组、无独立外部验证，这正是 PMHostX 用仁济前瞻队列可以主张的增量所在。<strong>做「同类工作的问题在哪」时引这条。</strong></p></div>
+    <div class="why"><span class="lbl">为何相关</span><p>GEO 三个脓毒症数据集（GSE28750 / GSE54514 / GSE131761）+ 机器学习筛关键基因、建诊断模型再验证。收它的理由<b>主要是当反面对照</b>：全程依赖公共回顾性数据、无独立外部验证、也不分标本报告。PMHostX 用自有临床样本建模并按标本类型分层评估，正好能在这几点上主张增量。<strong>做「同类工作的问题在哪」时引这条。</strong></p></div>
   </article>
 
   <article class="item" data-g="6" data-id="10-1007-s00210-026-05786-9">
@@ -1213,31 +1213,31 @@ footer.foot{
 <div class="recent">
   <h2>收录记录</h2>
   <ol>
-      <li><span class="d">2026-09-24</span><span class="g">建模</span><span><a href="https://doi.org/10.1016/j.ebiom.2026.106462">Cepheid 9-gene host mRNA expression across the spectrum of Mycobacterium tuberculosis infection and disease: insights across the lifespan.</a></span></li>
-      <li><span class="d">2026-09-24</span><span class="g">标志物</span><span><a href="https://doi.org/10.64898/2026.05.07.723467">Integration of functional immunomonitoring assays with PET/CT scans in TB patients identifies on-treatment biomarkers.</a></span></li>
-      <li><span class="d">2026-09-24</span><span class="g">建模</span><span><a href="https://doi.org/10.1016/j.compbiolchem.2026.109319">A HEK293T-derived explainable CatBoost signature for estimating HCoV-OC43 viral burden from host transcriptomes.</a></span></li>
-      <li><span class="d">2026-09-24</span><span class="g">标志物</span><span><a href="https://doi.org/10.3390/diagnostics16152416">A Nomogram Integrating CD169%, Neutrophil CD64 Index, and C-Reactive Protein for Differential Diagnosis of Mixed Respiratory Tract Infections.</a></span></li>
-      <li><span class="d">2026-09-24</span><span class="g">建模</span><span><a href="https://doi.org/10.1097/MD.0000000000050020">The role of cellular senescence in sepsis and its mechanism in copper death: An analysis based on machine learning.</a></span></li>
-      <li><span class="d">2026-09-24</span><span class="g">背景</span><span><a href="https://doi.org/10.1080/14789450.2026.2732072">Proteomic advances in extracellular vesicles: unlocking biomarkers for microbial infectious diseases.</a></span></li>
-      <li><span class="d">2026-09-24</span><span class="g">背景</span><span><a href="https://doi.org/10.64898/2026.06.11.26355454">Paired plasma and EV-enriched plasma proteomics reveal nonredundant sepsis-associated host-response signatures in critical illness.</a></span></li>
-      <li><span class="d">2026-09-24</span><span class="g">背景</span><span><a href="https://doi.org/10.1186/s13054-026-06169-5">The molecular ICU: a primer on omics, informatics and the future of precision critical care.</a></span></li>
-      <li><span class="d">2026-09-24</span><span class="g">背景</span><span><a href="https://doi.org/10.1556/1886.2026.00039">Recent advances in screening, diagnosis, prognosis and personalized treatment of sepsis.</a></span></li>
-      <li><span class="d">2026-09-24</span><span class="g">标志物</span><span><a href="https://doi.org/10.7759/cureus.112064">Diagnostic Accuracy of Immature Granulocyte Count for Early Sepsis Detection: A Comparative Evaluation With C-Reactive Protein and Procalcitonin.</a></span></li>
-      <li><span class="d">2026-09-24</span><span class="g">背景</span><span><a href="https://doi.org/10.1016/j.jinf.2026.106828">Mycobacterium tuberculosis pathogen load and associated inflammatory responses define infection severity in HIV-associated TB and interact with age to predict mortality.</a></span></li>
-      <li><span class="d">2026-09-24</span><span class="g">标志物</span><span><a href="https://doi.org/10.1007/s40291-026-00860-7">Cost-Effectiveness of a Host-Response Point-of-Care Assay for Early Sepsis Diagnosis in UK Emergency Departments.</a></span></li>
+      <li><span class="d">2026-09-24</span><span class="g">诊断建模</span><span><a href="https://doi.org/10.1016/j.ebiom.2026.106462">Cepheid 9-gene host mRNA expression across the spectrum of Mycobacterium tuberculosis infection and disease: insights across the lifespan.</a></span></li>
+      <li><span class="d">2026-09-24</span><span class="g">标志物与 panel</span><span><a href="https://doi.org/10.64898/2026.05.07.723467">Integration of functional immunomonitoring assays with PET/CT scans in TB patients identifies on-treatment biomarkers.</a></span></li>
+      <li><span class="d">2026-09-24</span><span class="g">诊断建模</span><span><a href="https://doi.org/10.1016/j.compbiolchem.2026.109319">A HEK293T-derived explainable CatBoost signature for estimating HCoV-OC43 viral burden from host transcriptomes.</a></span></li>
+      <li><span class="d">2026-09-24</span><span class="g">标志物与 panel</span><span><a href="https://doi.org/10.3390/diagnostics16152416">A Nomogram Integrating CD169%, Neutrophil CD64 Index, and C-Reactive Protein for Differential Diagnosis of Mixed Respiratory Tract Infections.</a></span></li>
+      <li><span class="d">2026-09-24</span><span class="g">诊断建模</span><span><a href="https://doi.org/10.1097/MD.0000000000050020">The role of cellular senescence in sepsis and its mechanism in copper death: An analysis based on machine learning.</a></span></li>
+      <li><span class="d">2026-09-24</span><span class="g">综述与背景</span><span><a href="https://doi.org/10.1080/14789450.2026.2732072">Proteomic advances in extracellular vesicles: unlocking biomarkers for microbial infectious diseases.</a></span></li>
+      <li><span class="d">2026-09-24</span><span class="g">综述与背景</span><span><a href="https://doi.org/10.64898/2026.06.11.26355454">Paired plasma and EV-enriched plasma proteomics reveal nonredundant sepsis-associated host-response signatures in critical illness.</a></span></li>
+      <li><span class="d">2026-09-24</span><span class="g">综述与背景</span><span><a href="https://doi.org/10.1186/s13054-026-06169-5">The molecular ICU: a primer on omics, informatics and the future of precision critical care.</a></span></li>
+      <li><span class="d">2026-09-24</span><span class="g">综述与背景</span><span><a href="https://doi.org/10.1556/1886.2026.00039">Recent advances in screening, diagnosis, prognosis and personalized treatment of sepsis.</a></span></li>
+      <li><span class="d">2026-09-24</span><span class="g">标志物与 panel</span><span><a href="https://doi.org/10.7759/cureus.112064">Diagnostic Accuracy of Immature Granulocyte Count for Early Sepsis Detection: A Comparative Evaluation With C-Reactive Protein and Procalcitonin.</a></span></li>
+      <li><span class="d">2026-09-24</span><span class="g">综述与背景</span><span><a href="https://doi.org/10.1016/j.jinf.2026.106828">Mycobacterium tuberculosis pathogen load and associated inflammatory responses define infection severity in HIV-associated TB and interact with age to predict mortality.</a></span></li>
+      <li><span class="d">2026-09-24</span><span class="g">标志物与 panel</span><span><a href="https://doi.org/10.1007/s40291-026-00860-7">Cost-Effectiveness of a Host-Response Point-of-Care Assay for Early Sepsis Diagnosis in UK Emergency Departments.</a></span></li>
       <li><span class="d"></span><span class="g"></span><span>…本批另 20 条</span></li>
-      <li><span class="d">2026-09-23</span><span class="g">方法学</span><span><a href="https://doi.org/10.1128/msystems.00897-26">Library strategies differentially shape microbial, functional, and host signals in clinical metagenomic sequencing</a></span></li>
-      <li><span class="d">2026-09-23</span><span class="g">方法学</span><span><a href="https://doi.org/10.1093/bib/bbag454">Benchmarking methods for extracting microbial signal from host-dominated metatranscriptomes</a></span></li>
-      <li><span class="d">2026-09-23</span><span class="g">方法学</span><span><a href="https://doi.org/10.3389/fbinf.2026.1906036">LungMicroHostR: an R package for integrated host-microbiome analysis of bronchoalveolar lavage fluid metagenomic sequencing data</a></span></li>
-      <li><span class="d">2026-09-23</span><span class="g">方法学</span><span><a href="https://doi.org/10.1371/journal.pone.0357585">High AUROC can mask decision failure in sepsis transcriptomic classifiers: preprocessing stability outweighs post hoc calibration across cohorts</a></span></li>
-      <li><span class="d">2026-09-23</span><span class="g">方法学</span><span><a href="https://doi.org/10.1002/jmv.71122">Comprehensive Viral Detection and Profiling of Plasma Cell-Free RNA in Patients With Suspected Hemophagocytic Lymphohistiocytosis</a></span></li>
-      <li><span class="d">2026-09-23</span><span class="g">方法学</span><span><a href="https://doi.org/10.64898/2026.08.11.744042">Host gene-expression signatures accurately distinguish bacterial, viral, and inflammatory diseases in febrile children across multiple cohorts</a></span></li>
-      <li><span class="d">2026-09-23</span><span class="g">标志物</span><span><a href="https://doi.org/10.1186/s12871-026-04088-0">Clinical evaluation of the SeptiScore biomarker for the diagnosis of healthcare-associated infections in critically ill trauma patients: a multicenter derivation and validation cohort study</a></span></li>
-      <li><span class="d">2026-09-23</span><span class="g">标志物</span><span><a href="https://doi.org/10.1097/PCC.0000000000004027">Validation of SeptiCyte RAPID to Discriminate Sepsis From Noninfectious Systemic Inflammation in Critically Ill Children</a></span></li>
-      <li><span class="d">2026-09-23</span><span class="g">标志物</span><span><a href="https://doi.org/10.3390/diagnostics16152450">Ruling In and Ruling Out Sepsis Using Likelihood Ratios of a Host Response Assay</a></span></li>
-      <li><span class="d">2026-09-23</span><span class="g">标志物</span><span><a href="https://doi.org/10.1007/s00431-026-07346-y">Performance of a host-protein score (MeMed BV score) for detecting bacterial infections in young children</a></span></li>
-      <li><span class="d">2026-09-23</span><span class="g">标志物</span><span><a href="https://doi.org/10.2147/idr.s648424">Blood Host-Response mRNA Assays in Adult Acute Care: Diagnostic Performance, Translational Evidence, and the Clinical Implementation Gap</a></span></li>
-      <li><span class="d">2026-09-23</span><span class="g">标志物</span><span><a href="https://doi.org/10.3389/fmicb.2026.1926383">Host-derived immune signatures as biomarkers to differentiate arboviral acute febrile illness from other causes of acute fever</a></span></li>
+      <li><span class="d">2026-09-23</span><span class="g">宿主信号提取</span><span><a href="https://doi.org/10.1128/msystems.00897-26">Library strategies differentially shape microbial, functional, and host signals in clinical metagenomic sequencing</a></span></li>
+      <li><span class="d">2026-09-23</span><span class="g">宿主信号提取</span><span><a href="https://doi.org/10.1093/bib/bbag454">Benchmarking methods for extracting microbial signal from host-dominated metatranscriptomes</a></span></li>
+      <li><span class="d">2026-09-23</span><span class="g">宿主信号提取</span><span><a href="https://doi.org/10.3389/fbinf.2026.1906036">LungMicroHostR: an R package for integrated host-microbiome analysis of bronchoalveolar lavage fluid metagenomic sequencing data</a></span></li>
+      <li><span class="d">2026-09-23</span><span class="g">宿主信号提取</span><span><a href="https://doi.org/10.1371/journal.pone.0357585">High AUROC can mask decision failure in sepsis transcriptomic classifiers: preprocessing stability outweighs post hoc calibration across cohorts</a></span></li>
+      <li><span class="d">2026-09-23</span><span class="g">宿主信号提取</span><span><a href="https://doi.org/10.1002/jmv.71122">Comprehensive Viral Detection and Profiling of Plasma Cell-Free RNA in Patients With Suspected Hemophagocytic Lymphohistiocytosis</a></span></li>
+      <li><span class="d">2026-09-23</span><span class="g">宿主信号提取</span><span><a href="https://doi.org/10.64898/2026.08.11.744042">Host gene-expression signatures accurately distinguish bacterial, viral, and inflammatory diseases in febrile children across multiple cohorts</a></span></li>
+      <li><span class="d">2026-09-23</span><span class="g">标志物与 panel</span><span><a href="https://doi.org/10.1186/s12871-026-04088-0">Clinical evaluation of the SeptiScore biomarker for the diagnosis of healthcare-associated infections in critically ill trauma patients: a multicenter derivation and validation cohort study</a></span></li>
+      <li><span class="d">2026-09-23</span><span class="g">标志物与 panel</span><span><a href="https://doi.org/10.1097/PCC.0000000000004027">Validation of SeptiCyte RAPID to Discriminate Sepsis From Noninfectious Systemic Inflammation in Critically Ill Children</a></span></li>
+      <li><span class="d">2026-09-23</span><span class="g">标志物与 panel</span><span><a href="https://doi.org/10.3390/diagnostics16152450">Ruling In and Ruling Out Sepsis Using Likelihood Ratios of a Host Response Assay</a></span></li>
+      <li><span class="d">2026-09-23</span><span class="g">标志物与 panel</span><span><a href="https://doi.org/10.1007/s00431-026-07346-y">Performance of a host-protein score (MeMed BV score) for detecting bacterial infections in young children</a></span></li>
+      <li><span class="d">2026-09-23</span><span class="g">标志物与 panel</span><span><a href="https://doi.org/10.2147/idr.s648424">Blood Host-Response mRNA Assays in Adult Acute Care: Diagnostic Performance, Translational Evidence, and the Clinical Implementation Gap</a></span></li>
+      <li><span class="d">2026-09-23</span><span class="g">标志物与 panel</span><span><a href="https://doi.org/10.3389/fmicb.2026.1926383">Host-derived immune signatures as biomarkers to differentiate arboviral acute febrile illness from other causes of acute fever</a></span></li>
       <li><span class="d"></span><span class="g"></span><span>…本批另 42 条</span></li>
   </ol>
 </div>
@@ -1247,7 +1247,7 @@ footer.foot{
   <ul>
     <li><b>窗口严格按发表日期。</b>日期取自 PubMed 的 <code>pubmed</code> / <code>epublish</code> 字段，或 Europe PMC 的 <code>firstPublicationDate</code>，逐条实测。期刊期号落在窗口内但上线日期在 6 月底的约 10 篇（例如 <i>Microbiol Spectr</i> 6 月 3 日上线的 NGS vs TGS benchmark）未计入；此口径经确认不放宽。</li>
     <li><b>FebriDx 在窗口内是空白。</b>针对 <code>SeptiCyte OR SeptiScore OR "MeMed BV" OR FebriDx OR TriVerity</code> 的检索命中 11 条期刊记录，<b>无一涉及 FebriDx</b>，预印本 0 条。marker panel 中 <b>MX1 这一支目前没有同期文献支撑</b>，措辞时需要单独处理。</li>
-    <li><b>三条需自行核对全文。</b>Diagnostics (Basel) 2026-08-03（<code>10.3390/diagnostics16152450</code>，LR 判读）、Recent Adv Inflamm Allergy Drug Discov 2026-09-15（<code>10.2174/0127722708440655260829134856</code>）与 Diagnostics (Basel) 2026-08-13（<code>10.3390/diagnostics16152416</code>，CD169%/CD64/CRP 列线图）在 PubMed 中无摘要字段，描述基于标题与期刊定位，引用前请下载原文确认入组与效能数据。</li>
+    <li><b>三条判词待按摘要重审。</b>Diagnostics (Basel) 2026-08-03（<code>10.3390/diagnostics16152450</code>，LR 判读）、Recent Adv Inflamm Allergy Drug Discov 2026-09-15（<code>10.2174/0127722708440655260829134856</code>）与 Diagnostics (Basel) 2026-08-13（<code>10.3390/diagnostics16152416</code>，CD169%/CD64/CRP 列线图）收录时 PubMed 没有摘要，判词是凭标题与期刊定位写的。2026-10-28 回查，三条都已补上完整摘要，判词尚未按摘要重读——引用前以原文为准。</li>
     <li><b>工具类论文的空白。</b>HISAT2 / featureCounts / FPKM / TPM 相关方法在窗口内无新论文——这些工具已成熟，处于被引用而非被重新发表的阶段。这本身也是方法学章节可以陈述的事实。</li>
     <li><b>一条未核到 DOI。</b>窗口外的 AAN 会议摘要（S16.010）未检索到 DOI，页面中已标注为待核，未编造标识符。</li>
     <li><b>预印本是否被 PubMed 收录，只能逐条实测。</b>此前按 DOI 前缀整类判断（<code>10.64898/…</code> 一律视为无 PubMed 记录），2026-09-24 实测证明是错的：同一批里两条 bioRxiv 预印本已有 PMID（42388796、42427735）并被正常收录，而清单中原有 7 条标 <code>pubmed_indexed: false</code> 的条目用 DOI 回查仍全部无记录。结论是<b>前缀不能作为是否被收录的依据</b>——已检索命中的预印本照常判断，未命中的仍按人工维护处理。</li>
@@ -1257,7 +1257,7 @@ footer.foot{
 </div>
 
 <footer class="foot">
-  生成于 2026-09-24 11:31 · 窗口 2026-07-01 → 2026-09-22 · 86 条<br>
+  生成于 2026-10-28 18:58 · 窗口 2026-07-01 → 2026-09-22 · 86 条<br>
   检索式与全部原始留痕见仓库内 queries.md 与 data/ 目录。
 </footer>
 
