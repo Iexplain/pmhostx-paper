@@ -14,6 +14,12 @@ data/meta_cache.json
 # 页面样稿，选定后并入 templates/，本身不提交
 drafts/
 
+# 判断层的中间结果（分批输入与回复，用于断点续跑），结论已写进 seen.json 与周报
+work/
+
+# run_weekly.sh 的运行日志与锁
+logs/
+
 # Python 字节码
 __pycache__/
 *.pyc

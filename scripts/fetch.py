@@ -317,10 +317,10 @@ def main():
         }
     n_skipped = sum(already.values())
     print(f"  去重后新候选 {len(surviving)} 条（台账跳过 {n_skipped} 条："
-          f"已收录 {already['in']} / 判断不收 {already['out']} / 标题分诊 {already['skip']}）")
+          f"已收录 {already['in']} / 判断不收 {already['out']} / 跳过 {already['skip']}）")
 
     if not surviving:
-        write_report(win_start, today, [], hits, already, len(queries),
+        write_report(win_start, since, today, [], hits, already, len(queries),
                      policy_excluded=[])
         return 0
 
@@ -380,7 +380,7 @@ def main():
     print(f"  窗口内 {len(candidates)} 条 | 被严格日期口径排除 {len(out_of_window)} 条"
           f" | 被来源口径排除 {len(policy_excluded)} 条")
 
-    write_report(win_start, today, candidates, hits, already, len(queries),
+    write_report(win_start, since, today, candidates, hits, already, len(queries),
                  out_of_window, policy_excluded)
     return 0
 
@@ -398,12 +398,14 @@ def authors_str(art) -> str:
     return s
 
 
-def write_report(win_start, today, candidates, hits, already, n_queries,
+def write_report(win_start, since, today, candidates, hits, already, n_queries,
                  out_of_window=None, policy_excluded=None):
     DATA.mkdir(exist_ok=True)
     out = DATA / f"candidates_{today}.json"
     out.write_text(json.dumps({
-        "window": {"start": str(win_start), "until": str(today)},
+        # start 是整个收录窗口的起点；since 是本次运行负责的那一段（上次成功的次日起），
+        # 周报与周页的日期范围用 since → until
+        "window": {"start": str(win_start), "since": str(since), "until": str(today)},
         "generated_at": datetime.now().isoformat(timespec="seconds"),
         "n_queries": n_queries,
         "total_pmids_found": len(hits),
