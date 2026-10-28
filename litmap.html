@@ -33,6 +33,7 @@
   --g4:#B03A3A;
   --g5:#55637A;
   --g6:#6B4E9E;
+  --g7:#17808E;
   --pin-bg:#FDF1DC;
   --pin-ink:#8A5A12;
   --focus:#2A5FA8;
@@ -53,6 +54,7 @@
     --g4:#E07A76;
     --g5:#94A3B3;
     --g6:#A98BD6;
+    --g7:#4FC0CC;
     --pin-bg:#392C13;
     --pin-ink:#E8C173;
     --focus:#74A9E8;
@@ -73,6 +75,7 @@
   --g4:#E07A76;
   --g5:#94A3B3;
   --g6:#A98BD6;
+  --g7:#4FC0CC;
   --pin-bg:#392C13;
   --pin-ink:#E8C173;
   --focus:#74A9E8;
@@ -148,7 +151,8 @@ h1{
 .chip[data-g="4"] .dot{background:var(--g4);}
 .chip[data-g="5"] .dot{background:var(--g5);}
 .chip[data-g="6"] .dot{background:var(--g6);}
-/* data-g="7"（窗口外）故意不给配色，让它落回 .dot 默认的 --ink-3 中性灰 */
+.chip[data-g="7"] .dot{background:var(--g7);}
+/* data-g="8"（窗口外）故意不给配色，让它落回 .dot 默认的 --ink-3 中性灰 */
 .chip[data-g="0"] .dot{display:none;}
 
 /* ---------- sections ---------- */
@@ -158,7 +162,8 @@ section{margin-top:44px;}
 .sec1 .well{background:var(--g1);} .sec2 .well{background:var(--g2);}
 .sec3 .well{background:var(--g3);} .sec4 .well{background:var(--g4);}
 .sec5 .well{background:var(--g5);} .sec6 .well{background:var(--g6);}
-.sec7 .well{background:var(--ink-3);}
+.sec7 .well{background:var(--g7);}
+.sec8 .well{background:var(--ink-3);}
 h2{
   font-family:"Noto Serif SC","Spectral",serif;font-weight:700;
   font-size:19.5px;margin:0;letter-spacing:-.005em;flex:1 1 auto;
@@ -211,9 +216,9 @@ h2{
 .why p{margin:0;font-size:14.5px;color:var(--ink-2);line-height:1.62;}
 .why p strong{color:var(--ink);font-weight:500;}
 
-/* out-of-window（第 7 组；第 6 组现在是正常的内容组） */
-.sec7 .item{background:var(--surface-2);border:1px dashed var(--line);border-radius:3px;padding:18px;margin-bottom:12px;}
-.sec7 .item:last-child{margin-bottom:0;}
+/* out-of-window（第 8 组；1–7 都是内容组） */
+.sec8 .item{background:var(--surface-2);border:1px dashed var(--line);border-radius:3px;padding:18px;margin-bottom:12px;}
+.sec8 .item:last-child{margin-bottom:0;}
 .oow{
   font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.08em;
   text-transform:uppercase;color:var(--g4);border:1px solid var(--g4);
@@ -265,7 +270,7 @@ footer.foot{
     <div class="stat"><span class="n">84</span><span class="k">窗口内</span></div>
     <div class="stat"><span class="n">2</span><span class="k">窗口外必读</span></div>
     <div class="stat"><span class="n">2</span><span class="k">批收录</span></div>
-    <div class="stat"><span class="n">28</span><span class="k">检索式</span></div>
+    <div class="stat"><span class="n">33</span><span class="k">检索式</span></div>
   </div>
 </header>
 
@@ -279,7 +284,7 @@ footer.foot{
     <button class="chip" data-g="4" aria-pressed="false"><span class="dot"></span>建库与去宿主</button>
     <button class="chip" data-g="5" aria-pressed="false"><span class="dot"></span>综述与背景</button>
     <button class="chip" data-g="6" aria-pressed="false"><span class="dot"></span>诊断建模</button>
-    <button class="chip" data-g="7" aria-pressed="false"><span class="dot"></span>窗口外</button>
+    <button class="chip" data-g="8" aria-pressed="false"><span class="dot"></span>窗口外</button>
   </div>
 </div>
 
@@ -1178,15 +1183,15 @@ footer.foot{
   </article>
 </section>
 
-<section class="sec7" data-g="7">
+<section class="sec8" data-g="8">
   <div class="sechead">
     <span class="well"></span>
     <h2>窗口外，但必须知道</h2>
     <span class="count">2 条</span>
   </div>
-  <p class="secdesc">日期不满足 7/1–9/23，但立意与 PMHostX 高度重合，写引言或讨论时很难回避。</p>
+  <p class="secdesc">发表日期早于窗口起点（2026-07-01），但立意与 PMHostX 高度重合，写引言或讨论时很难回避。</p>
 
-  <article class="item" data-g="7" data-id="pmid-42018084">
+  <article class="item" data-g="8" data-id="pmid-42018084">
     <div class="tline">
       <span class="oow">2026-04-22</span>
       <h3 class="ptitle"><a href="https://pubmed.ncbi.nlm.nih.gov/42018084/">Translating Host-Derived Signals from Cerebrospinal Fluid Metagenomic Sequencing into a Diagnostic Tool for Autoimmune Encephalitis in Children</a></h3>
@@ -1196,7 +1201,7 @@ footer.foot{
     <div class="why"><span class="lbl">为何相关</span><p><strong>全库中与 PMHostX 立意最接近的一篇。</strong>明确主张"CSF mNGS 的宿主来源 RNA 成分通常被丢弃"，并把它转成自免脑炎诊断工具：180 例疑似脑炎患儿，88 例做宿主转录组分析，RAD54B 经 RT-qPCR 验证，多基因宿主反应模型 AUC &gt; 0.923。与你的差异在于它走 DNA 侧、你走 RNA 侧——这个差异正是你文章可主张的增量。</p></div>
   </article>
 
-  <article class="item" data-g="7" data-id="title-108964f5f6">
+  <article class="item" data-g="8" data-id="title-108964f5f6">
     <div class="tline">
       <span class="oow">2026-06-10</span>
       <h3 class="ptitle">CSF Host Transcriptomics Differentiates Infectious Encephalitis from Autoimmune Encephalitis (S16.010)</h3>
@@ -1257,7 +1262,7 @@ footer.foot{
 </div>
 
 <footer class="foot">
-  生成于 2026-10-28 18:58 · 窗口 2026-07-01 → 2026-09-22 · 86 条<br>
+  生成于 2026-10-28 19:32 · 窗口 2026-07-01 → 2026-09-22 · 86 条<br>
   检索式与全部原始留痕见仓库内 queries.md 与 data/ 目录。
 </footer>
 

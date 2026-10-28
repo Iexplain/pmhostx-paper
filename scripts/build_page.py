@@ -24,19 +24,19 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
 TEMPLATES = ROOT / "templates"
 
-# 内容组是 1–6，窗口外固定排在最后。
+# 内容组是 1–7，窗口外固定排在最后。
 #
 # 窗口外的组号抽成常量，因为它在两处被引用（筛选按钮的 data-g、分组的 CSS class），
 # 以前是散落的字面量 "6" —— 加内容组时会撞号，而且撞了不报错：GROUP_CSS.get(g,'sec1')
 # 会静默回退到组 1 的配色，页面看起来正常，只是颜色错了。
-OOW_GROUP = 7
+OOW_GROUP = 8
 
-GROUP_CSS = {1: "sec1", 2: "sec2", 3: "sec3", 4: "sec4", 5: "sec5", 6: "sec6", 7: "sec7"}
+GROUP_CSS = {1: "sec1", 2: "sec2", 3: "sec3", 4: "sec4", 5: "sec5", 6: "sec6", 7: "sec7", 8: "sec8"}
 
 # 组序号 → 筛选按钮短名。窗口外那组不走这里（它用固定标签），
 # 所以这个字典只需覆盖内容组；缺键时回退到 sections 里的全名。
 GROUP_CHIP = {1: "宿主信号提取", 2: "标志物与 panel", 3: "中枢感染", 4: "建库与去宿主",
-              5: "综述与背景", 6: "诊断建模"}
+              5: "综述与背景", 6: "诊断建模", 7: "病原检测与 mNGS"}
 
 
 def load(path: Path, default=None):

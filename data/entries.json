@@ -25,8 +25,12 @@
       "desc": "PMHostX 不只是把宿主 mRNA 定量出来，还要把定量结果落成诊断判读：判别感染与否、细菌 / 病毒 / 真菌。这一组是用机器学习 / transformer 在宿主表达谱或宏基因组上建模的工作——特征选择、验证设计、报告口径都可以直接对标。"
     },
     "7": {
+      "name": "病原检测与 mNGS · 标签从哪来、和传统方法差多少",
+      "desc": "BALF / CSF / 血液的 mNGS 与临床宏基因组病原检测、与培养和 PCR 的比较、定植与感染的微生态判读。PMHostX 的感染标签与病原通道都建立在这一层上。"
+    },
+    "8": {
       "name": "窗口外，但必须知道",
-      "desc": "日期不满足 7/1–9/23，但立意与 PMHostX 高度重合，写引言或讨论时很难回避。"
+      "desc": "发表日期早于窗口起点（2026-07-01），但立意与 PMHostX 高度重合，写引言或讨论时很难回避。"
     }
   },
   "entries": [
@@ -810,7 +814,7 @@
       "pubmed_indexed": true
     },
     {
-      "group": 7,
+      "group": 8,
       "num": 42,
       "title": "Translating Host-Derived Signals from Cerebrospinal Fluid Metagenomic Sequencing into a Diagnostic Tool for Autoimmune Encephalitis in Children",
       "title_url": "https://pubmed.ncbi.nlm.nih.gov/42018084/",
@@ -829,7 +833,7 @@
       "pubmed_indexed": true
     },
     {
-      "group": 7,
+      "group": 8,
       "num": 43,
       "title": "CSF Host Transcriptomics Differentiates Infectious Encephalitis from Autoimmune Encephalitis (S16.010)",
       "title_url": null,

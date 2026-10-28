@@ -87,4 +87,19 @@ AA_balf_mngs
 AB_pathogen_class_host
 (bacterial[tiab] AND (viral[tiab] OR fungal[tiab])) AND ("host response"[tiab] OR "host gene expression"[tiab] OR "host transcriptom*"[tiab] OR "gene expression signature*"[tiab] OR "transcriptomic signature*"[tiab] OR "host biomarker*"[tiab] OR "host RNA"[tiab]) AND (distinguish*[tiab] OR discriminat*[tiab] OR differentiat*[tiab] OR classif*[tiab])
 
+AC_mngs_specimen_pathogen
+(mNGS[tiab] OR "metagenomic next-generation sequencing"[tiab] OR "clinical metagenomic*"[tiab] OR "metagenomic sequencing"[tiab]) AND (BALF[tiab] OR "bronchoalveolar lavage"[tiab] OR "cerebrospinal fluid"[tiab] OR bloodstream[tiab] OR "blood sample*"[tiab] OR plasma[tiab]) AND (pathogen*[tiab] OR diagnos*[tiab])
+
+AD_mngs_vs_conventional
+(mNGS[tiab] OR "metagenomic next-generation sequencing"[tiab] OR "clinical metagenomic*"[tiab] OR tNGS[tiab] OR "targeted next-generation sequencing"[tiab]) AND (culture[tiab] OR PCR[tiab] OR "conventional microbiolog*"[tiab] OR "conventional method*"[tiab] OR "conventional test*"[tiab]) AND (compar*[tiab] OR concordance[tiab] OR "diagnostic performance"[tiab] OR sensitivity[tiab]) AND (infection*[tiab] OR infectious[tiab] OR pathogen*[tiab] OR pneumonia[tiab] OR sepsis[tiab] OR meningitis[tiab] OR encephalitis[tiab])
+
+AE_mngs_microbiome_signal
+(mNGS[tiab] OR metagenom*[tiab] OR metatranscriptom*[tiab]) AND (microbiome[tiab] OR microbiota[tiab] OR "microbial community"[tiab] OR coloniz*[tiab] OR colonis*[tiab]) AND (BALF[tiab] OR "bronchoalveolar lavage"[tiab] OR "lower respiratory"[tiab] OR "cerebrospinal fluid"[tiab] OR bloodstream[tiab] OR sepsis[tiab]) AND (infection*[tiab] OR diagnos*[tiab] OR pathogen*[tiab])
+
+AF_fungal_dx
+("invasive fungal"[tiab] OR "fungal infection*"[tiab] OR aspergill*[tiab] OR cryptococc*[tiab] OR pneumocystis[tiab] OR candidemia[tiab] OR candidaemia[tiab]) AND (mNGS[tiab] OR "metagenomic next-generation sequencing"[tiab] OR "host response"[tiab] OR "host transcriptom*"[tiab] OR "gene expression signature*"[tiab] OR "host biomarker*"[tiab]) AND (diagnos*[tiab] OR discriminat*[tiab] OR distinguish*[tiab])
+
+AG_immune_signature_infection
+("immune signature*"[tiab] OR "immune response signature*"[tiab] OR "immune profil*"[tiab] OR "immune transcriptom*"[tiab]) AND (transcriptom*[tiab] OR "RNA-seq"[tiab] OR "RNA sequencing"[tiab] OR "gene expression"[tiab]) AND (infection*[tiab] OR sepsis[tiab]) AND (classif*[tiab] OR diagnos*[tiab] OR distinguish*[tiab] OR discriminat*[tiab])
+
 ```
