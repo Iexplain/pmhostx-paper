@@ -8,6 +8,12 @@ data/candidates_*.json
 # 一次性诊断产物
 data/candidates_*.run*.json
 
+# 摘要 / 文献类型 / PMC 号缓存（~3MB），scripts/enrich.py 随时可重建
+data/meta_cache.json
+
+# 页面样稿，选定后并入 templates/，本身不提交
+drafts/
+
 # Python 字节码
 __pycache__/
 *.pyc
