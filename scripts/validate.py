@@ -68,24 +68,42 @@ def main():
     #    "人"这一类的存在理由最硬：「理由说非人源、实际是人类研究」是最严重的
     #    错法（2026-09-24 真踩过：一条写「非人源宿主（mouse）」的记录，
     #    摘要原文是 "macrophages from people with type 1 diabetes"）。
+    # 词表按「整词」匹配：两侧不能紧挨英文字母（中文字符算边界，所以「（mice）」「猪PRRSV」都认）。
+    # 以 * 结尾的是前缀。以前是子串匹配，误配一路：hog ⊂ pathogen、hen ⊂ phenotype、
+    # vine ⊂ bovine、pine ⊂ spine、plant ⊂ Lactiplantibacillus / transplant、salmon ⊂ Salmonella——
+    # 2026-10-29 因此把 4 条判对了的理由（猕猴桃、桃、可可、in ovo 鸡胚）报成「矛盾」，整轮回滚。
+    # tree / forest（random forest、决策树）、vector（support vector machine）有歧义，已去掉。
+    def words(*alts: str) -> str:
+        parts = [re.escape(a[:-1]) + "[A-Za-z]*" if a.endswith("*") else re.escape(a) + "(?:e?s)?"
+                 for a in alts]
+        return r"(?<![A-Za-z])(?:" + "|".join(parts) + r")(?![A-Za-z])"
+
     SPECIES = {
         # 键名必须是"人类"而不是"人"：理由侧的匹配用的是子串（`sp in why`），
         # 而每条非人源理由里都写着"非**人**源宿主"，单字"人"会把它们全部
         # 误判成"声称人类宿主"——一开就报了 39 条假问题。
-        "人类": r"human|patient|people|person|volunteer|donor|clinical sample|cohort|informed consent",
-        "猪": r"porcine|swine|\bpigs?\b|PRRSV|hog|boar",
-        "牛": r"bovine|cattle|rumen|calves?\b|\bcows?\b|dairy|heifer|Holstein",
-        "鼠": r"mouse|mice|murine|rats?\b|rodent",
-        "植物": r"plant|root|leaf|leaves|foliar|grass|tree|pine|conifer|grape|vine|coffee|legume|"
-                r"rhizosphere|mycorrhiz|crop|seedling|floral|pollen|turfgrass|endophyt|forest|"
-                r"sorghum|potato|rice|wheat|maize|tomato|cucurbit|Arabidopsis|barley|soybean|fern|Azolla|cyanobacter",
-        "昆虫": r"insect|silkworm|Antheraea|bees?\b|termite|Coptotermes|locust|Ceracris|bed bug|Cimex|"
-                r"beetle|moth|butterfly|Drosophila|wasp|aphid|mayfly|Ephemera",
-        "鱼": r"\bfish\b|finfish|fishmeal|shellfish|shrimp|crab|Portunus|pompano|flounder|Paralichthys|"
-              r"salmon|trout|tilapia|zebrafish|eel|Anguilla|carps?\b|Oncorhynchus|Larimichthys|croaker|"
-              r"taimen|Hucho|loach|Triplophysa|crayfish|Cherax|prawn|lobster|mussel|oyster|scallop",
-        "蚊媒": r"mosquito|Culex|tick|Aedes|vector",
-        "鸡": r"chicken|poultry|ducks?\b|avian|chicks?\b|hen|broiler",
+        "人类": words("human*", "patient*", "people", "person*", "volunteer*", "donor*",
+                    "clinical sample", "cohort*", "informed consent"),
+        "猪": words("porcine", "swine", "pig", "piglet*", "PRRSV", "hog", "boar"),
+        "牛": words("bovine", "cattle", "rumen", "calf", "calves", "cow", "dairy", "heifer*", "Holstein*"),
+        "鼠": words("mouse", "mice", "murine", "rat", "rodent*"),
+        "植物": words("plant", "root", "leaf", "leaves", "foliar", "grass*", "pine", "conifer*", "grape*",
+                    "vine", "coffee", "legume*", "rhizospher*", "mycorrhiz*", "crop", "seedling",
+                    "floral", "pollen", "turfgrass", "endophyt*", "sorghum", "potato*", "rice", "wheat",
+                    "maize", "tomato*", "cucurbit*", "Arabidopsis", "barley", "soybean", "fern", "Azolla",
+                    "cyanobacter*", "kiwifruit", "Actinidia*", "peach*", "Prunus", "cacao", "cocoa",
+                    "xylem", "phloem", "orchard*", "phytopathogen*"),
+        "昆虫": words("insect*", "silkworm*", "Antheraea", "bee", "termite*", "Coptotermes", "locust*",
+                    "Ceracris", "bed bug", "Cimex", "beetle*", "moth", "butterfl*", "Drosophila",
+                    "wasp*", "aphid*", "mayfl*", "Ephemera"),
+        "鱼": words("fish", "finfish", "fishmeal", "shellfish", "shrimp*", "crab*", "Portunus", "pompano",
+                   "flounder*", "Paralichthys", "salmon", "salmonid*", "trout", "tilapia", "zebrafish",
+                   "eel", "Anguilla", "carp", "Oncorhynchus", "Larimichthys", "croaker*", "taimen", "Hucho",
+                   "loach*", "Triplophysa", "crayfish", "Cherax", "prawn*", "lobster*", "mussel*",
+                   "oyster*", "scallop*"),
+        "蚊媒": words("mosquito*", "Culex", "tick", "Aedes", "vector-borne", "vector borne"),
+        "鸡": words("chicken*", "poultry", "duck*", "avian", "chick", "hen", "broiler*", "in ovo",
+                   "embryonated egg"),
     }
     allrec = {}
     for f in cands:
