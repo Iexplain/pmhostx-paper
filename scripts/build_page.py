@@ -285,7 +285,7 @@ def topbar(P: str, runs: list, cur: dict | None, counts: dict) -> str:
     for r in runs:
         a, b = r["window"]
         txt = (f"{r.get('label', r['id'])} · 回填 · {counts.get(r['id'], 0)} 条" if r.get("kind") == "回填"
-               else f"{run_name(r)} · {a[5:]}–{b[5:]} · {counts.get(r['id'], 0)} 条")
+               else f"{run_name(r)} · {counts.get(r['id'], 0)} 条 · {a[5:]}–{b[5:]}")
         sel = " selected" if r is cur else ""
         opts.append(f'<option value="{P}w/{r["id"]}.html"{sel}>{escape(txt)}</option>')
 
