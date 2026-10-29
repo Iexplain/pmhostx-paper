@@ -112,8 +112,12 @@ def apply(day: str) -> int:
             # 新候选记 pending；重审的保留原判断不动
             if q["kind"] == "new":
                 seen[i] = {"v": "pending", "d": day, "why": j["why"].strip()}
+                requeue.append(i)
+            elif q["prev"]["v"] != "pending":
+                requeue.append(i)
+            # 已经是 pending、重审又被拒：只自动重试这一次，移出队列留给人工——
+            # 否则每周都要为它二分定位一遍（单条触发拒绝要十几次调用）
             rows["pending"].append((q, j))
-            requeue.append(i)
             continue
         if q["kind"] == "new":
             seen[i] = {"v": j["v"], "d": day, "why": j["why"].strip()}
@@ -234,7 +238,8 @@ def write_weekly(day, s, rows, notes):
     if rows["pending"]:
         L += ["", "## 未能判断", "",
               "判断层接口拒绝处理下面这些记录（\"can't help with this\"），没有作出判断。"
-              "它们在台账里记为 pending，已放进重审队列，下一轮自动重试；如果持续被拒，需要人工判断。", ""]
+              "它们在台账里记为 pending。第一次被拒的放进重审队列，下一轮自动重试一次；"
+              "重试仍被拒的移出队列，需要人工判断（台账里 `v: pending` 的条目）。", ""]
         L += [f"- {q['title']}（{q['journal']} {q['pubdate']}）" for q, _ in rows["pending"]]
     L += ["", "## 值得注意", ""]
     L += ([f"- {n}" for n in notes] if notes else ["（本周判断层没有标注）"])
