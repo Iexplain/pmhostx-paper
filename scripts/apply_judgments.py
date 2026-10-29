@@ -103,9 +103,18 @@ def apply(day: str) -> int:
             pool[x["id"]] = x
     cmap = {c["id"]: c for c in cands.get("candidates", [])}
 
-    rows = {"in": [], "out": [], "skip": [], "re": []}
+    rows = {"in": [], "out": [], "skip": [], "re": [], "pending": []}
+    requeue = []        # 被接口拒绝、没判成的：放回重审队列，下一轮再试
     for q in queue:
         j, i = J[q["id"]], q["id"]
+        if j["v"] == "pending":
+            # 没有判断就不能写成 skip/out：那等于声称「读过、不收」，是假账。
+            # 新候选记 pending；重审的保留原判断不动
+            if q["kind"] == "new":
+                seen[i] = {"v": "pending", "d": day, "why": j["why"].strip()}
+            rows["pending"].append((q, j))
+            requeue.append(i)
+            continue
         if q["kind"] == "new":
             seen[i] = {"v": j["v"], "d": day, "why": j["why"].strip()}
             if j["v"] == "in":
@@ -143,8 +152,11 @@ def apply(day: str) -> int:
 
     # 处理过的条目移出重审队列
     rj = load(DATA / "rejudge.json", {"queue": []})
-    done = {q["id"] for q in queue if q["kind"] == "rejudge"}
+    done = {q["id"] for q in queue if q["kind"] == "rejudge"} - set(requeue)
     rj["queue"] = [r for r in rj.get("queue", []) if r["id"] not in done]
+    have = {r["id"] for r in rj["queue"]}
+    rj["queue"] += [{"id": i, "reason": f"{day} 判断层接口拒绝处理，未判断"}
+                    for i in requeue if i not in have]
     dump(DATA / "rejudge.json", rj)
 
     w = cands.get("window", {})
@@ -156,6 +168,7 @@ def apply(day: str) -> int:
         "excluded_by_date": len(cands.get("excluded_by_date", [])),
         "excluded_by_policy": len(cands.get("excluded_by_policy", [])),
         "in": len(rows["in"]), "out": len(rows["out"]), "skip": len(rows["skip"]),
+        "pending": len(rows["pending"]),
         "must_read": sum(1 for e, _ in rows["in"] if e["must_read"]),
         "rejudged": len(rows["re"]),
         "rejudge_to_in": sum(1 for q, j in rows["re"] if q["prev"]["v"] != "in" and j["v"] == "in"),
@@ -164,7 +177,8 @@ def apply(day: str) -> int:
                                      encoding="utf-8")
     write_weekly(day, summary, rows, notes)
     print(f"已写入：收录 {summary['in']} / 不收 {summary['out']} / 跳过 {summary['skip']}"
-          f"｜重审 {summary['rejudged']} 条，其中改判收录 {summary['rejudge_to_in']}")
+          + (f" / 待人工 {summary['pending']}" if summary["pending"] else "")
+          + f"｜重审 {summary['rejudged']} 条，其中改判收录 {summary['rejudge_to_in']}")
     return 0
 
 
@@ -217,6 +231,11 @@ def write_weekly(day, s, rows, notes):
         L += ["（无）", ""]
     for tag, r, j in rest:
         L.append(f"- {r['title']}（{r['journal']} {r['pubdate']}）— {tag}：{j['why'].strip()}")
+    if rows["pending"]:
+        L += ["", "## 未能判断", "",
+              "判断层接口拒绝处理下面这些记录（\"can't help with this\"），没有作出判断。"
+              "它们在台账里记为 pending，已放进重审队列，下一轮自动重试；如果持续被拒，需要人工判断。", ""]
+        L += [f"- {q['title']}（{q['journal']} {q['pubdate']}）" for q, _ in rows["pending"]]
     L += ["", "## 值得注意", ""]
     L += ([f"- {n}" for n in notes] if notes else ["（本周判断层没有标注）"])
     WEEKLY.mkdir(exist_ok=True)
@@ -229,7 +248,7 @@ def finalize(day: str) -> int:
         print("找不到 summary.json —— apply 没跑成功，不能写 last_run", file=sys.stderr)
         return 1
     seen = load(DATA / "seen.json", {})
-    led = {"in": 0, "out": 0, "skip": 0}
+    led = {"in": 0, "out": 0, "skip": 0, "pending": 0}
     for k, v in seen.items():
         if not k.startswith("_") and isinstance(v, dict) and v.get("v") in led:
             led[v["v"]] += 1
@@ -245,7 +264,7 @@ def finalize(day: str) -> int:
     rec = {"id": day, "run": day, "week": s["week"], "kind": "补漏" if span > 9 else "周更",
            "window": [s["since"], s["until"]],
            "stats": {k: s[k] for k in ("n_queries", "hits", "candidates", "in", "out", "skip",
-                                       "must_read", "rejudged", "rejudge_to_in")}}
+                                       "pending", "must_read", "rejudged", "rejudge_to_in")}}
     runs["runs"] = [r for r in runs["runs"] if r["id"] != day] + [rec]
     runs["runs"].sort(key=lambda r: r["run"], reverse=True)
     dump(DATA / "runs.json", runs)

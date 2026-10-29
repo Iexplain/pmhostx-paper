@@ -295,7 +295,7 @@ def main():
         return 1
 
     surviving = {}   # pmid -> (id, doi, title, journal, queries)
-    already = {"in": 0, "out": 0, "skip": 0}
+    already = {"in": 0, "out": 0, "skip": 0, "pending": 0}
     for pmid in sorted(hits):
         rec = summ.get(pmid)
         if not rec or "error" in rec:
@@ -317,7 +317,8 @@ def main():
         }
     n_skipped = sum(already.values())
     print(f"  去重后新候选 {len(surviving)} 条（台账跳过 {n_skipped} 条："
-          f"已收录 {already['in']} / 判断不收 {already['out']} / 跳过 {already['skip']}）")
+          f"已收录 {already['in']} / 判断不收 {already['out']} / 跳过 {already['skip']}"
+          f"{' / 待人工 ' + str(already['pending']) if already['pending'] else ''}）")
 
     if not surviving:
         write_report(win_start, since, today, [], hits, already, len(queries),

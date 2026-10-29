@@ -48,6 +48,7 @@ ABS_MAX = 2500        # 重审条目的摘要来自 meta_cache，不截断会比
 
 NOABS = re.compile(r"无摘要|摘要缺失|凭题录|凭标题")
 PANEL_CLAIM = re.compile(r"你的? ?panel ?(里|中|成员|的基因)")
+REFUSED = "can't help with this"   # 接口拒绝处理时 claude -p 给出的报错
 
 
 def load(p: Path, default):
@@ -196,6 +197,71 @@ def call_claude(prompt: str) -> tuple[str, float]:
     return out.get("result") or "", float(out.get("total_cost_usd") or 0)
 
 
+class BatchFailed(Exception):
+    pass
+
+
+def judge_chunk(chunk: list[dict], base: str, wd: Path, tag: str, label: str,
+                cost: list) -> tuple[list[dict], str]:
+    """判一批，返回以 id 为键的结果与 notes。
+
+    三种失败分开处理：
+    - 内容没过检查 → 带着错误说明立即重试
+    - 限流 / 接口报错 → 等 30 / 60 / 90 秒再试
+    - 接口拒绝处理（"can't help with this"）连续两次 → 对半拆开分别判，
+      拆到单条仍被拒，就把这一条标成 pending（待人工），不让一条摘要卡住整轮。
+      2026-10-29 首轮运行里有一批 20 条被连拒 4 次，整轮因此失败。
+    """
+    prompt = base.replace("{{ITEMS}}", json.dumps(for_model(chunk), ensure_ascii=False, indent=1))
+    feedback, refusals = "", 0
+    for attempt in range(1, ATTEMPTS + 1):
+        reply, call_failed = "", False
+        try:
+            reply, c = call_claude(prompt + feedback)
+            cost[0] += c
+            obj = parse_reply(reply)
+            errs = check(obj.get("items"), chunk)
+        except (RuntimeError, subprocess.TimeoutExpired) as e:
+            errs, call_failed = [f"调用失败：{e}"], True
+            if REFUSED in str(e):
+                refusals += 1
+        except (ValueError, json.JSONDecodeError) as e:
+            errs = [f"解析失败：{e}"]
+        if not errs:
+            items = [{"id": chunk[it["k"] - 1]["id"], **{f: v for f, v in it.items() if f != "k"}}
+                     for it in sorted(obj["items"], key=lambda it: it["k"])]
+            return items, (obj.get("notes") or "").strip()
+        # 原始回复留档，排查用（work/ 不进 git）
+        (wd / f"failed_{tag}_{attempt}.txt").write_text(
+            "\n".join(errs) + "\n\n----- 原始回复 -----\n" + (reply or ""), encoding="utf-8")
+        print(f"  {label}第 {attempt} 次未通过：{errs[0]}"
+              + (f"（另 {len(errs) - 1} 条）" if len(errs) > 1 else ""), file=sys.stderr)
+        if refusals >= 2:
+            break
+        if attempt == ATTEMPTS:
+            raise BatchFailed(f" {ATTEMPTS} 次都没通过检查")
+        if call_failed:
+            # 限流时立刻重试只会再撞一次；内容错误才值得马上重来
+            time.sleep(BACKOFF * attempt)
+            feedback = ""
+        else:
+            feedback = ("\n\n# 上一次的输出没有通过检查，请修正后重新输出完整 JSON\n\n"
+                        + "\n".join(f"- {e}" for e in errs[:20]))
+
+    # 连续被拒：拆开找出触发的那一条
+    if len(chunk) == 1:
+        q = chunk[0]
+        print(f"  {label}：接口拒绝处理这一条，标为待人工：{q['title'][:70]}", file=sys.stderr)
+        return [{"id": q["id"], "v": "pending",
+                 "why": "【待人工】判断层接口拒绝处理这条记录（can't help with this），未作判断；"
+                        "已放入重审队列，下一轮自动重试"}], ""
+    mid = len(chunk) // 2
+    print(f"  {label}被接口连续拒绝，拆成 {mid} + {len(chunk) - mid} 条分别判", file=sys.stderr)
+    a, na = judge_chunk(chunk[:mid], base, wd, tag + "a", label + "前半", cost)
+    b, nb = judge_chunk(chunk[mid:], base, wd, tag + "b", label + "后半", cost)
+    return a + b, "\n".join(n for n in (na, nb) if n)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--date", default=str(date.today()))
@@ -227,53 +293,22 @@ def main():
     base = (tpl.replace("{{JUDGING}}", JUDGING.read_text(encoding="utf-8"))
                .replace("{{EXISTING}}", existing_list()))
     start = max([int(f.stem.split("_")[1]) for f in wd.glob("judged_*.json")] or [0]) + 1
-    total_cost = 0.0
+    cost = [0.0]
     for k, chunk in enumerate(chunks):
-        prompt = base.replace("{{ITEMS}}", json.dumps(for_model(chunk), ensure_ascii=False, indent=1))
-        feedback = ""
-        for attempt in range(1, ATTEMPTS + 1):
-            reply, call_failed = "", False
-            try:
-                reply, cost = call_claude(prompt + feedback)
-                total_cost += cost
-                obj = parse_reply(reply)
-                errs = check(obj.get("items"), chunk)
-            except (RuntimeError, subprocess.TimeoutExpired) as e:
-                errs, call_failed = [f"调用失败：{e}"], True
-            except (ValueError, json.JSONDecodeError) as e:
-                errs = [f"解析失败：{e}"]
-            if not errs:
-                break
-            # 原始回复留档，排查用（work/ 不进 git）
-            (wd / f"failed_{start + k:03d}_{attempt}.txt").write_text(
-                "\n".join(errs) + "\n\n----- 原始回复 -----\n" + (reply or ""), encoding="utf-8")
-            print(f"  第 {k + 1}/{len(chunks)} 批第 {attempt} 次未通过：{errs[0]}"
-                  + (f"（另 {len(errs) - 1} 条）" if len(errs) > 1 else ""), file=sys.stderr)
-            if attempt == ATTEMPTS:
-                continue
-            if call_failed:
-                # 限流时立刻重试只会再撞一次；内容错误才值得马上重来
-                time.sleep(BACKOFF * attempt)
-                feedback = ""
-            else:
-                feedback = ("\n\n# 上一次的输出没有通过检查，请修正后重新输出完整 JSON\n\n"
-                            + "\n".join(f"- {e}" for e in errs[:20]))
-        else:
-            print(f"错误：第 {k + 1} 批 {ATTEMPTS} 次都没通过检查，停止。已完成的批次保留在 {wd.relative_to(ROOT)}/",
-                  file=sys.stderr)
+        label = f"第 {k + 1}/{len(chunks)} 批"
+        try:
+            items, notes = judge_chunk(chunk, base, wd, f"{start + k:03d}", label, cost)
+        except BatchFailed as e:
+            print(f"错误：{label}{e}，停止。已完成的批次保留在 {wd.relative_to(ROOT)}/", file=sys.stderr)
             return 1
-        # 序号映射回 id：落盘的结果与以前一样以 id 为键，apply_judgments.py 不用改
-        items = [{"id": chunk[it["k"] - 1]["id"], **{f: v for f, v in it.items() if f != "k"}}
-                 for it in sorted(obj["items"], key=lambda it: it["k"])]
-        obj["items"] = items
         out = wd / f"judged_{start + k:03d}.json"
-        out.write_text(json.dumps({"items": items, "notes": obj.get("notes") or ""},
+        out.write_text(json.dumps({"items": items, "notes": notes},
                                   ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
-        c = {v: sum(1 for it in obj["items"] if it["v"] == v) for v in ("in", "out", "skip")}
-        print(f"  第 {k + 1}/{len(chunks)} 批 ✓  in {c['in']} / out {c['out']} / skip {c['skip']}")
-    print(f"判断完成，本次花费约 ${total_cost:.2f}")
+        c = {v: sum(1 for it in items if it["v"] == v) for v in ("in", "out", "skip", "pending")}
+        print(f"  {label} ✓  in {c['in']} / out {c['out']} / skip {c['skip']}"
+              + (f" / 待人工 {c['pending']}" if c["pending"] else ""))
+    print(f"判断完成，本次花费约 ${cost[0]:.2f}")
     return 0
-
 
 if __name__ == "__main__":
     sys.exit(main())

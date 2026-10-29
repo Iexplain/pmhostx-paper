@@ -196,7 +196,7 @@ def main():
         if k.startswith("_") or not isinstance(v, dict):
             continue
         why = v.get("why") or ""
-        if v.get("v") in ("skip", "out") and not why.strip():
+        if v.get("v") in ("skip", "out", "pending") and not why.strip():
             problems.append(f"台账里 {k} 是 {v.get('v')}，但没有理由 —— "
                             f"这条判断没有交代，事后无法重审")
             continue
@@ -218,7 +218,8 @@ def main():
     c = Counter((v.get("v") if isinstance(v, dict) else "in") for k, v in led.items()
                 if not k.startswith("_"))
     print(f"✓ 检查通过：清单 {len(entries)} 条 | 台账 {n_led} 条"
-          f"（in {c['in']} / out {c['out']} / skip {c['skip']}）| 候选池 {len(pool)} 个 id")
+          f"（in {c['in']} / out {c['out']} / skip {c['skip']}"
+          + (f" / pending {c['pending']}" if c["pending"] else "") + f"）| 候选池 {len(pool)} 个 id")
     if any(vague.values()):
         n_claim = sum(1 for v in led.values()
                       if isinstance(v, dict) and "非人源" in (v.get("why") or ""))
