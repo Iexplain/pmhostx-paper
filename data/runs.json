@@ -2,6 +2,28 @@
   "_comment": "每次成功运行一条记录（新的在前），由 apply_judgments.py finalize 追加。周页按它生成。",
   "runs": [
     {
+      "id": "2026-10-29",
+      "run": "2026-10-29",
+      "week": "2026-W44",
+      "kind": "补漏",
+      "window": [
+        "2026-09-25",
+        "2026-10-29"
+      ],
+      "stats": {
+        "n_queries": 33,
+        "hits": 997,
+        "candidates": 347,
+        "in": 103,
+        "out": 145,
+        "skip": 97,
+        "pending": 2,
+        "must_read": 9,
+        "rejudged": 36,
+        "rejudge_to_in": 1
+      }
+    },
+    {
       "id": "2026-09-24",
       "run": "2026-09-24",
       "week": "2026-W39",

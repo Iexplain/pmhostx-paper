@@ -1,18 +1,19 @@
 {
-  "last_success": "2026-09-24",
-  "n_candidates": 500,
-  "n_included": 6,
-  "_note": "补漏起点 = last_success 的次日。2026-09-24 为增量批（非回填），窗口仍从 2026-07-01 起。",
+  "last_success": "2026-10-29",
+  "n_candidates": 347,
+  "n_included": 103,
+  "_note": "补漏起点 = last_success 的次日。由 scripts/apply_judgments.py finalize 在整轮成功后写入。",
   "window": {
-    "start": "2026-07-01",
-    "until": "2026-09-24"
+    "since": "2026-09-25",
+    "until": "2026-10-29"
   },
   "ledger": {
-    "in": 60,
-    "out": 75,
-    "skip": 596
+    "in": 190,
+    "out": 220,
+    "skip": 666,
+    "pending": 2
   },
-  "excluded_by_date": 336,
-  "excluded_by_policy": 130,
-  "weekly_report": "weekly/2026-09-24.md"
+  "excluded_by_date": 130,
+  "excluded_by_policy": 209,
+  "weekly_report": "weekly/2026-10-29.md"
 }
