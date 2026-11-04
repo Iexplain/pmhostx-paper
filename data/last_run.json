@@ -1,19 +1,19 @@
 {
-  "last_success": "2026-10-29",
-  "n_candidates": 347,
-  "n_included": 103,
+  "last_success": "2026-11-04",
+  "n_candidates": 24,
+  "n_included": 11,
   "_note": "补漏起点 = last_success 的次日。由 scripts/apply_judgments.py finalize 在整轮成功后写入。",
   "window": {
-    "since": "2026-09-25",
-    "until": "2026-10-29"
+    "since": "2026-10-30",
+    "until": "2026-11-04"
   },
   "ledger": {
-    "in": 190,
-    "out": 220,
-    "skip": 666,
-    "pending": 2
+    "in": 201,
+    "out": 233,
+    "skip": 668,
+    "pending": 0
   },
-  "excluded_by_date": 130,
-  "excluded_by_policy": 209,
-  "weekly_report": "weekly/2026-10-29.md"
+  "excluded_by_date": 0,
+  "excluded_by_policy": 111,
+  "weekly_report": "weekly/2026-11-04.md"
 }
